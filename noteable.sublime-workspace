@@ -1,0 +1,563 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"text-",
+				"text-align"
+			],
+			[
+				"1px",
+				"10px"
+			],
+			[
+				"inline",
+				"inline-block"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 189.0,
+		"selected_items":
+		[
+			[
+				"push",
+				"Git: Push"
+			],
+			[
+				"comm",
+				"Git: Commit"
+			],
+			[
+				"add",
+				"Git: Add..."
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"mini",
+				"Minify::Minify File"
+			],
+			[
+				"com",
+				"Git: Commit"
+			],
+			[
+				"status",
+				"Git: Status"
+			],
+			[
+				"statu",
+				"Git: Status"
+			],
+			[
+				"PUS",
+				"Git: Push"
+			],
+			[
+				"diff c",
+				"Git: Diff Current File"
+			],
+			[
+				"stau",
+				"Git: Status"
+			],
+			[
+				"pretty",
+				"Pretty JSON: Format (Pretty Print) JSON"
+			],
+			[
+				"diff",
+				"Git: Diff"
+			],
+			[
+				"remo",
+				"Git: Remote"
+			],
+			[
+				"Package Control: n",
+				"Package Control: Install Package"
+			],
+			[
+				"sta",
+				"Git: Status"
+			],
+			[
+				"git push",
+				"Git: Push"
+			],
+			[
+				"stat",
+				"Git: Status"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"git: push",
+				"Git: Push"
+			],
+			[
+				"gist",
+				"Git: Status"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 472.0
+	},
+	"console":
+	{
+		"height": 308.0,
+		"history":
+		[
+			"view.run_command('timestamp')",
+			"view.run_command('barney')",
+			"view.run_command('InsertDateTime')",
+			"view.run_command('insertdatetime')",
+			"view.run_command('example')",
+			"view.run_command('insertdatetime')",
+			"view.run_command('example')",
+			"view.run_command('insertdatetime')",
+			"view.run_command('insertdatetimte')",
+			"view.run_command('example')",
+			"view.run_command('test')",
+			"view.run_command('User.text')",
+			"view.run_command('text')",
+			"view.run_command('insertdatetime')",
+			"view.run_command('InsertDatetime')",
+			"view.run_command('insertdatetime')",
+			"view.runCommand('insertdatetime')",
+			"view.runCommand(\"inssertdatetime\")",
+			"view.runCommand(\"inssertdatetime')",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/B/Projects/noteable"
+	],
+	"file_history":
+	[
+		"/C/Users/B/Projects/generator-keystone/app/templates/templates/default-swig/layouts/default.swig",
+		"/C/Users/B/Projects/generator-keystone/app/templates/templates/default-jade/layouts/default.jade",
+		"/C/Users/B/Desktop/need more.txt",
+		"/C/Users/B/Projects/hawkett/templates/views/layouts/default.hbs",
+		"/C/Users/B/Projects/hawkett/public/styles/normalize.css",
+		"/C/Users/B/Projects/hawkett/public/styles/normalize.min.css",
+		"/C/Users/B/Projects/hawkett/public/styles/hawkettconstructions.min.css",
+		"/C/Users/B/Projects/hawkett/public/styles/hawkettconstructions.css",
+		"/C/Users/B/Projects/hawkett/Gruntfile.js",
+		"/C/Users/B/Projects/hawkett/node_modules/grunt-nodemon/node_modules/nodemon/node_modules/update-notifier/node_modules/configstore/node_modules/js-yaml/lib/js-yaml/schema/default_full.js",
+		"/C/Users/B/Projects/hawkett/public/styles/site.min.css",
+		"/C/Users/B/Projects/hawkett/node_modules/grunt/node_modules/minimatch/minimatch.js",
+		"/C/Users/B/Projects/hawkett/routes/middleware.js",
+		"/C/Users/B/Projects/hawkett/public/fonts/glyphicons-halflings-regular.svg",
+		"/C/Users/B/Projects/hawkett/templates/views/gallery.hbs",
+		"/C/Users/B/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/B/Projects/hawkett/templates/views/index.hbs",
+		"/C/Users/B/Projects/hawkett/templates/views/about.hbs",
+		"/C/Users/B/Projects/hawkett/node_modules/handlebars/node_modules/optimist/example/boolean_single.js",
+		"/C/Users/B/Projects/hawkett/node_modules/handlebars/lib/handlebars/base.js",
+		"/C/Users/B/Projects/hawkett/node_modules/keystone/routes/views/home.js",
+		"/C/Users/B/Projects/hawkett/node_modules/keystone/node_modules/azure/node_modules/azure-common/node_modules/tunnel/test/http-over-http.js",
+		"/C/Users/B/Projects/hawkett/routes/views/gallery.js",
+		"/C/Users/B/Projects/hawkett/public/js/gallery.js",
+		"/C/Users/B/Projects/hawkett/models/Gallery.js",
+		"/C/Users/B/Projects/hawkett/node_modules/grunt/node_modules/grunt-legacy-util/test/fixtures/Gruntfile-execArgv.js",
+		"/C/Users/B/Projects/hawkett/node_modules/grunt-contrib-jshint/CHANGELOG",
+		"/C/Users/B/Projects/hawkett/public/styles/bootstrap/component-animations.less",
+		"/C/Users/B/Projects/hawkett/node_modules/grunt-node-inspector/node_modules/node-inspector/lib/callback.js",
+		"/C/Users/B/Projects/hawkett/node_modules/grunt-node-inspector/node_modules/node-inspector/front-end/DevToolsExtensionAPI.js",
+		"/C/Users/B/Projects/hawkett/node_modules/keystone/node_modules/mandrill-api/deploy",
+		"/C/Users/B/Projects/hawkett/node_modules/async/LICENSE",
+		"/C/Users/B/Projects/hawkett/node_modules/grunt-node-inspector/node_modules/node-inspector/node_modules/rc/LICENSE.APACHE2",
+		"/C/Users/B/Projects/hawkett/node_modules/keystone/node_modules/less-middleware/node_modules/less/lib/source-map/source-map-footer.js",
+		"/C/Users/B/Projects/hawkett/node_modules/express3-handlebars/node_modules/semver/foot.js",
+		"/C/Users/B/Projects/hawkett/node_modules/moment/foo.coffee",
+		"/C/Users/B/Projects/hawkett/node_modules/moment/f.coffee",
+		"/C/Users/B/Projects/Hawkett Constructions/css/style.css",
+		"/C/Users/B/Projects/hawkett/templates/emails/enquiry-notification.jade",
+		"/C/Users/B/Projects/hawkett/models/Enquiry.js",
+		"/C/Users/B/Projects/hawkett/routes/views/contact.js",
+		"/C/Users/B/Projects/hawkett/node_modules/keystone/lib/email.js",
+		"/C/Users/B/Projects/hawkett/node_modules/keystone/index.js",
+		"/C/Users/B/Projects/hawkett/.env",
+		"/C/Users/B/Projects/hawkett/templates/emails/enquiry-notification.hbs",
+		"/C/Users/B/Projects/hawkett/node_modules/grunt-contrib-watch/node_modules/tiny-lr-fork/test/middleware.js",
+		"/C/Users/B/Projects/hawkett/templates/views/helpers/index.js",
+		"/C/Users/B/AppData/Roaming/Sublime Text 3/Packages/Pretty JSON/Pretty JSON.sublime-settings",
+		"/C/Users/B/Projects/hawkett/node_modules/keystone/public/js/common/ui-cloudinaryimage.js",
+		"/C/Users/B/Desktop/tes.json",
+		"/C/Users/B/Projects/hawkett/node_modules/keystone/templates/fields/cloudinaryimage/form.jade",
+		"/C/Users/B/Projects/Keynotes/public/js/keynotes.js",
+		"/C/Users/B/Projects/hawkett/public/styles/site/layout.less",
+		"/C/Users/B/Projects/hawkett/hawkett.sublime-project",
+		"/C/Users/B/Projects/Keynotes/routes/views/post.js",
+		"/C/Users/B/Projects/Keynotes/routes/views/note.js",
+		"/C/Users/B/Projects/hawkett/node_modules/keystone/node_modules/less-middleware/node_modules/less/test/css/mixins-important.css",
+		"/C/Users/B/Projects/hawkett/node_modules/keystone/public/js/lib/fancybox/helpers/jquery.fancybox-media.js",
+		"/C/Users/B/Projects/hawkett/node_modules/grunt-node-inspector/node_modules/node-inspector/front-end/heapProfiler.css",
+		"/C/Users/B/Projects/hawkett/node_modules/keystone/node_modules/azure/node_modules/azure-common/node_modules/tunnel/test/https-over-https-error.js",
+		"/C/Users/B/Projects/hawkett/node_modules/keystone/node_modules/keystone-utils/lib/htmlEntities.js",
+		"/C/Users/B/Projects/hawkett/node_modules/grunt-contrib-jshint/test/fixtures/missingsemicolon.js",
+		"/C/Users/B/Projects/hawkett/node_modules/keystone/node_modules/less-middleware/node_modules/less/test/less/errors/import-missing.less",
+		"/C/Users/B/Dropbox/Banana Park/Catalogue/Ebay/Other products/otherproducts.txt",
+		"/C/Users/B/Dropbox/Banana Park/Catalogue/Ebay/Details.txt",
+		"/C/Users/B/Projects/hawkett/node_modules/grunt-node-inspector/node_modules/node-inspector/front-end/StatusBarButton.js",
+		"/C/Users/B/Projects/hawkett/node_modules/keystone/node_modules/mongoose/static.js",
+		"/C/Users/B/Projects/hawkett/node_modules/jshint-stylish/node_modules/chalk/node_modules/.bin/strip-ansi",
+		"/C/Users/B/Projects/hawkett/node_modules/grunt-express-server/test/stoppable_test.js",
+		"/C/Users/B/Projects/hawkett/node_modules/jshint-stylish/stylish.js",
+		"/C/Users/B/Projects/hawkett/.gitignore",
+		"/C/Users/B/Projects/hawkett/node_modules/dotenv/.env",
+		"/C/Users/B/Projects/hawkett/templates/views/contact.hbs",
+		"/C/Users/B/Projects/generator-keystone/app/templates/templates/default-jade/views/contact.jade",
+		"/C/Users/B/Projects/Keynotes/templates/views/contact.jade",
+		"/C/Users/B/Projects/Keynotes/routes/views/contact.js",
+		"/C/Users/B/Projects/Keynotes/models/enquiries.js",
+		"/C/Users/B/AppData/Roaming/Sublime Text 3/Packages/User/CSS.sublime-settings",
+		"/C/Users/B/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/B/Projects/Hawkett Constructions/contact.html",
+		"/C/Users/B/Projects/hawkett/node_modules/moment/lang/hy-am.js",
+		"/C/Users/B/Projects/hawkett/node_modules/.bin/handlebars",
+		"/C/Users/B/Dropbox/Banana Park/Catalogue/Ebay/mask packs/details.txt",
+		"/C/Users/B/Projects/hawkett/routes/views/services.js",
+		"/C/Users/B/Projects/hawkett/routes/index.js",
+		"/C/Users/B/Projects/hawkett/templates/views/services.hbs",
+		"/C/Users/B/Projects/Hawkett Constructions/services.html",
+		"/C/Users/B/Projects/Hawkett Constructions/index.html",
+		"/C/Users/B/Projects/Hawkett Constructions/about.html",
+		"/C/Users/B/Projects/hawkett/node_modules/grunt-contrib-watch/node_modules/tiny-lr-fork/bin/update-livereload",
+		"/C/Users/B/Projects/hawkett/node_modules/grunt-contrib-watch/node_modules/tiny-lr-fork/node_modules/debug/debug.js",
+		"/C/Users/B/Projects/hawkett/node_modules/grunt-contrib-watch/node_modules/tiny-lr-fork/node_modules/noptify/actions/commandable.js",
+		"/C/Users/B/Projects/hawkett/node_modules/keystone/node_modules/azure/node_modules/azure-common/node_modules/xml2js/node_modules/sax/test/cdata-multiple.js",
+		"/C/Users/B/Projects/hawkett/node_modules/grunt-express-server/test/custom_output_test.js",
+		"/C/Users/B/Projects/hawkett/node_modules/keystone/node_modules/less-middleware/node_modules/less/test/css/import-interpolation.css",
+		"/C/Users/B/Projects/hawkett/node_modules/keystone/node_modules/less-middleware/node_modules/less/test/css/variables-in-at-rules.css",
+		"/C/Users/B/Projects/hawkett/node_modules/keystone/node_modules/less-middleware/node_modules/less/test/less/errors/comment-in-selector.less",
+		"/C/Users/B/Projects/hawkett/node_modules/grunt-node-inspector/node_modules/node-inspector/front-end/CookieItemsView.js",
+		"/C/Users/B/Projects/hawkett/node_modules/keystone/node_modules/azure/node_modules/azure-storage-legacy/lib/blob/models/containeraclresult.js",
+		"/C/Users/B/Projects/hawkett/node_modules/grunt-node-inspector/node_modules/node-inspector/front-end/FileContentView.js",
+		"/C/Users/B/Projects/hawkett/node_modules/keystone/node_modules/mongoose/node_modules/mongodb/lib/mongodb/commands/delete_command.js",
+		"/C/Users/B/Projects/hawkett/node_modules/keystone/node_modules/mongoose/lib/model.js",
+		"/C/Users/B/Projects/hawkett/public/styles/bootstrap/modals.less",
+		"/C/Users/B/Projects/hawkett/node_modules/keystone/node_modules/express/node_modules/connect/lib/middleware/methodOverride.js",
+		"/C/Users/B/Projects/hawkett/node_modules/keystone/node_modules/less-middleware/node_modules/less/test/css/mixins-guards-default-func.css",
+		"/C/Users/B/Projects/hawkett/node_modules/grunt-node-inspector/node_modules/node-inspector/front-end/KeyboardShortcut.js",
+		"/C/Users/B/Projects/hawkett/node_modules/grunt-node-inspector/node_modules/node-inspector/front-end/DockController.js",
+		"/C/Users/B/Projects/hawkett/node_modules/keystone/node_modules/azure/node_modules/wns/test/nock/TileWidePeekImageCollection01-success.js",
+		"/C/Users/B/Projects/hawkett/node_modules/grunt-node-inspector/node_modules/node-inspector/front-end/CookiesTable.js",
+		"/C/Users/B/Projects/hawkett/public/styles/site.css",
+		"/C/Users/B/Projects/hawkett/public/styles/site.less",
+		"/C/Users/B/Projects/hawkett/routes/views/about.js",
+		"/C/Users/B/Projects/Console2/console_delte.xml",
+		"/C/Users/B/Projects/Console2/console.xml",
+		"/C/Users/B/Projects/Hawkett/models/galleries.js",
+		"/C/Users/B/Projects/Hawkett/.env",
+		"/C/Users/B/Projects/Hawkett/templates/layouts/default.jade",
+		"/C/Users/B/Projects/Keynotes/models/galleries.js",
+		"/C/Users/B/Projects/Hawkett Constructions/.htaccess",
+		"/C/Users/B/Projects/Hawkett Constructions/css/bootstrap.css",
+		"/C/Users/B/Projects/Restaurant.cs",
+		"/C/Users/B/Dropbox/Banana Park/Catalogue/mask packs/details.txt",
+		"/C/Users/B/Projects/Portal/Portal/Portal/Web.config",
+		"/C/Users/B/Projects/Mi9/service.js",
+		"/C/Users/B/AppData/Roaming/Sublime Text 3/Packages/User/SideBarEnhancements/Open With/Side Bar.sublime-menu",
+		"/C/Users/B/Projects/Hawkett Constructions/hawkett.sublime-project",
+		"/C/Users/B/Projects/Hawkett Constructions/index_old.html",
+		"/C/Users/B/Projects/Hawkett Constructions/gallery.html"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 104.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"footer",
+			"4",
+			"20px",
+			"..",
+			"serviceRequired",
+			"console",
+			"mandrill api key",
+			"mandrill",
+			"Enquiry",
+			"\\n",
+			"default.hbs",
+			"fancybox",
+			".click",
+			"click",
+			"img-thumbnail",
+			"300",
+			"heroimage",
+			"\\",
+			"float",
+			"cloudinary",
+			"keystone.set('cloudinary config'",
+			"3000",
+			"cloudinaryUrlLimit",
+			"? undefined",
+			"</li>",
+			"<li>",
+			"propertyLocation",
+			" class=\"lead\"",
+			"../img",
+			"cloudinary",
+			"thebodyshop",
+			"box-shadow",
+			"h3",
+			"gallery",
+			"link",
+			" class=\"lead\"",
+			"li",
+			"mountain",
+			"blue",
+			"Oconnellbathroom",
+			"holderjs",
+			"font-weight",
+			"7",
+			"6",
+			"5",
+			"4",
+			"6",
+			"span3",
+			"</p>",
+			"<p>",
+			"Play",
+			"replace",
+			"</a>",
+			"></a>",
+			".mp3",
+			"http",
+			"ahttp",
+			"href\\=\\\"",
+			"href\\=\\\"http.+?mp3",
+			"http.+?mp3",
+			"http://www.howtostudykorean.com/wp-content/uploads/2014/01/wLesson-4-1.mp3",
+			"audio",
+			"shift+t",
+			"ctrl+d",
+			"ctrl+t"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"",
+			"/images",
+			"<br />",
+			"",
+			"</a><br />",
+			">Downloada</a>",
+			".mp3\" download></a>",
+			"<a href=\"http",
+			"http",
+			"a"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 22.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 98.0
+	},
+	"output.git-commit":
+	{
+		"height": 92.0
+	},
+	"output.git-push":
+	{
+		"height": 92.0
+	},
+	"output.sftp":
+	{
+		"height": 92.0
+	},
+	"project": "noteable.sublime-project",
+	"replace":
+	{
+		"height": 72.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"defaul",
+				"templates\\views\\layouts\\default.hbs"
+			],
+			[
+				"def",
+				"templates\\views\\layouts\\default.hbs"
+			],
+			[
+				"hawcss",
+				"public\\styles\\hawkettconstructions.css"
+			],
+			[
+				"grunt",
+				"Gruntfile.js"
+			],
+			[
+				".hbs",
+				"templates\\views\\index.hbs"
+			],
+			[
+				"galler",
+				"templates\\views\\gallery.hbs"
+			],
+			[
+				"default",
+				"templates\\views\\layouts\\default.hbs"
+			],
+			[
+				"hawkcss",
+				"public\\styles\\hawkettconstructions.css"
+			],
+			[
+				"midd",
+				"routes\\middleware.js"
+			],
+			[
+				"middle",
+				"routes\\middleware.js"
+			],
+			[
+				"hawkett",
+				"public\\styles\\hawkettconstructions.css"
+			],
+			[
+				"enquir",
+				"models\\Enquiry.js"
+			],
+			[
+				"hawk",
+				"public\\styles\\hawkettconstructions.css"
+			],
+			[
+				"in",
+				"index_old.html"
+			],
+			[
+				"pa",
+				"Package Control Messages"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 284.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
