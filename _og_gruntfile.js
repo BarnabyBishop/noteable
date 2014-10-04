@@ -21,12 +21,12 @@ module.exports = function(grunt) {
 			},
 			dev: {
 				options: {
-					script: 'app.js',
+					script: 'app.coffee',
 					debug: true
 				}
 			}
 		},
-
+/*
 		coffee: {
 		  compile: {
 		    files: {
@@ -34,7 +34,7 @@ module.exports = function(grunt) {
 		    }
 	  	},
 		},
-
+*/
 		coffeelint: {
       app: ['*.coffee', '/public/scripts/*.coffee'],
      	options: {
@@ -78,7 +78,7 @@ module.exports = function(grunt) {
 
 		nodemon: {
 			debug: {
-				script: 'app.js',
+				script: 'app.coffee',
 				options: {
 					nodeArgs: ['--debug'],
 					env: {
@@ -100,10 +100,10 @@ module.exports = function(grunt) {
 			},
 			express: {
 				files: [
-					'app.js',
+					'app.coffee',
 					'public/js/lib/**/*.{js,json}'
 				],
-				tasks: ['coffee', 'coffeelint', 'concurrent:dev']
+				tasks: ['coffeelint', 'concurrent:dev']
 			},
 			livereload: {
 				files: [
@@ -123,7 +123,6 @@ module.exports = function(grunt) {
 	// default option to connect server
 	grunt.registerTask('serve', function(target) {
 		grunt.task.run([
-			'coffee',
 			'coffeelint',
 			'shell:mongodb',
 			'concurrent:dev'
