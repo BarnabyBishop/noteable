@@ -24,6 +24,10 @@ module.exports = (grunt) ->
 			options:
 				configFile: 'coffeelint.json'
 
+		stylus:
+			compile:
+				files: 'public/styles/style.css': 'public/styles/style.styl'
+
 		shell:
 			mongodb:
 				command: 'C:\\Users\\B\\Projects\\mongodb\\bin\\mongod.exe',
@@ -63,6 +67,12 @@ module.exports = (grunt) ->
 				],
 				tasks: ['coffeelint']
 
+			stylus:
+				files: [
+					'public/styles/*.styl'
+				],
+				tasks: ['stylus']
+
 			express:
 				files: [
 					'app.coffee',
@@ -74,7 +84,7 @@ module.exports = (grunt) ->
 				files: [
 					'public/styles/**/*.css',
 					'public/styles/**/*.less',
-					'templates/**/*.jade',
+					'views/*.jade',
 					'node_modules/keystone/templates/**/*.jade'
 				],
 				options:
@@ -82,6 +92,7 @@ module.exports = (grunt) ->
 		)
 
 	grunt.loadNpmTasks('grunt-contrib-coffee')
+	grunt.loadNpmTasks('grunt-contrib-stylus')
 
 	# default option to connect server
 	grunt.registerTask('default', (target) ->
