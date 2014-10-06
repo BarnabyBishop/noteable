@@ -7,6 +7,7 @@ cookieParser = require('cookie-parser')
 bodyParser = require('body-parser')
 routes = require('./routes/index')
 users = require('./routes/users')
+model = require('./models/model')
 
 app = express()
 
@@ -55,7 +56,6 @@ app.use((err, req, res, next) ->
 		error: {}
 	)
 )
-
 
 module.exports = app
 
