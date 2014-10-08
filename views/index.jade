@@ -1,9 +1,12 @@
 extends layout
 
 block content
-	h1= title
-	p Welcome to #{title}
-	each note in notes
-		strong= note.title
-		div(contenteditable=true)= note.text
+	.note-list
+		each note in notes
+			div
+				strong= note.title
+
+	.note
+		input.title(placeholder='Title')
+		textarea.text(placeholder='Note')
 
