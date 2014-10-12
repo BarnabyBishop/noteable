@@ -21,4 +21,21 @@ router.get('/:id', (req, res) ->
 )
 
 
+router.post('/savenote', (req, res) ->
+	console.log JSON.stringify req.body
+	id = req.body._id
+	savedNote =
+		title: req.body.title
+		text: req.body.text
+
+	Note = mongoose.model('Note')
+	Note.findOneAndUpdate({ _id: id }, savedNote, (err, note) ->
+		if err
+			console.error(err)
+		else
+			console.info('saved: ' + note)
+
+	)
+)
+
 module.exports = router

@@ -4,6 +4,9 @@ block content
 	.note-list
 
 	.note
-		input.title(placeholder='Title')
-		textarea.text(placeholder='Note')
+		input.title(placeholder='Title', data-type='title')
+		textarea.text(placeholder='Note', data-type='text')
+
+	script(src='/scripts/jquery-2.1.1.min.js')
+	script(src='/scripts/index.js')
 

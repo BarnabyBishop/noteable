@@ -1,5 +1,5 @@
 mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/notable')
+mongoose.connect('mongodb://localhost/noteable')
 
 db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error:'))
