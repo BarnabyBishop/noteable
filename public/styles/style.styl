@@ -17,12 +17,21 @@ textarea:focus, input:focus
 	border solid 1px #ccc
 	display inline-block
 	width 15%
-	padding 10px
 	vertical-align top
 	cursor pointer
 	margin-right 15px
 	display inline-block
+	font-weight bold
 
+	div
+		padding:10px
+
+		&:not(:last-child)
+			border-bottom solid 1px #ddd
+
+		&.selected
+			border-bottom: solid 2px #408FB6;
+			padding-bottom 9px
 .note
 	border 1px solid #ccc
 	display inline-block

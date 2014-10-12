@@ -24,6 +24,10 @@ module.exports = (grunt) ->
 			options:
 				configFile: 'coffeelint.json'
 
+		coffee:
+			compile:
+				files:
+					'public/scripts/index.js': 'public/scripts/index.coffee'
 		stylus:
 			compile:
 				files: 'public/styles/style.css': 'public/styles/style.styl'
@@ -63,9 +67,10 @@ module.exports = (grunt) ->
 				files: [
 					'model/**/*.coffee',
 					'routes/**/*.coffee',
-					'*.coffee'
+					'*.coffee',
+					'public/scripts/*.coffee'
 				],
-				tasks: ['coffeelint']
+				tasks: ['coffeelint', 'coffee']
 
 			stylus:
 				files: [
@@ -78,12 +83,13 @@ module.exports = (grunt) ->
 					'app.coffee',
 					'public/js/lib/**/*.{js,json}'
 				],
-				tasks: ['coffeelint', 'concurrent:dev']
+				tasks: ['coffeelint', 'coffee', 'stylus', 'concurrent:dev']
 
 			livereload:
 				files: [
 					'public/styles/**/*.css',
-					'public/styles/**/*.less',
+					'public/styles/**/*.styl',
+					'public/scripts/*.coffee',
 					'views/*.jade',
 					'node_modules/keystone/templates/**/*.jade'
 				],
@@ -98,6 +104,7 @@ module.exports = (grunt) ->
 	grunt.registerTask('default', (target) ->
 		grunt.task.run([
 			'coffeelint',
+			'coffee',
 			'shell:mongodb',
 			'concurrent:dev'
 		])
