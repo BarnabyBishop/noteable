@@ -29,8 +29,7 @@
     "grunt-shell": "~1.1.1",
     "grunt-shell-spawn": "~0.3.0",
     "grunt-concurrent": "~1.0.0",
-    "grunt-contrib-stylus": "~0.20.0",
-    "grunt-contrib-cssmin": "~0.10.0"
+    "grunt-contrib-stylus": "~0.20.0"
   },
   "scripts": {
     "start": "node app .js"

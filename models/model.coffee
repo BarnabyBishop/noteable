@@ -1,9 +1,20 @@
 mongoose = require('mongoose')
-Schema = mongoose.Schema
-mongoose.connect('mongodb://localhost/noteable')
+Note = require('./note')
+User = require('./user')
 
-db = mongoose.connection
-db.on('error', console.error.bind(console, 'connection error:'))
+connStr = 'mongodb://localhost/noteable'
+
+mongoose.connect(connStr,
+				(err) ->
+					if err
+						throw err
+				console.log('Successfully connected to MongoDB')
+)
+
+module.exports = { Note, User }
+
+###
+#Schema = mongoose.Schema
 db.once('open', () ->
 	noteSchema = mongoose.Schema(
 		_id: String # will actually be a uuid
@@ -12,11 +23,16 @@ db.once('open', () ->
 	)
 
 	Note = mongoose.model('Note', noteSchema)
+
+console.log('inserting user')
+init = new User(
+	'email': 'barneyb@gmail.com',
+	'password': 'whocares')
+init.save((err) ->
+	if err
+		console.log 'error: ' + err
+	else
+		consooe.log 'that worked i guess...'
 )
-###
-	init = new Note(
-		'title': 'init',
-		'text': 'init text',
-		'notid':  mongoose.Types.ObjectId('97c5f017c48947a59eb44f6cb68e18ac')) #'97c5f017c48947a59eb44f6cb68e18ac')
-	init.save()
+
 ###

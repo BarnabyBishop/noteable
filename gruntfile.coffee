@@ -84,17 +84,6 @@ module.exports = (grunt) ->
 					'public/js/lib/**/*.{js,json}'
 				],
 				tasks: ['coffeelint', 'coffee', 'stylus', 'concurrent:dev']
-
-			livereload:
-				files: [
-					'public/styles/**/*.css',
-					'public/styles/**/*.styl',
-					'public/scripts/*.coffee',
-					'views/*.jade',
-					'node_modules/keystone/templates/**/*.jade'
-				],
-				options:
-					livereload: true
 		)
 
 	grunt.loadNpmTasks('grunt-contrib-coffee')
