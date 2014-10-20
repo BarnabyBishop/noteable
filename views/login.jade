@@ -1,0 +1,15 @@
+extends layout
+
+
+block content
+	.container
+		if message
+			div message
+		form(method='post')
+			div
+				label Email
+				input(type='email', name='email', placeholder='Email' required)
+			div
+				label Password
+				input(type='password', name='password', placeholder='password' required)
+			button(type='submit') Login

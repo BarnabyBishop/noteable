@@ -1,13 +1,16 @@
 debug = require('debug')('noteable')
 express = require('express')
+session = require('express-session')
 path = require('path')
 favicon = require('serve-favicon')
 logger = require('morgan')
 cookieParser = require('cookie-parser')
 bodyParser = require('body-parser')
-routes = require('./routes/index')
-users = require('./routes/users')
+flash = require('connect-flash')
+routes = require('./routes/routes')
 model = require('./models/model')
+passport = require("passport")
+LocalStrategy = require("passport-local").Strategy
 
 app = express()
 
@@ -22,10 +25,55 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded( extended: false ))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(session({ secret: 'i have no idea what im doing' }))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(flash())
 
 app.use('/', routes)
-app.use('/users', users)
 
+passport.use(new LocalStrategy({
+	usernameField: 'email',
+	passwordField: 'password'
+	},
+	(email, password, done) ->
+		model.User.findOne(
+			email: email,
+			(err, user) ->
+				if err
+					console.log err
+					return done(err)
+				unless user
+					console.log 'incorrect username'
+					return done(null, false, message: "Incorrect username.")
+
+				user.comparePassword(password,
+					(err, isMatch) ->
+						if err
+							throw err
+						console.log('Password: ', isMatch)
+						if isMatch
+							return done(null, user)
+						else
+							return done(null, false, message: "Incorrect password.")
+				)
+
+			)
+		)
+)
+passport.serializeUser((user, done) ->
+	done(null, user.id)
+)
+
+
+passport.deserializeUser((id, done) ->
+	model.User.findById(id, (err, user) ->
+		if err
+			done(err)
+		if user
+			done(null,user)
+	)
+)
 # catch 404 and forward to error handler
 app.use((req, res, next) ->
 	err = new Error('Not Found')
