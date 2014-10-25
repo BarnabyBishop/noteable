@@ -1,5 +1,6 @@
 $ ->
 	notes = {}
+	folders = {}
 	editAmount = 0
 	editTimer = false
 
@@ -8,7 +9,6 @@ $ ->
 		element.addClass('selected')
 
 		note = notes[element.attr('data-id')]
-		$('.note .title').attr('test', note._id)
 		$('.note .title').val(note.title).attr('data-id', note._id)
 		$('.note .text').val(note.text).attr('data-id', note._id)
 
@@ -22,23 +22,15 @@ $ ->
 					element.text(value)
 			)
 
-	editField = (control, value) ->
+	editNoteField = (control, value) ->
 		id = control.attr('data-id')
 		if not id
-			newNote = true
-			id = uuid.v4()
-			notes[id] =
-				_id: id
-			$('.note .title').attr('data-id', id)
-			$('.note .text').attr('data-id', id)
+			id = createNote()
 
-		type = control.attr('data-type')
-		notes[id][type] = value
+		field = control.attr('data-field')
+		notes[id][field] = value
 
-		if newNote
-			addNoteToList(notes[id])
-		else
-			setValue($("[data-type=#{type}][data-id=#{id}]").not(control), value)
+		setValue($("[data-field=#{field}][data-id=#{id}]").not(control), value)
 
 		# If the user has stopped typing for 1 second Or made over 50 changes save
 		if editTimer
@@ -57,15 +49,84 @@ $ ->
 		)
 
 	addNoteToList = (note) ->
-		node = $("<div data-id='#{note._id}' data-type='title'>#{note.title}</div>")
+		node = $("<div data-id='#{note._id}' data-field='title'>#{note.title}</div>")
 		$('.note-list').append(node)
 		node.click( ->
 			selectNote($(this))
 		)
 
-	# Load notes from serbe
-	$.ajax(url: "/notes")
-	.done(
+
+	createNote = ->
+		id = uuid.v4()
+		notes[id] =
+			_id: id
+			title: ''
+			deleted: false
+		$('.note .title').attr('data-id', id)
+		$('.note .text').attr('data-id', id)
+		addNoteToList(notes[id])
+		return id
+
+	deleteNote = ->
+		id = $('.note .title').attr('data-id')
+		if id
+			$.ajax(
+				type: 'POST',
+				url: '/deletenote',
+				data:
+					_id: id
+			)
+
+	addFolderToList = (folder) ->
+		node = $("<div data-id='#{folder._id}' data-type='folder' data-field='name'><span class='typcn typcn-folder'></span><input type='text' data-id='#{folder._id}' value='#{folder.name if folder.name?}' /></div>")
+		$('.note-list').append(node)
+		node.click( ->
+			selectFolder($(this))
+		)
+		node.find('input').on('input', -> editFolder($(this), this.value))
+
+	selectFolder = ->
+		s = 'todo'
+
+	editFolder = (control, value) ->
+		id = control.attr('data-id')
+
+		folders[id].name = value
+		# If the user has stopped typing for 1 second Or made over 50 changes save
+		if editFolderTimer
+			clearTimeout(editFolderTimer)
+		editFolderTimer = setTimeout((-> saveFolder(id)), 500)
+
+	createFolder = ->
+		id = uuid.v4()
+		folders[id] =
+			_id: id
+			name: ''
+			parent: ''
+			deleted: false
+
+		addFolderToList(folders[id])
+		return id
+
+	saveFolder = (id) ->
+		$.ajax(
+			type: 'POST',
+			url: '/savefolder',
+			data: folders[id]
+		)
+
+	# Load notes from server
+	$.ajax(url: "/getfolders")
+	.then(
+		(data) ->
+			data.forEach(
+				(folder) ->
+					folders[folder._id] = folder
+					addFolderToList(folder)
+			)
+			$.ajax(url: "/getnotes")
+	)
+	.then(
 		(data) ->
 			data.forEach(
 				(note) ->
@@ -75,5 +136,9 @@ $ ->
 	)
 
 	# prepare inputs for editing
-	$('.note .title').on('input', -> editField($(this), this.value))
-	$('.note .text') .on('input', -> editField($(this), this.value))
+	$('.note .title').on('input', -> editNoteField($(this), this.value))
+	$('.note .text') .on('input', -> editNoteField($(this), this.value))
+
+	$('.newfolder').on('click', createFolder)
+	$('.newnote').on('click', createNote)
+	$('.deletenote').on('click', deleteNote)

@@ -7,6 +7,8 @@ noteSchema = mongoose.Schema(
 		required: true
 	title: String
 	text: String
+	folder: String
+	deleted: Boolean
 )
 
 module.exports = mongoose.model('Note', noteSchema)

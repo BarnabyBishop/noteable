@@ -1,4 +1,5 @@
 mongoose = require('mongoose')
+Folder = require('./folder')
 Note = require('./note')
 User = require('./user')
 
@@ -11,28 +12,4 @@ mongoose.connect(connStr,
 				console.log('Successfully connected to MongoDB')
 )
 
-module.exports = { Note, User }
-
-###
-#Schema = mongoose.Schema
-db.once('open', () ->
-	noteSchema = mongoose.Schema(
-		_id: String # will actually be a uuid
-		title: String
-		text: String
-	)
-
-	Note = mongoose.model('Note', noteSchema)
-
-console.log('inserting user')
-init = new User(
-	'email': 'barneyb@gmail.com',
-	'password': 'whocares')
-init.save((err) ->
-	if err
-		console.log 'error: ' + err
-	else
-		consooe.log 'that worked i guess...'
-)
-
-###
+module.exports = { Folder, Note, User }

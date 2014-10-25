@@ -39,16 +39,28 @@ router.get('/',
 			res.render('index')
 )
 
-router.get('/notes',
+router.get('/getnotes',
 	ensureAuthenticated,
 	(req, res) ->
 		Note = mongoose.model('Note')
-		Note.find((err, notes) ->
+		Note.find({ 'deleted': false }, (err, notes) ->
 			if err
 				console.error(err)
 			res.json(notes)
 		)
 )
+
+router.get('/getfolders',
+	ensureAuthenticated,
+	(req, res) ->
+		Folder = mongoose.model('Folder')
+		Folder.find({ 'deleted': false }, (err, folders) ->
+			if err
+				console.error(err)
+			res.json(folders)
+		)
+)
+
 
 router.get('/:id',
 	ensureAuthenticated,
@@ -56,6 +68,25 @@ router.get('/:id',
 		res.json({})
 )
 
+router.post('/savefolder',
+	ensureAuthenticated,
+	(req, res) ->
+		_id = req.body._id
+		savedFolder =
+			name: req.body.name || ''
+			parent: req.body.parent || ''
+			deleted: false
+
+		console.log 'saving: ' + JSON.stringify(savedFolder)
+		Folder = mongoose.model('Folder')
+		Folder.findOneAndUpdate({ _id: _id }, savedFolder, { upsert:true }, (err, folder) ->
+			if err
+				console.error(err)
+				return res.status(500).end()
+			res.status(200).end()
+
+		)
+)
 
 router.post('/savenote',
 	ensureAuthenticated,
@@ -64,15 +95,31 @@ router.post('/savenote',
 		savedNote =
 			title: req.body.title || ''
 			text: req.body.text || ''
+			folder: req.body.folder || ''
+			deleted: false
 		Note = mongoose.model('Note')
 		Note.findOneAndUpdate({ _id: _id }, savedNote, { upsert:true }, (err, note) ->
 			if err
 				console.error(err)
-		)
+				return res.status(500).end()
+			res.status(200).end()
 
-		res.status(200).end()
+		)
 )
 
+router.post('/deletenote',
+	ensureAuthenticated,
+	(req, res) ->
+		_id = req.body._id
+		Note = mongoose.model('Note')
+		Note.findOneAndUpdate({ _id: _id }, { deleted: true }, (err, note) ->
+			if err
+				console.error(err)
+				return res.status(500).end()
+			res.status(200).end()
+		)
+
+)
 
 
 module.exports = router
