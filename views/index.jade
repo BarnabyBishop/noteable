@@ -1,11 +1,15 @@
 extends layout
 
 block content
+	div
+		button.typcn.typcn-folder-add.newfolder
+		button.typcn.typcn-plus-outline.newnote
+		button.typcn.typcn-trash.deletenote
 	.note-list
 
 	.note
-		input.title(placeholder='Title', data-type='title')
-		textarea.text(placeholder='Note', data-type='text')
+		input.title(placeholder='Title', data-field='title')
+		textarea.text(placeholder='Note', data-field='text')
 
 	script(src='/scripts/uuid.min.js')
 	script(src='/scripts/jquery-2.1.1.min.js')
