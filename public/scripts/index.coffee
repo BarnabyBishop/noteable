@@ -5,7 +5,7 @@ $ ->
 	editTimer = false
 
 	selectNote = (element) ->
-		$('.note-list .selected').removeClass('selected')
+		$('.notelist .selected').removeClass('selected')
 		element.addClass('selected')
 
 		note = notes[element.attr('data-id')]
@@ -50,7 +50,7 @@ $ ->
 
 	addNoteToList = (note) ->
 		node = $("<div data-id='#{note._id}' data-field='title'>#{note.title}</div>")
-		$('.note-list').append(node)
+		$('.notelist').append(node)
 		node.click( ->
 			selectNote($(this))
 		)
@@ -78,12 +78,12 @@ $ ->
 			)
 
 	addFolderToList = (folder) ->
-		node = $("<div data-id='#{folder._id}' data-type='folder' data-field='name'><span class='typcn typcn-folder'></span><input type='text' data-id='#{folder._id}' value='#{folder.name if folder.name?}' /></div>")
-		$('.note-list').append(node)
+		node = $("<div data-id='#{folder._id}' data-type='folder' data-field='name'><span class='typcn typcn-folder'></span><div data-id='#{folder._id}'>#{folder.name if folder.name?}'</div></div>")
+		$('.folderlist .panel').append(node)
 		node.click( ->
 			selectFolder($(this))
 		)
-		node.find('input').on('input', -> editFolder($(this), this.value))
+		# node.find('input').on('input', -> editFolder($(this), this.value))
 
 	selectFolder = ->
 		s = 'todo'
@@ -124,8 +124,8 @@ $ ->
 					folders[folder._id] = folder
 					addFolderToList(folder)
 			)
-			$.ajax(url: "/getnotes")
 	)
+	$.ajax(url: "/getnotes")
 	.then(
 		(data) ->
 			data.forEach(
