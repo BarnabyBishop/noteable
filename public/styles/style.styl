@@ -7,20 +7,21 @@ textarea:focus, input:focus
 	outline 0
 
 .note
-.note-list
+.notelist
 	-webkit-box-shadow: 0 2px 1px rgba(0,0,0,0.08);
 	box-shadow: 0 2px 1px rgba(0,0,0,0.08);
 	-webkit-border-radius 5px
 	border-radius 5px
 
-.note-list
-	border solid 1px #ccc
+.notelist-container
 	display inline-block
 	width 15%
 	vertical-align top
-	cursor pointer
 	margin-right 15px
-	display inline-block
+
+.notelist
+	border solid 1px #ccc
+	cursor pointer
 	font-weight bold
 
 	div
@@ -37,12 +38,15 @@ textarea:focus, input:focus
 			background-color #eee
 
 .deletenote
+.newfolder
 	float right
+
+.note-container
+	display inline-block
+	width 80%
 
 .note
 	border 1px solid #ccc
-	display inline-block
-	width 80%
 
 	.title
 	.text
@@ -63,8 +67,9 @@ button
 	background-color transparent
 	border 0
 	padding 0
-	font-size 30px
 	cursor pointer
+	font-size 28px
+	outline transparent
 
 	&:hover
 		color #6BD5FF

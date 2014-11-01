@@ -7,7 +7,7 @@
     editTimer = false;
     selectNote = function(element) {
       var note;
-      $('.note-list .selected').removeClass('selected');
+      $('.notelist .selected').removeClass('selected');
       element.addClass('selected');
       note = notes[element.attr('data-id')];
       $('.note .title').val(note.title).attr('data-id', note._id);
@@ -55,7 +55,7 @@
     addNoteToList = function(note) {
       var node;
       node = $("<div data-id='" + note._id + "' data-field='title'>" + note.title + "</div>");
-      $('.note-list').append(node);
+      $('.notelist').append(node);
       return node.click(function() {
         return selectNote($(this));
       });
@@ -88,13 +88,10 @@
     };
     addFolderToList = function(folder) {
       var node;
-      node = $("<div data-id='" + folder._id + "' data-type='folder' data-field='name'><span class='typcn typcn-folder'></span><input type='text' data-id='" + folder._id + "' value='" + (folder.name != null ? folder.name : void 0) + "' /></div>");
-      $('.note-list').append(node);
-      node.click(function() {
+      node = $("<div data-id='" + folder._id + "' data-type='folder' data-field='name'><span class='typcn typcn-folder'></span><div data-id='" + folder._id + "'>" + (folder.name != null ? folder.name : void 0) + "'</div></div>");
+      $('.folderlist .panel').append(node);
+      return node.click(function() {
         return selectFolder($(this));
-      });
-      return node.find('input').on('input', function() {
-        return editFolder($(this), this.value);
       });
     };
     selectFolder = function() {
@@ -134,13 +131,13 @@
     $.ajax({
       url: "/getfolders"
     }).then(function(data) {
-      data.forEach(function(folder) {
+      return data.forEach(function(folder) {
         folders[folder._id] = folder;
         return addFolderToList(folder);
       });
-      return $.ajax({
-        url: "/getnotes"
-      });
+    });
+    $.ajax({
+      url: "/getnotes"
     }).then(function(data) {
       return data.forEach(function(note) {
         notes[note._id] = note;
