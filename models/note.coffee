@@ -7,16 +7,34 @@ noteSchema = mongoose.Schema(
 		required: true
 	title: String
 	text: String
-	folder: String
-	deleted: Boolean
+	path: String
+	deleted:
+		type: Boolean
+		default: false
+	list:
+		text: String
+		checked: Boolean
 )
 
-module.exports = mongoose.model('Note', noteSchema)
+noteModel = mongoose.model('Note', noteSchema)
 
-###
-	init = new Note(
-		'title': 'init',
-		'text': 'init text',
-		'notid':  mongoose.Types.ObjectId('97c5f017c48947a59eb44f6cb68e18ac')) #'97c5f017c48947a59eb44f6cb68e18ac')
-	init.save()
-###
+module.exports =
+	get: (callback) ->
+		noteModel.find({ 'deleted': false }, callback)
+
+	save: (note, callback) ->
+		_id = note._id
+
+		console.log note
+		# mongo gets cranky if you try and insert/update the _id
+		# through the saved object
+		delete note._id
+		delete note.__v
+
+		console.log note
+
+		noteModel.findOneAndUpdate({ _id: _id }, note, { upsert:true }, callback)
+
+	delete: (noteId, callback) ->
+		noteModel.findOneAndUpdate({ _id: noteId }, { deleted: true }, callback)
+
