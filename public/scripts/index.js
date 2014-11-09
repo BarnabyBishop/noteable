@@ -88,8 +88,8 @@
     };
     addFolderToList = function(folder) {
       var node;
-      node = $("<div data-id='" + folder._id + "' data-type='folder' data-field='name'><span class='typcn typcn-folder'></span><div data-id='" + folder._id + "'>" + (folder.name != null ? folder.name : void 0) + "'</div></div>");
-      $('.folderlist .panel').append(node);
+      node = $("<div data-id='" + folder._id + "' class='folder' data-type='folder' data-field='name'><span class='icon fa fa-folder-o'></span><div data-id='" + folder._id + "'>" + (folder.name != null ? folder.name : void 0) + "'</div></div>");
+      $('.folderlist .panel .newfolder').before(node);
       return node.click(function() {
         return selectFolder($(this));
       });
@@ -152,7 +152,10 @@
     });
     $('.newfolder').on('click', createFolder);
     $('.newnote').on('click', createNote);
-    return $('.deletenote').on('click', deleteNote);
+    $('.deletenote').on('click', deleteNote);
+    return $('.folderlist').on('click', function() {
+      return $(this).find('.panel').toggle();
+    });
   });
 
 }).call(this);

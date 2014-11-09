@@ -78,12 +78,11 @@ $ ->
 			)
 
 	addFolderToList = (folder) ->
-		node = $("<div data-id='#{folder._id}' data-type='folder' data-field='name'><span class='typcn typcn-folder'></span><div data-id='#{folder._id}'>#{folder.name if folder.name?}'</div></div>")
-		$('.folderlist .panel').append(node)
+		node = $("<div data-id='#{folder._id}' class='folder' data-type='folder' data-field='name'><span class='icon fa fa-folder-o'></span><div data-id='#{folder._id}'>#{folder.name if folder.name?}'</div></div>")
+		$('.folderlist .panel .newfolder').before(node)
 		node.click( ->
 			selectFolder($(this))
 		)
-		# node.find('input').on('input', -> editFolder($(this), this.value))
 
 	selectFolder = ->
 		s = 'todo'
@@ -142,3 +141,5 @@ $ ->
 	$('.newfolder').on('click', createFolder)
 	$('.newnote').on('click', createNote)
 	$('.deletenote').on('click', deleteNote)
+
+	$('.folderlist').on('click', -> $(this).find('.panel').toggle())

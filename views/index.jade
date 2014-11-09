@@ -3,15 +3,16 @@ extends layout
 block content
 	div.notelist-container
 		div.folderlist
-			button.typcn.typcn-folder.folders
+			button.fa.fa-folder-o.folders
 			span.currentfolder
 			div.panel
-		button.typcn.typcn-folder-add.newfolder
+				button.fa.fa-plus.newfolder
+
 		.notelist
 
 	div.note-container
-		button.typcn.typcn-plus-outline.newnote
-		button.typcn.typcn-trash.deletenote
+		button.fa.fa-plus.newnote
+		button.fa.fa-trash-o.deletenote
 		.note
 			input.title(placeholder='Title', data-field='title')
 			textarea.text(placeholder='Note', data-field='text')

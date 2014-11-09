@@ -37,7 +37,7 @@ passport.use(new LocalStrategy({
 	passwordField: 'password'
 	},
 	(email, password, done) ->
-		model.User.findOne(
+		model.user.findOne(
 			email: email,
 			(err, user) ->
 				if err
@@ -67,7 +67,7 @@ passport.serializeUser((user, done) ->
 
 
 passport.deserializeUser((id, done) ->
-	model.User.findById(id, (err, user) ->
+	model.user.findById(id, (err, user) ->
 		if err
 			done(err)
 		if user

@@ -1,8 +1,4 @@
 mongoose = require('mongoose')
-Folder = require('./folder')
-Note = require('./note')
-User = require('./user')
-
 connStr = 'mongodb://localhost/noteable'
 
 mongoose.connect(connStr,
@@ -12,4 +8,7 @@ mongoose.connect(connStr,
 				console.log('Successfully connected to MongoDB')
 )
 
-module.exports = { Folder, Note, User }
+module.exports =
+	folder: require('./folder')
+	note: require('./note')
+	user: require('./user')

@@ -2,6 +2,7 @@ express = require('express')
 router = express.Router()
 mongoose = require('mongoose')
 passport = require('passport')
+model = require('../models/model')
 
 ensureAuthenticated = (req, res, next) ->
 	if req.isAuthenticated()
@@ -34,30 +35,30 @@ router.get('/logout', (req, res) ->
 )
 
 router.get('/',
-		ensureAuthenticated,
-		(req, res) ->
-			res.render('index')
+	ensureAuthenticated,
+	(req, res) ->
+		res.render('index')
 )
 
 router.get('/getnotes',
 	ensureAuthenticated,
 	(req, res) ->
-		Note = mongoose.model('Note')
-		Note.find({ 'deleted': false }, (err, notes) ->
-			if err
-				console.error(err)
-			res.json(notes)
+		model.note.get(
+			(err, notes) ->
+				if err
+					console.error(err)
+				res.json(notes)
 		)
 )
 
 router.get('/getfolders',
 	ensureAuthenticated,
 	(req, res) ->
-		Folder = mongoose.model('Folder')
-		Folder.find({ 'deleted': false }, (err, folders) ->
-			if err
-				console.error(err)
-			res.json(folders)
+		model.folder.get(
+			(err, folders) ->
+				if err
+					console.error(err)
+				res.json(folders)
 		)
 )
 
@@ -71,39 +72,26 @@ router.get('/:id',
 router.post('/savefolder',
 	ensureAuthenticated,
 	(req, res) ->
-		_id = req.body._id
-		savedFolder =
-			name: req.body.name || ''
-			parent: req.body.parent || ''
-			deleted: false
-
-		console.log 'saving: ' + JSON.stringify(savedFolder)
-		Folder = mongoose.model('Folder')
-		Folder.findOneAndUpdate({ _id: _id }, savedFolder, { upsert:true }, (err, folder) ->
-			if err
-				console.error(err)
-				return res.status(500).end()
-			res.status(200).end()
-
+		folder = req.body || {}
+		model.folder.save(folder,
+			(err, folder) ->
+				if err
+					console.error(err)
+					return res.status(500).end()
+				return res.status(200).end()
 		)
 )
 
 router.post('/savenote',
 	ensureAuthenticated,
 	(req, res) ->
-		_id = req.body._id
-		savedNote =
-			title: req.body.title || ''
-			text: req.body.text || ''
-			folder: req.body.folder || ''
-			deleted: false
-		Note = mongoose.model('Note')
-		Note.findOneAndUpdate({ _id: _id }, savedNote, { upsert:true }, (err, note) ->
-			if err
-				console.error(err)
-				return res.status(500).end()
-			res.status(200).end()
-
+		note = req.body || {}
+		model.note.save(note,
+			(err, note) ->
+				if err
+					console.error(err)
+					return res.status(500).end()
+				return res.status(200).end()
 		)
 )
 
@@ -111,14 +99,13 @@ router.post('/deletenote',
 	ensureAuthenticated,
 	(req, res) ->
 		_id = req.body._id
-		Note = mongoose.model('Note')
-		Note.findOneAndUpdate({ _id: _id }, { deleted: true }, (err, note) ->
-			if err
-				console.error(err)
-				return res.status(500).end()
-			res.status(200).end()
+		model.note.delete(_id,
+			(err,  note) ->
+				if err
+					console.error(err)
+					return res.status(500).end()
+				return res.status(200).end()
 		)
-
 )
 
 
