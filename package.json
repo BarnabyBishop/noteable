@@ -1,6 +1,6 @@
 {
   "name": "noteable",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
     "express": "~4.9.0",
@@ -14,7 +14,8 @@
     "mongoose": "*",
     "passport": "*",
     "passport-local": "*",
-    "coffee-script": "*"
+    "coffee-script": "*",
+    "connect-mongo": "*"
   },
   "devDependencies": {
     "grunt": "~0.4.4",
@@ -32,6 +33,6 @@
     "grunt-contrib-stylus": "~0.20.0"
   },
   "scripts": {
-    "start": "node app .js"
+    "start": "coffee app.coffee"
   }
 }

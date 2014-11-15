@@ -39,14 +39,13 @@ textarea:focus, input:focus
 			background-color #eee
 
 .folderlist
-	height: 38px
-
 	.panel
 		background-color #FFF
-		-webkit-box-shadow: 0 2px 1px rgba(0,0,0,0.08);
-		box-shadow: 2px 2px 1px rgba(0,0,0,0.08);
+		-webkit-box-shadow 0 2px 1px rgba(0,0,0,0.08);
+		box-shadow 2px 2px 1px rgba(0,0,0,0.08);
 		display none
 		position absolute
+		padding 10px
 
 		.folder
 			div
@@ -69,6 +68,7 @@ textarea:focus, input:focus
 		border 0
 		width 95%
 		font-size 16px
+		background-color transparent
 
 	.title
 		font-weight bold
@@ -90,4 +90,15 @@ button
 		color #6BD5FF
 
 	.fa
+	&.fa
 		font-size 23px
+
+.foldername
+.confirmfolder.fa
+	display none
+
+.textbox
+	border solid 1px #ccc
+	border-radius 4px
+	padding 4px
+	font-weight normal

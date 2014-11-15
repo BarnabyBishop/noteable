@@ -31,8 +31,6 @@ module.exports =
 		delete note._id
 		delete note.__v
 
-		console.log note
-
 		noteModel.findOneAndUpdate({ _id: _id }, note, { upsert:true }, callback)
 
 	delete: (noteId, callback) ->
