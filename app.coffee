@@ -11,6 +11,7 @@ routes = require('./routes/routes')
 model = require('./models/model')
 passport = require("passport")
 LocalStrategy = require("passport-local").Strategy
+MongoStore = require('connect-mongo')(session)
 
 app = express()
 
@@ -25,7 +26,14 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded( extended: false ))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
-app.use(session({ secret: 'i have no idea what im doing' }))
+app.use(session(
+	secret: 'i have no idea what im doing'
+	saveUninitialized: true
+	resave: true
+	cookie:
+		maxAge: 3600000
+	store: new MongoStore(db: 'noteable')
+	))
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())

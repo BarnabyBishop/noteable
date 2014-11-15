@@ -35,7 +35,7 @@ $ ->
 		# If the user has stopped typing for 1 second Or made over 50 changes save
 		if editTimer
 			clearTimeout(editTimer)
-		if (++editAmount == 50)
+		if ++editAmount == 50
 			editAmount = 0
 			saveNote(id)
 		else
@@ -61,6 +61,7 @@ $ ->
 		notes[id] =
 			_id: id
 			title: ''
+			path: $('.currentfolder').attr('data-current-path')
 			deleted: false
 		$('.note .title').attr('data-id', id)
 		$('.note .text').attr('data-id', id)
@@ -78,14 +79,19 @@ $ ->
 			)
 
 	addFolderToList = (folder) ->
-		node = $("<div data-id='#{folder._id}' class='folder' data-type='folder' data-field='name'><span class='icon fa fa-folder-o'></span><div data-id='#{folder._id}'>#{folder.name if folder.name?}'</div></div>")
+		node = $("<div data-id='#{folder._id}' data-path=#{folder.path} class='folder' data-type='folder' data-field='name'><span class='icon fa fa-folder-o'></span><div data-id='#{folder._id}'>#{folder.name if folder.name?}</div></div>")
 		$('.folderlist .panel .newfolder').before(node)
 		node.click( ->
 			selectFolder($(this))
 		)
 
-	selectFolder = ->
-		s = 'todo'
+	selectFolder = (folder)->
+		folderPath = folder.attr('data-path')
+		$('.currentfolder').attr('data-current-path', folderPath)
+		$('.notelist').empty()
+		for note of notes
+			if notes[note].path is folderPath
+				addNoteToList(notes[note])
 
 	editFolder = (control, value) ->
 		id = control.attr('data-id')
@@ -97,15 +103,20 @@ $ ->
 		editFolderTimer = setTimeout((-> saveFolder(id)), 500)
 
 	createFolder = ->
-		id = uuid.v4()
-		folders[id] =
-			_id: id
-			name: ''
-			parent: ''
-			deleted: false
+		folderName = $('.foldername').val()
+		if folderName
+			id = uuid.v4()
+			folders[id] =
+				_id: id
+				name: folderName
+				path: ',' + folderName + ','
+				deleted: false
 
-		addFolderToList(folders[id])
-		return id
+			saveFolder(id)
+			addFolderToList(folders[id])
+
+		$('.foldername').text('').hide()
+		$('.confirmfolder').hide()
 
 	saveFolder = (id) ->
 		$.ajax(
@@ -127,10 +138,12 @@ $ ->
 	$.ajax(url: "/getnotes")
 	.then(
 		(data) ->
+			currentPath = $('.currentfolder').attr('data-current-path')
 			data.forEach(
 				(note) ->
 					notes[note._id] = note
-					addNoteToList(note)
+					if note.path is currentPath
+						addNoteToList(note)
 			)
 	)
 
@@ -138,8 +151,10 @@ $ ->
 	$('.note .title').on('input', -> editNoteField($(this), this.value))
 	$('.note .text') .on('input', -> editNoteField($(this), this.value))
 
-	$('.newfolder').on('click', createFolder)
 	$('.newnote').on('click', createNote)
 	$('.deletenote').on('click', deleteNote)
 
-	$('.folderlist').on('click', -> $(this).find('.panel').toggle())
+	$('.folders').on('click', -> $('.folderlist').find('.panel').toggle())
+	$('.newfolder').on('click', -> $(this).siblings('*').show())
+
+	$('.confirmfolder').on('click', createFolder)

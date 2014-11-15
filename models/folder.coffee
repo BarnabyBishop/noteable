@@ -21,7 +21,7 @@ module.exports =
 		_id = folder._id
 
 		# mongo gets cranky if you try and insert/update the _id
-		# through the saved object
+		# and version (__v) through the saved object
 		delete folder._id
 		delete folder.__v
 

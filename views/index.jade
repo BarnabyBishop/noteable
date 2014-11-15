@@ -3,10 +3,14 @@ extends layout
 block content
 	div.notelist-container
 		div.folderlist
-			button.fa.fa-folder-o.folders
-			span.currentfolder
+			button.folders
+				i.fa.fa-folder-o
+				span.currentfolder
 			div.panel
 				button.fa.fa-plus.newfolder
+				input(placeholder='New Folder').foldername.textbox
+				button.confirmfolder.fa.fa-check-circle-o
+
 
 		.notelist
 
