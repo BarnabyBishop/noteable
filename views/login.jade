@@ -2,14 +2,12 @@ extends layout
 
 
 block content
-	.container
+	.login-container
 		if message
 			div message
 		form(method='post')
 			div
-				label Email
-				input(type='email', name='email', placeholder='Email' required)
+				input(type='email', name='email', placeholder='Email' required).textbox
 			div
-				label Password
-				input(type='password', name='password', placeholder='password' required)
-			button(type='submit') Login
+				input(type='password', name='password', placeholder='password' required).textbox
+			button(type='submit').button Login

@@ -1,6 +1,6 @@
 (function() {
   $(function() {
-    var addFolderToList, addNoteToList, createFolder, createNote, deleteNote, editAmount, editFolder, editNoteField, editTimer, folders, notes, saveFolder, saveNote, selectFolder, selectNote, setValue;
+    var addFolderToList, addNoteToList, clearInputs, createFolder, createNote, deleteNote, editAmount, editFolder, editNoteField, editTimer, folders, notes, saveFolder, saveNote, selectFolder, selectNote, setValue, toggleFolderList;
     notes = {};
     folders = {};
     editAmount = 0;
@@ -72,6 +72,8 @@
       $('.note .title').attr('data-id', id);
       $('.note .text').attr('data-id', id);
       addNoteToList(notes[id]);
+      clearInputs();
+      $('.note .title').focus();
       return id;
     };
     deleteNote = function() {
@@ -89,26 +91,25 @@
     };
     addFolderToList = function(folder) {
       var node;
-      node = $("<div data-id='" + folder._id + "' data-path=" + folder.path + " class='folder' data-type='folder' data-field='name'><span class='icon fa fa-folder-o'></span><div data-id='" + folder._id + "'>" + (folder.name != null ? folder.name : void 0) + "</div></div>");
+      node = $("<div data-id='" + folder._id + "' data-path='" + folder.path + "' class='folder' data-type='folder' data-field='name'><span class='icon fa fa-folder-o'></span><div data-id='" + folder._id + "'>" + (folder.name != null ? folder.name : void 0) + "</div></div>");
       $('.folderlist .panel .newfolder').before(node);
       return node.click(function() {
         return selectFolder($(this));
       });
     };
-    selectFolder = function(folder) {
-      var folderPath, note, _results;
-      folderPath = folder.attr('data-path');
-      $('.currentfolder').attr('data-current-path', folderPath);
+    selectFolder = function(folderElement) {
+      var folderId, folderPath, note;
+      folderPath = folderElement.attr('data-path');
+      folderId = folderElement.attr('data-id');
+      $('.currentfolder').attr('data-current-path', folderPath).text(folders[folderId].name);
       $('.notelist').empty();
-      _results = [];
       for (note in notes) {
         if (notes[note].path === folderPath) {
-          _results.push(addNoteToList(notes[note]));
-        } else {
-          _results.push(void 0);
+          addNoteToList(notes[note]);
         }
       }
-      return _results;
+      toggleFolderList();
+      return clearInputs();
     };
     editFolder = function(control, value) {
       var editFolderTimer, id;
@@ -145,9 +146,22 @@
         data: folders[id]
       });
     };
+    toggleFolderList = function() {
+      return $('.folderlist').find('.panel').toggle();
+    };
+    clearInputs = function() {
+      $('.note .title').val('');
+      return $('.note .text').val('');
+    };
     $.ajax({
       url: "/getfolders"
     }).then(function(data) {
+      folders[''] = {
+        _id: '',
+        name: '/',
+        path: ''
+      };
+      addFolderToList(folders['']);
       return data.forEach(function(folder) {
         folders[folder._id] = folder;
         return addFolderToList(folder);
@@ -173,13 +187,12 @@
     });
     $('.newnote').on('click', createNote);
     $('.deletenote').on('click', deleteNote);
-    $('.folders').on('click', function() {
-      return $('.folderlist').find('.panel').toggle();
-    });
+    $('.folders').on('click', toggleFolderList);
     $('.newfolder').on('click', function() {
       return $(this).siblings('*').show();
     });
-    return $('.confirmfolder').on('click', createFolder);
+    $('.confirmfolder').on('click', createFolder);
+    return $('.note .title').focus();
   });
 
 }).call(this);

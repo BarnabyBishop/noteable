@@ -66,6 +66,8 @@ $ ->
 		$('.note .title').attr('data-id', id)
 		$('.note .text').attr('data-id', id)
 		addNoteToList(notes[id])
+		clearInputs()
+		$('.note .title').focus()
 		return id
 
 	deleteNote = ->
@@ -79,19 +81,24 @@ $ ->
 			)
 
 	addFolderToList = (folder) ->
-		node = $("<div data-id='#{folder._id}' data-path=#{folder.path} class='folder' data-type='folder' data-field='name'><span class='icon fa fa-folder-o'></span><div data-id='#{folder._id}'>#{folder.name if folder.name?}</div></div>")
+		node = $("<div data-id='#{folder._id}' data-path='#{folder.path}' class='folder' data-type='folder' data-field='name'><span class='icon fa fa-folder-o'></span><div data-id='#{folder._id}'>#{folder.name if folder.name?}</div></div>")
 		$('.folderlist .panel .newfolder').before(node)
 		node.click( ->
 			selectFolder($(this))
 		)
 
-	selectFolder = (folder)->
-		folderPath = folder.attr('data-path')
-		$('.currentfolder').attr('data-current-path', folderPath)
+	selectFolder = (folderElement)->
+		folderPath = folderElement.attr('data-path')
+		folderId = folderElement.attr('data-id')
+		$('.currentfolder')
+			.attr('data-current-path', folderPath)
+			.text(folders[folderId].name)
 		$('.notelist').empty()
 		for note of notes
 			if notes[note].path is folderPath
 				addNoteToList(notes[note])
+		toggleFolderList()
+		clearInputs()
 
 	editFolder = (control, value) ->
 		id = control.attr('data-id')
@@ -125,10 +132,22 @@ $ ->
 			data: folders[id]
 		)
 
+	toggleFolderList = ->
+		$('.folderlist').find('.panel').toggle()
+
+	clearInputs = ->
+		$('.note .title').val('')
+		$('.note .text').val('')
+
 	# Load notes from server
 	$.ajax(url: "/getfolders")
 	.then(
 		(data) ->
+			folders[''] =
+				_id: ''
+				name: '/'
+				path: ''
+			addFolderToList(folders[''])
 			data.forEach(
 				(folder) ->
 					folders[folder._id] = folder
@@ -154,7 +173,8 @@ $ ->
 	$('.newnote').on('click', createNote)
 	$('.deletenote').on('click', deleteNote)
 
-	$('.folders').on('click', -> $('.folderlist').find('.panel').toggle())
+	$('.folders').on('click', toggleFolderList)
 	$('.newfolder').on('click', -> $(this).siblings('*').show())
 
 	$('.confirmfolder').on('click', createFolder)
+	$('.note .title').focus()
