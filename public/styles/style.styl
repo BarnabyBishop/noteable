@@ -70,6 +70,7 @@ textarea:focus, input:focus
 
 .note
 	border 1px solid #ccc
+	position relative
 
 	.title
 	.text
@@ -87,6 +88,13 @@ textarea:focus, input:focus
 		padding 0px 10px 10px 10px
 		height 500px
 
+	.makelist
+		position absolute
+		right 10px
+		top 10px
+		color #aaa
+		font-size 14px
+
 button
 	background-color transparent
 	border 0
@@ -97,12 +105,11 @@ button
 	&:hover
 		color #6BD5FF
 
-	.fa
-	&.fa
-		font-size 27px
+.icon
+	font-size 32px
 
 .foldername
-.confirmfolder.fa
+.confirmfolder
 	display none
 
 .textbox

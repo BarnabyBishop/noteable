@@ -1,6 +1,6 @@
 (function() {
   $(function() {
-    var addFolderToList, addNoteToList, clearInputs, createFolder, createNote, deleteNote, editAmount, editFolder, editNoteField, editTimer, folders, notes, saveFolder, saveNote, selectFolder, selectNote, setValue, toggleFolderList;
+    var addFolderToList, addNoteToList, clearInputs, createFolder, createNote, deleteNote, editAmount, editFolder, editNoteField, editTimer, folders, makeList, notes, saveFolder, saveNote, selectFolder, selectNote, setValue, toggleFolderList;
     notes = {};
     folders = {};
     editAmount = 0;
@@ -153,6 +153,7 @@
       $('.note .title').val('');
       return $('.note .text').val('');
     };
+    makeList = function() {};
     $.ajax({
       url: "/getfolders"
     }).then(function(data) {
@@ -187,6 +188,7 @@
     });
     $('.newnote').on('click', createNote);
     $('.deletenote').on('click', deleteNote);
+    $('.makelist').on('click', makeList);
     $('.folders').on('click', toggleFolderList);
     $('.newfolder').on('click', function() {
       return $(this).siblings('*').show();

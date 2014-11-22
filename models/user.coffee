@@ -47,12 +47,5 @@ userSchema.methods.comparePassword = (candidatePassword, cb) ->
 			cb(null, isMatch)
 	)
 
-console.log('user loaded')
-module.exports = mongoose.model('User', userSchema)
 
-###
-	init = new Note(
-		'email': 'barneyb@gmail.com',
-		'password': 'whocares'
-	init.save()
-###
+module.exports = mongoose.model('User', userSchema)

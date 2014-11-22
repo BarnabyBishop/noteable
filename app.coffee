@@ -12,13 +12,19 @@ model = require('./models/model')
 passport = require("passport")
 LocalStrategy = require("passport-local").Strategy
 MongoStore = require('connect-mongo')(session)
+nunjucks = require('nunjucks')
 
 app = express()
 
 # view engine setup
 app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'jade')
-
+app.set('view engine', 'html')
+# app.set('view engine', 'jade')
+nunjucks.configure(
+	'views',
+	autoescape: true,
+	express: app
+	)
 
 #app.use(favicon(__dirname + '/public/favicon.ico'))
 app.use(logger('dev'))

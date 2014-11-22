@@ -1,12 +1,7 @@
 mongoose = require('mongoose')
 connStr = 'mongodb://localhost/noteable'
 
-mongoose.connect(connStr,
-				(err) ->
-					if err
-						throw err
-				console.log('Successfully connected to MongoDB')
-)
+mongoose.connect(connStr, (err) -> throw err if err)
 
 module.exports =
 	folder: require('./folder')
