@@ -4,22 +4,27 @@ block content
 	div.notelist-container
 		div.folderlist
 			button.folders
-				i.fa.fa-folder-o
+				i.icon.ion-ios7-folder-outline
 				span.currentfolder(data-current-path='')
 			div.panel
-				button.fa.fa-plus.newfolder
+				button.icon.ion-ios7-plus-empty.newfolder
 				input(placeholder='New Folder').foldername.textbox
-				button.confirmfolder.fa.fa-check-circle-o
+				button.confirmfolder.icon.ion-ios7-checkmark
 
 
 		.notelist
 
 	div.note-container
-		button.fa.fa-plus.newnote
-		button.fa.fa-trash-o.deletenote
+		button.icon.ion-ios7-plus-empty.newnote
+		button.icon.ion-ios7-trash-outline.deletenote
 		.note
+			button.makelist.icon.ion-clipboard
 			input.title(placeholder='Title', data-field='title')
 			textarea.text(placeholder='Note', data-field='text')
+			.list
+				.list-item
+					button.icon.ion-ios7-circle-outline
+
 
 	script(src='/scripts/uuid.min.js')
 	script(src='/scripts/jquery-2.1.1.min.js')

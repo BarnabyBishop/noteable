@@ -24,59 +24,39 @@
 	"buffers":
 	[
 		{
-			"file": "public/styles/style.styl",
+			"file": "views/index.html",
 			"settings":
 			{
-				"buffer_size": 1523,
+				"buffer_size": 1265,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "public/scripts/index.coffee",
+			"file": "views/error.html",
 			"settings":
 			{
-				"buffer_size": 3843,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "models/note.coffee",
-			"settings":
-			{
-				"buffer_size": 790,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "views/index.jade",
-			"settings":
-			{
-				"buffer_size": 611,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "models/folder.coffee",
-			"settings":
-			{
-				"buffer_size": 751,
-				"line_ending": "Windows"
+				"buffer_size": 146,
+				"line_ending": "Unix"
 			}
 		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 400.0,
+		"height": 374.0,
 		"selected_items":
 		[
 			[
-				"list",
-				"Package Control: List Packages"
+				"instal",
+				"Package Control: Install Package"
 			],
 			[
 				"install",
 				"Package Control: Install Package"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
 			],
 			[
 				"diff",
@@ -211,38 +191,54 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/B/Projects/noteable"
+		"/C/Users/B/Projects/noteable",
+		"/C/Users/B/Projects/noteable/routes",
+		"/C/Users/B/Projects/noteable/views"
 	],
 	"file_history":
 	[
-		"/C/Users/B/Projects/noteable/models/model.coffee",
-		"/C/Users/B/Projects/noteable/package.json",
+		"/C/Users/B/Projects/noteable/views/error.html",
+		"/C/Users/B/Projects/noteable/views/login.html",
+		"/C/Users/B/Projects/noteable/views/layout.html",
+		"/C/Users/B/Projects/noteable/views/layout.jade",
+		"/C/Users/B/Projects/noteable/public/scripts/index.coffee",
+		"/C/Users/B/Projects/noteable/views/index.jade",
+		"/C/Users/B/Dropbox/Banana Park/Catalogue/Ebay/Details.txt",
 		"/C/Users/B/Projects/noteable/app.coffee",
+		"/C/Users/B/Projects/noteable/views/error.jade",
+		"/C/Users/B/Projects/noteable/public/styles/style.styl",
+		"/C/Users/B/Projects/noteable/node_modules/coffeelint/src/error_report.coffee",
+		"/C/Users/B/Projects/noteable/test.txt",
+		"/C/Users/B/Dropbox/Banana Park/Catalogue/Ebay/Other products/otherproducts.html",
+		"/C/Users/B/Dropbox/Banana Park/Catalogue/Ebay/baby towels/html.txt",
+		"/C/Users/B/Projects/noteable/models/user.coffee",
+		"/C/Users/B/Projects/noteable/models/model.coffee",
+		"/C/Users/B/Downloads/ionicons-1.5.2/ionicons-1.5.2/cheatsheet - compact.html",
+		"/C/Users/B/Projects/noteable/node_modules/coffee-script/node_modules/mkdirp/test/umask_sync.js",
+		"/C/Users/B/Projects/noteable/node_modules/.bin/jade",
+		"/C/Users/B/Projects/noteable/node_modules/debug/.jshintrc",
+		"/C/Users/B/Projects/noteable/node_modules/bcrypt/.npmignore",
+		"/C/Users/B/Projects/noteable/models/folder.coffee",
+		"/C/Users/B/Projects/noteable/views/login.jade",
+		"/C/Users/B/Projects/noteable/models/note.coffee",
+		"/C/Users/B/Projects/noteable/package.json",
 		"/C/Users/B/Projects/noteable/node_modules/stylus/lib/nodes/query-list.js",
 		"/C/Users/B/Projects/noteable/node_modules/grunt-node-inspector/node_modules/node-inspector/front-end/LiveEditSupport.js",
 		"/C/Users/B/Projects/noteable/node_modules/bcrypt/LICENSE",
-		"/C/Users/B/Projects/noteable/views/layout.jade",
 		"/C/Users/B/Projects/noteable/node_modules/mongoose/node_modules/mpromise/test/promises.Aplus.js",
 		"/C/Users/B/Projects/noteable/public/styles/style.css",
-		"/C/Users/B/Projects/noteable/public/styles/style.styl",
-		"/C/Users/B/Projects/noteable/models/note.coffee",
-		"/C/Users/B/Projects/noteable/models/folder.coffee",
 		"/C/Users/B/Projects/noteable/routes/routes.coffee",
 		"/C/Users/B/Projects/noteable/node_modules/grunt-node-inspector/node_modules/node-inspector/front-end/auditsPanel.css",
 		"/C/Users/B/Projects/noteable/coffeelint.json",
 		"/C/Users/B/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
 		"/C/Users/B/Projects/noteable/noteable.sublime-project",
-		"/C/Users/B/Projects/noteable/views/index.jade",
-		"/C/Users/B/Projects/noteable/public/scripts/index.coffee",
 		"/C/Users/B/Projects/noteable/node_modules/grunt-contrib-stylus/node_modules/nib/node_modules/.bin/stylus",
 		"/C/Users/B/Projects/noteable/node_modules/grunt-contrib-stylus/node_modules/.bin/stylus.cmd",
 		"/C/Users/B/Projects/noteable/node_modules/grunt-contrib-stylus/node_modules/.bin/stylus",
 		"/C/Users/B/Projects/noteable/node_modules/.bin/stylus.cmd",
 		"/C/Users/B/Projects/noteable/node_modules/.bin/stylus",
-		"/C/Users/B/Projects/noteable/node_modules/bcrypt/.npmignore",
 		"/C/Users/B/Projects/noteable/node_modules/bcrypt/test/sync.js",
 		"/C/Users/B/Projects/noteable/node_modules/grunt-node-inspector/node_modules/node-inspector/front-end/buildSystemOnly.js",
-		"/C/Users/B/Projects/noteable/views/login.jade",
 		"/C/Users/B/Projects/noteable/todo",
 		"/C/Users/B/Desktop/test.json",
 		"/C/Users/B/AppData/Roaming/Sublime Text 3/Packages/Default/Default (Windows).sublime-keymap",
@@ -253,7 +249,6 @@
 		"/C/Users/B/Projects/noteable/node_modules/stylus/bin/stylus",
 		"/C/Users/B/Projects/noteable/node_modules/grunt-express-server/test/stoppable_test.js",
 		"/C/Users/B/Projects/Keynotes/templates/views/contact.jade",
-		"/C/Users/B/Projects/noteable/models/user.coffee",
 		"/C/Users/B/Projects/noteable/gruntfile.coffee",
 		"/C/Users/B/Projects/noteable/node_modules/coffeelint/lib/reporters/default.js",
 		"/C/Users/B/Projects/noteable/node_modules/grunt-node-inspector/node_modules/node-inspector/front-end/DevToolsExtensionAPI.js",
@@ -329,20 +324,7 @@
 		"/C/Users/B/Projects/hawkett/.env",
 		"/C/Users/B/Projects/hawkett/templates/emails/enquiry-notification.hbs",
 		"/C/Users/B/Projects/hawkett/node_modules/grunt-contrib-watch/node_modules/tiny-lr-fork/test/middleware.js",
-		"/C/Users/B/Projects/hawkett/templates/views/helpers/index.js",
-		"/C/Users/B/AppData/Roaming/Sublime Text 3/Packages/Pretty JSON/Pretty JSON.sublime-settings",
-		"/C/Users/B/Projects/hawkett/node_modules/keystone/public/js/common/ui-cloudinaryimage.js",
-		"/C/Users/B/Desktop/tes.json",
-		"/C/Users/B/Projects/hawkett/node_modules/keystone/templates/fields/cloudinaryimage/form.jade",
-		"/C/Users/B/Projects/Keynotes/public/js/keynotes.js",
-		"/C/Users/B/Projects/hawkett/public/styles/site/layout.less",
-		"/C/Users/B/Projects/hawkett/hawkett.sublime-project",
-		"/C/Users/B/Projects/Keynotes/routes/views/post.js",
-		"/C/Users/B/Projects/Keynotes/routes/views/note.js",
-		"/C/Users/B/Projects/hawkett/node_modules/keystone/node_modules/less-middleware/node_modules/less/test/css/mixins-important.css",
-		"/C/Users/B/Projects/hawkett/node_modules/keystone/public/js/lib/fancybox/helpers/jquery.fancybox-media.js",
-		"/C/Users/B/Projects/hawkett/node_modules/grunt-node-inspector/node_modules/node-inspector/front-end/heapProfiler.css",
-		"/C/Users/B/Projects/hawkett/node_modules/keystone/node_modules/azure/node_modules/azure-common/node_modules/tunnel/test/https-over-https-error.js"
+		"/C/Users/B/Projects/hawkett/templates/views/helpers/index.js"
 	],
 	"find":
 	{
@@ -361,6 +343,24 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"'",
+			"]",
+			"(",
+			"8",
+			"9",
+			"%",
+			"%}",
+			"{%",
+			"h1",
+			",",
+			".ion",
+			".icon.ion",
+			"<span class=\"step size-12\">",
+			"size-12",
+			"folders",
+			"fa",
+			":",
+			"container",
 			"forEach",
 			"setValue",
 			":",
@@ -470,25 +470,7 @@
 			"li",
 			"mountain",
 			"blue",
-			"Oconnellbathroom",
-			"holderjs",
-			"font-weight",
-			"7",
-			"6",
-			"5",
-			"4",
-			"6",
-			"span3",
-			"</p>",
-			"<p>",
-			"Play",
-			"replace",
-			"</a>",
-			"></a>",
-			".mp3",
-			"http",
-			"ahttp",
-			"href\\=\\\""
+			"Oconnellbathroom"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -496,6 +478,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			".icon.ion",
 			"",
 			"/images",
 			"<br />",
@@ -516,24 +499,24 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "public/styles/style.styl",
+					"file": "views/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1523,
+						"buffer_size": 1265,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1523,
-								1523
+								12,
+								23
 							]
 						],
 						"settings":
@@ -546,178 +529,87 @@
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
 								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content"
-							],
-							"color_scheme": "Packages/User/Color Highlighter/themes/base16-eighties.dark (SL).tmTheme",
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Stylus/Stylus.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1395.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "public/scripts/index.coffee",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3843,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2302,
-								2302
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
-								"bh_regex_content"
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content"
 							],
 							"color_scheme": "Packages/User/Color Highlighter/themes/base16-eighties.dark (SL).tmTheme",
 							"incomplete_sync": null,
+							"open_with_edit": true,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1050.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "models/note.coffee",
-					"semi_transient": false,
+					"buffer": 1,
+					"file": "views/error.html",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 790,
+						"buffer_size": 146,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								604,
-								604
+								0,
+								0
 							]
 						],
 						"settings":
@@ -730,253 +622,68 @@
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
 								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content"
-							],
-							"color_scheme": "Packages/User/Color Highlighter/themes/base16-eighties.dark (SL).tmTheme",
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 285.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "views/index.jade",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 611,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								284,
-								292
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
-								"bh_curly_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content"
+								"bh_curly_content"
 							],
 							"color_scheme": "Packages/User/Color Highlighter/themes/base16-eighties.dark (SL).tmTheme",
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/HTML/HTML.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "models/folder.coffee",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 751,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								472,
-								472
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content"
-							],
-							"color_scheme": "Packages/User/Color Highlighter/themes/base16-eighties.dark (SL).tmTheme",
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -1053,6 +760,42 @@
 		"selected_items":
 		[
 			[
+				"layou",
+				"views\\layout.html"
+			],
+			[
+				"error",
+				"views\\error.jade"
+			],
+			[
+				"sty",
+				"public\\styles\\style.styl"
+			],
+			[
+				"user",
+				"models\\user.coffee"
+			],
+			[
+				"model",
+				"models\\model.coffee"
+			],
+			[
+				".jade",
+				"views\\index.jade"
+			],
+			[
+				"app.coffe",
+				"app.coffee"
+			],
+			[
+				"styl",
+				"public\\styles\\style.styl"
+			],
+			[
+				"log",
+				"views\\login.jade"
+			],
+			[
 				"note",
 				"models\\note.coffee"
 			],
@@ -1085,10 +828,6 @@
 				"public\\styles\\style.styl"
 			],
 			[
-				"model",
-				"models\\model.coffee"
-			],
-			[
 				"route",
 				"routes\\routes.coffee"
 			],
@@ -1113,10 +852,6 @@
 				"views\\index.jade"
 			],
 			[
-				"styl",
-				"public\\styles\\style.styl"
-			],
-			[
 				"index",
 				"views\\index.jade"
 			],
@@ -1139,10 +874,6 @@
 			[
 				"mo",
 				"models\\model.coffee"
-			],
-			[
-				"layou",
-				"views\\layout.jade"
 			],
 			[
 				"defaul",
@@ -1230,7 +961,7 @@
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": false,
+	"side_bar_visible": true,
 	"side_bar_width": 284.0,
 	"status_bar_visible": true,
 	"template_settings":

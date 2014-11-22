@@ -139,6 +139,10 @@ $ ->
 		$('.note .title').val('')
 		$('.note .text').val('')
 
+	makeList = ->
+		# todo
+
+
 	# Load notes from server
 	$.ajax(url: "/getfolders")
 	.then(
@@ -169,12 +173,12 @@ $ ->
 	# prepare inputs for editing
 	$('.note .title').on('input', -> editNoteField($(this), this.value))
 	$('.note .text') .on('input', -> editNoteField($(this), this.value))
-
 	$('.newnote').on('click', createNote)
 	$('.deletenote').on('click', deleteNote)
+	$('.makelist').on('click', makeList)
 
 	$('.folders').on('click', toggleFolderList)
 	$('.newfolder').on('click', -> $(this).siblings('*').show())
-
 	$('.confirmfolder').on('click', createFolder)
+
 	$('.note .title').focus()
