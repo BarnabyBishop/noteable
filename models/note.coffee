@@ -11,9 +11,10 @@ noteSchema = mongoose.Schema(
 	deleted:
 		type: Boolean
 		default: false
-	list:
+	list: [
 		text: String
 		checked: Boolean
+	]
 )
 
 noteModel = mongoose.model('Note', noteSchema)

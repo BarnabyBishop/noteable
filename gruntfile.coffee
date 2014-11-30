@@ -32,6 +32,12 @@ module.exports = (grunt) ->
 			compile:
 				files: 'public/styles/style.css': 'public/styles/style.styl'
 
+		nunjucks:
+			precompile:
+				baseDir: 'views/',
+				src: 'views/*',
+				dest: 'public/scripts/templates.js'
+
 		shell:
 			mongodb:
 				command: 'C:\\Users\\B\\Projects\\mongodb\\bin\\mongod.exe',
@@ -78,6 +84,10 @@ module.exports = (grunt) ->
 				],
 				tasks: ['stylus']
 
+			nunjucks:
+				files: 'views/*',
+				tasks: ['nunjucks']
+
 			express:
 				files: [
 					'app.coffee',
@@ -88,12 +98,14 @@ module.exports = (grunt) ->
 
 	grunt.loadNpmTasks('grunt-contrib-coffee')
 	grunt.loadNpmTasks('grunt-contrib-stylus')
+	grunt.loadNpmTasks('grunt-nunjucks')
 
 	# default option to connect server
 	grunt.registerTask('default', (target) ->
 		grunt.task.run([
 			'coffeelint',
 			'coffee',
+			'nunjucks',
 			'shell:mongodb',
 			'concurrent:dev'
 		])

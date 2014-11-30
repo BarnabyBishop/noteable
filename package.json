@@ -30,7 +30,8 @@
     "grunt-shell": "~1.1.1",
     "grunt-shell-spawn": "~0.3.0",
     "grunt-concurrent": "~1.0.0",
-    "grunt-contrib-stylus": "~0.20.0"
+    "grunt-contrib-stylus": "~0.20.0",
+    "grunt-nunjucks": "~0.1.4"
   },
   "scripts": {
     "start": "coffee app.coffee"

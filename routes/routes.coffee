@@ -85,6 +85,7 @@ router.post('/savefolder',
 router.post('/savenote',
 	ensureAuthenticated,
 	(req, res) ->
+		console.log req.body
 		note = req.body || {}
 		model.note.save(note,
 			(err, note) ->
