@@ -1,17 +1,22 @@
 (function() {
   $(function() {
-    var addFolderToList, addNoteToList, clearInputs, createFolder, createNote, deleteNote, editAmount, editFolder, editNoteField, editTimer, folders, makeList, notes, saveFolder, saveNote, selectFolder, selectNote, setValue, toggleFolderList;
+    var addFolderToList, addNoteToList, checkItem, clearInputs, createFolder, createNote, deleteNote, editAmount, editFolder, editListField, editNoteField, editTimer, folders, notes, renderList, saveFolder, saveNote, selectFolder, selectNote, setSaveTimer, setValue, startList, toggleFolderList;
     notes = {};
     folders = {};
     editAmount = 0;
     editTimer = false;
     selectNote = function(element) {
-      var note;
+      var note, _ref;
       $('.notelist .selected').removeClass('selected');
       element.addClass('selected');
       note = notes[element.attr('data-id')];
       $('.note .title').val(note.title).attr('data-id', note._id);
-      return $('.note .text').val(note.text).attr('data-id', note._id);
+      $('.note .text').val(note.text).attr('data-id', note._id);
+      if ((_ref = note.list) != null ? _ref.length : void 0) {
+        return renderList(note.list);
+      } else {
+        return $('.list').empty();
+      }
     };
     setValue = function(elements, value) {
       return elements.each(function() {
@@ -33,23 +38,15 @@
       field = control.attr('data-field');
       notes[id][field] = value;
       setValue($("[data-field=" + field + "][data-id=" + id + "]").not(control), value);
-      if (editTimer) {
-        clearTimeout(editTimer);
-      }
-      if (++editAmount === 50) {
-        editAmount = 0;
-        return saveNote(id);
-      } else {
-        return editTimer = setTimeout((function() {
-          return saveNote(id);
-        }), 500);
-      }
+      return setSaveTimer(id);
     };
     saveNote = function(id) {
+      console.log(notes[id]);
       return $.ajax({
         type: 'POST',
         url: '/savenote',
-        data: notes[id]
+        contentType: 'application/json',
+        data: JSON.stringify(notes[id])
       });
     };
     addNoteToList = function(note) {
@@ -153,7 +150,68 @@
       $('.note .title').val('');
       return $('.note .text').val('');
     };
-    makeList = function() {};
+    startList = function() {
+      return renderList();
+    };
+    renderList = function(list) {
+      var listTemplate;
+      listTemplate = nunjucks.render('list.html', {
+        list: list
+      });
+      $('.list').html(listTemplate);
+      $('.listtext').on('input', function() {
+        return editListField($(this).parent(), this.value);
+      });
+      return $('.checkbox').on('click', function() {
+        return checkItem($(this).parent());
+      });
+    };
+    editListField = function(control, value) {
+      var list, listIndex, noteId;
+      noteId = $('.note .title').attr('data-id');
+      if (!noteId) {
+        noteId = createNote();
+      }
+      if (!notes[noteId].list) {
+        notes[noteId].list = [];
+      }
+      listIndex = control.attr('data-index');
+      list = notes[noteId].list;
+      if (list.length < (listIndex + 1)) {
+        list.push({
+          text: value,
+          checked: false
+        });
+      } else {
+        list[listIndex].text = value;
+      }
+      return setSaveTimer(noteId);
+    };
+    checkItem = function(control) {
+      var listIndex, noteId;
+      noteId = $('.note .title').attr('data-id');
+      listIndex = control.attr('data-index');
+      if (!noteId || !notes[noteId].list || !notes[noteId].list[listIndex]) {
+        return;
+      }
+      notes[noteId].list[listIndex].checked = !notes[noteId].list[listIndex].checked;
+      control.toggleClass('checked');
+      control.find('button').toggleClass('ion-ios7-checkmark-outline').toggleClass('ion-ios7-circle-outline');
+      return setSaveTimer(noteId);
+    };
+    setSaveTimer = function(id) {
+      if (editTimer) {
+        clearTimeout(editTimer);
+      }
+      if (++editAmount === 50) {
+        editAmount = 0;
+        return saveNote(id);
+      } else {
+        return editTimer = setTimeout((function() {
+          return saveNote(id);
+        }), 500);
+      }
+    };
     $.ajax({
       url: "/getfolders"
     }).then(function(data) {
@@ -188,7 +246,7 @@
     });
     $('.newnote').on('click', createNote);
     $('.deletenote').on('click', deleteNote);
-    $('.makelist').on('click', makeList);
+    $('.startlist').on('click', startList);
     $('.folders').on('click', toggleFolderList);
     $('.newfolder').on('click', function() {
       return $(this).siblings('*').show();

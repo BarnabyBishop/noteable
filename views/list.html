@@ -1,0 +1,12 @@
+{% block content %}
+	{% for item in list %}
+	<div class="listitem {% if item.checked %}checked{% endif %}" data-index="{{ loop.index0 }}">
+		<button class="checkbox icon {% if item.checked %}ion-ios7-checkmark-outline{% else %}ion-ios7-circle-outline{% endif %}"></button>
+		<input type="text" class="listtext"  value="{{ item.text }}" />
+	</div>
+	{% endfor %}
+	<div class="listitem" data-index="{{ list.length if list else 0  }}">
+		<button class="icon ion-ios7-circle-outline"></button>
+		<input type="text" class="listtext"/>
+	</div>
+{% endblock %}

@@ -13,28 +13,25 @@
 				<button class="confirmfolder icon ion-ios7-checkmark"></button>
 			</div>
 		</div>
-
 		<div class="notelist"></div>
-
 	</div>
 
 	<div class="note-container">
 		<button class="icon ion-ios7-plus-empty newnote"></button>
 		<button class="icon ion-ios7-trash-outline deletenote"></button>
 		<div class="note">
-			<button class="makelist icon ion-clipboard"></button>
+			<button class="startlist icon ion-clipboard"></button>
 			<input type="text" class="title" placeholder="Title" data-field="title">
+			<div class="list"></div>
 			<textarea name="" id="" cols="30" rows="10" class="text" placeholder="Note" data-field="text"></textarea>
-			<div class="list">
-				<div class="list-item">
-					<button class="icon ion-ios7-circle-outline"></button>
-				</div>
-			</div>
 		</div>
 	</div>
 
 	<script src="/scripts/uuid.min.js"></script>
 	<script src="/scripts/jquery-2.1.1.min.js"></script>
+	<script src="/scripts/nunjucks-slim.min.js"></script>
+	<script src="/scripts/templates.js"></script>
 	<script src="/scripts/index.js"></script>
+
 
 {% endblock %}
