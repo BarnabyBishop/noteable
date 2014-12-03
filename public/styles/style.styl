@@ -129,6 +129,7 @@ button
 	padding-left 70px
 
 .listitem
+	position relative
 
 	button
 		font-size 26px
@@ -136,10 +137,10 @@ button
 		vertical-align sub
 		margin-right 4px
 
-		&:hover:before
+		&.checkbox:hover:before
 			content "\f16d"
 
-		&:active:before
+		&.checkbox:active:before
 			content "\f16e"
 
 	&.checked
@@ -149,3 +150,10 @@ button
 	input
 		border 0
 		width 300px
+
+	&:hover
+		.listclose
+			display inline-block
+
+.listclose
+	display: none

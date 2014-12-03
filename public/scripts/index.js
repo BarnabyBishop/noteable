@@ -1,6 +1,6 @@
 (function() {
   $(function() {
-    var addFolderToList, addNoteToList, checkItem, clearInputs, createFolder, createNote, deleteNote, editAmount, editFolder, editListField, editNoteField, editTimer, folders, notes, renderList, saveFolder, saveNote, selectFolder, selectNote, setSaveTimer, setValue, startList, toggleFolderList;
+    var addFolderToList, addNoteToList, checkItem, clearInputs, createFolder, createNote, deleteItem, deleteNote, editAmount, editFolder, editListField, editNoteField, editTimer, folders, notes, renderList, saveFolder, saveNote, selectFolder, selectNote, setSaveTimer, setValue, startList, toggleFolderList;
     notes = {};
     folders = {};
     editAmount = 0;
@@ -41,7 +41,6 @@
       return setSaveTimer(id);
     };
     saveNote = function(id) {
-      console.log(notes[id]);
       return $.ajax({
         type: 'POST',
         url: '/savenote',
@@ -162,8 +161,11 @@
       $('.listtext').on('input', function() {
         return editListField($(this).parent(), this.value);
       });
-      return $('.checkbox').on('click', function() {
+      $('.checkbox').on('click', function() {
         return checkItem($(this).parent());
+      });
+      return $('.listclose').on('click', function() {
+        return deleteItem($(this).parent());
       });
     };
     editListField = function(control, value) {
@@ -175,7 +177,7 @@
       if (!notes[noteId].list) {
         notes[noteId].list = [];
       }
-      listIndex = control.attr('data-index');
+      listIndex = parseInt(control.attr('data-index'));
       list = notes[noteId].list;
       if (list.length < (listIndex + 1)) {
         list.push({
@@ -197,6 +199,17 @@
       notes[noteId].list[listIndex].checked = !notes[noteId].list[listIndex].checked;
       control.toggleClass('checked');
       control.find('button').toggleClass('ion-ios7-checkmark-outline').toggleClass('ion-ios7-circle-outline');
+      return setSaveTimer(noteId);
+    };
+    deleteItem = function(control) {
+      var listIndex, noteId;
+      noteId = $('.note .title').attr('data-id');
+      listIndex = control.attr('data-index');
+      if (!noteId || !notes[noteId].list || !notes[noteId].list[listIndex]) {
+        return;
+      }
+      notes[noteId].list.splice(listIndex, 1);
+      renderList(notes[noteId].list);
       return setSaveTimer(noteId);
     };
     setSaveTimer = function(id) {

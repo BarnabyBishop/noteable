@@ -40,7 +40,6 @@ $ ->
 		setSaveTimer(id)
 
 	saveNote = (id) ->
-		console.log notes[id]
 		$.ajax(
 			type: 'POST',
 			url: '/savenote',
@@ -148,6 +147,7 @@ $ ->
 		$('.list').html(listTemplate)
 		$('.listtext').on('input', -> editListField($(this).parent(), this.value))
 		$('.checkbox').on('click', -> checkItem($(this).parent()))
+		$('.listclose').on('click', -> deleteItem($(this).parent()))
 
 	editListField = (control, value) ->
 		noteId = $('.note .title').attr('data-id')
@@ -157,7 +157,7 @@ $ ->
 		if not notes[noteId].list
 			notes[noteId].list = []
 
-		listIndex = control.attr('data-index')
+		listIndex = parseInt(control.attr('data-index'))
 		list = notes[noteId].list
 
 		if list.length < (listIndex + 1)
@@ -180,6 +180,19 @@ $ ->
 		control.find('button')
 				.toggleClass('ion-ios7-checkmark-outline')
 				.toggleClass('ion-ios7-circle-outline')
+
+		setSaveTimer(noteId)
+
+	deleteItem = (control) ->
+		noteId = $('.note .title').attr('data-id')
+
+		listIndex = control.attr('data-index')
+		if not noteId or not notes[noteId].list or not notes[noteId].list[listIndex]
+			return
+
+		notes[noteId].list.splice(listIndex, 1)
+
+		renderList(notes[noteId].list)
 
 		setSaveTimer(noteId)
 

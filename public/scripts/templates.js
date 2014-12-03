@@ -158,14 +158,14 @@ output += "ion-ios7-circle-outline";
 }
 output += "\"></button>\r\n\t\t<input type=\"text\" class=\"listtext\"  value=\"";
 output += runtime.suppressValue(runtime.memberLookup((t_6),"text", env.autoesc), env.autoesc);
-output += "\" />\r\n\t</div>\r\n\t";
+output += "\" />\r\n\t\t<button class=\"listclose icon ion-ios7-close-empty\"></button>\r\n\t</div>\r\n\t";
 ;
 }
 }
 frame = frame.pop();
 output += "\r\n\t<div class=\"listitem\" data-index=\"";
 output += runtime.suppressValue((runtime.contextOrFrameLookup(context, frame, "list")?runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "list")),"length", env.autoesc):0), env.autoesc);
-output += "\">\r\n\t\t<button class=\"icon ion-ios7-circle-outline\"></button>\r\n\t\t<input type=\"text\" class=\"listtext\"/>\r\n\t</div>\r\n";
+output += "\">\r\n\t\t<button class=\"icon ion-ios7-circle-outline\"></button>\r\n\t\t<input type=\"text\" class=\"listtext\"/>\r\n\t\t<button class=\"listclose icon ion-ios7-close-empty\"></button>\r\n\t</div>\r\n";
 cb(null, output);
 ;
 } catch (e) {
