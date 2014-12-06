@@ -1,6 +1,6 @@
 (function() {
   $(function() {
-    var addFolderToList, addNoteToList, checkItem, clearInputs, createFolder, createNote, deleteItem, deleteNote, editAmount, editFolder, editListField, editNoteField, editTimer, folders, notes, renderList, saveFolder, saveNote, selectFolder, selectNote, setSaveTimer, setValue, startList, toggleFolderList;
+    var addFolderToList, addNoteToList, checkItem, clearInputs, createFolder, createNote, deleteItem, deleteNote, editAmount, editFolder, editListField, editNoteField, editTimer, folders, moveItem, notes, renderList, saveFolder, saveNote, selectFolder, selectNote, setSaveTimer, setValue, startList, toggleFolderList;
     notes = {};
     folders = {};
     editAmount = 0;
@@ -159,13 +159,19 @@
       });
       $('.list').html(listTemplate);
       $('.listtext').on('input', function() {
-        return editListField($(this).parent(), this.value);
+        return editListField($(this).parent(), $(this).text());
       });
       $('.checkbox').on('click', function() {
         return checkItem($(this).parent());
       });
-      return $('.listclose').on('click', function() {
+      $('.listclose').on('click', function() {
         return deleteItem($(this).parent());
+      });
+      $('.listmoveup').on('click', function() {
+        return moveItem($(this).parent(), -1);
+      });
+      return $('.listmovedown').on('click', function() {
+        return moveItem($(this).parent(), 1);
       });
     };
     editListField = function(control, value) {
@@ -184,6 +190,7 @@
           text: value,
           checked: false
         });
+        renderList(notes[noteId].list);
       } else {
         list[listIndex].text = value;
       }
@@ -198,7 +205,7 @@
       }
       notes[noteId].list[listIndex].checked = !notes[noteId].list[listIndex].checked;
       control.toggleClass('checked');
-      control.find('button').toggleClass('ion-ios7-checkmark-outline').toggleClass('ion-ios7-circle-outline');
+      control.find('.checkbox').toggleClass('ion-ios7-checkmark-outline').toggleClass('ion-ios7-circle-outline');
       return setSaveTimer(noteId);
     };
     deleteItem = function(control) {
@@ -210,6 +217,19 @@
       }
       notes[noteId].list.splice(listIndex, 1);
       renderList(notes[noteId].list);
+      return setSaveTimer(noteId);
+    };
+    moveItem = function(control, relativePosition) {
+      var item, list, listIndex, noteId;
+      noteId = $('.note .title').attr('data-id');
+      if (!noteId || !notes[noteId].list) {
+        return;
+      }
+      listIndex = parseInt(control.attr('data-index'));
+      list = notes[noteId].list;
+      item = list.splice(listIndex, 1);
+      list.splice(listIndex + relativePosition, 0, item[0]);
+      renderList(list);
       return setSaveTimer(noteId);
     };
     setSaveTimer = function(id) {

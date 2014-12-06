@@ -97,12 +97,12 @@ textarea:focus, input:focus
 button
 	background-color transparent
 	border 0
-	padding 0
+	padding 2px
 	cursor pointer
 	outline transparent
 
 	&:hover
-		color #6BD5FF
+		color #222
 
 .icon
 	font-size 32px
@@ -126,15 +126,25 @@ button
 	letter-spacing 1px
 
 .list
-	padding-left 70px
+	padding-left 40px
 
 .listitem
 	position relative
 
-	button
-		font-size 26px
+	&.checked
+		input
+			text-decoration line-through
+
+
+	&:hover
+		.listclose,
+		.listmoveup,
+		.listmovedown
+			display inline-block
+
+	.checkbox
+		font-size 29px
 		color #444
-		vertical-align sub
 		margin-right 4px
 
 		&.checkbox:hover:before
@@ -143,17 +153,25 @@ button
 		&.checkbox:active:before
 			content "\f16e"
 
-	&.checked
-		input
-			text-decoration line-through
+	.listclose,
+	.listmoveup,
+	.listmovedown
+		color #666
+		font-size 26px
 
-	input
-		border 0
-		width 300px
+	.listclose
+		font-size 28px
 
-	&:hover
-		.listclose
-			display inline-block
+.listtext
+	border 0
+	outline 0
+	width 300px
+	display inline-block
+	vertical-align top
+	padding 10px 0px
 
-.listclose
-	display: none
+.listclose,
+.listmoveup,
+.listmovedown
+	display none
+

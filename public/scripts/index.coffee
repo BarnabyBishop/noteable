@@ -145,9 +145,11 @@ $ ->
 	renderList = (list) ->
 		listTemplate = nunjucks.render('list.html', { list: list })
 		$('.list').html(listTemplate)
-		$('.listtext').on('input', -> editListField($(this).parent(), this.value))
+		$('.listtext').on('input', -> editListField($(this).parent(), $(this).text()))
 		$('.checkbox').on('click', -> checkItem($(this).parent()))
 		$('.listclose').on('click', -> deleteItem($(this).parent()))
+		$('.listmoveup').on('click', -> moveItem($(this).parent(), -1))
+		$('.listmovedown').on('click', -> moveItem($(this).parent(), 1))
 
 	editListField = (control, value) ->
 		noteId = $('.note .title').attr('data-id')
@@ -162,6 +164,7 @@ $ ->
 
 		if list.length < (listIndex + 1)
 			list.push({ text: value, checked: false })
+			renderList(notes[noteId].list)
 		else
 			list[listIndex].text = value
 
@@ -177,7 +180,7 @@ $ ->
 		notes[noteId].list[listIndex].checked = !notes[noteId].list[listIndex].checked
 
 		control.toggleClass('checked')
-		control.find('button')
+		control.find('.checkbox')
 				.toggleClass('ion-ios7-checkmark-outline')
 				.toggleClass('ion-ios7-circle-outline')
 
@@ -195,6 +198,23 @@ $ ->
 		renderList(notes[noteId].list)
 
 		setSaveTimer(noteId)
+
+	moveItem = (control, relativePosition) ->
+		noteId = $('.note .title').attr('data-id')
+
+		if not noteId or not notes[noteId].list
+			return
+
+		listIndex = parseInt(control.attr('data-index'))
+		list = notes[noteId].list
+
+		item = list.splice(listIndex, 1)
+		list.splice(listIndex + relativePosition, 0, item[0])
+
+		renderList(list)
+
+		setSaveTimer(noteId)
+
 
 	setSaveTimer  = (id) ->
 		# If the user has stopped typing for 1 second Or made over 50 changes save
