@@ -1,6 +1,6 @@
 (function() {
   $(function() {
-    var addFolderToList, addNoteToList, checkItem, clearInputs, createFolder, createNote, deleteItem, deleteNote, editAmount, editFolder, editListField, editNoteField, editTimer, folders, moveItem, notes, renderList, saveFolder, saveNote, selectFolder, selectNote, setSaveTimer, setValue, startList, toggleFolderList;
+    var addFolderToList, addNoteToList, checkListItem, clearInputs, createFolder, createNote, deleteListItem, deleteNote, editAmount, editFolder, editListItem, editNoteField, editTimer, folders, moveListItem, notes, renderList, resetListIndex, saveFolder, saveNote, selectFolder, selectNote, setSaveTimer, setValue, startList, toggleFolderList;
     notes = {};
     folders = {};
     editAmount = 0;
@@ -12,10 +12,9 @@
       note = notes[element.attr('data-id')];
       $('.note .title').val(note.title).attr('data-id', note._id);
       $('.note .text').val(note.text).attr('data-id', note._id);
+      $('.list').empty();
       if ((_ref = note.list) != null ? _ref.length : void 0) {
-        return renderList(note.list);
-      } else {
-        return $('.list').empty();
+        return renderList($('.list'), note.list);
       }
     };
     setValue = function(elements, value) {
@@ -149,33 +148,34 @@
       $('.note .title').val('');
       return $('.note .text').val('');
     };
-    startList = function() {
-      return renderList();
+    startList = function(button) {
+      console.log(button.siblings('.list').length);
+      return renderList(button.siblings('.list'));
     };
-    renderList = function(list) {
+    renderList = function(container, list) {
       var listTemplate;
-      listTemplate = nunjucks.render('list.html', {
+      listTemplate = nunjucks.render('listitem.html', {
         list: list
       });
-      $('.list').html(listTemplate);
-      $('.listtext').on('input', function() {
-        return editListField($(this).parent(), $(this).text());
+      container.append(listTemplate);
+      container.find('.listtext').off().on('input', function() {
+        return editListItem($(this));
       });
-      $('.checkbox').on('click', function() {
-        return checkItem($(this).parent());
+      container.find('.listcheckbox').off().on('click', function() {
+        return checkListItem($(this).parent());
       });
-      $('.listclose').on('click', function() {
-        return deleteItem($(this).parent());
+      container.find('.listclose').off().on('click', function() {
+        return deleteListItem($(this).parent());
       });
-      $('.listmoveup').on('click', function() {
-        return moveItem($(this).parent(), -1);
+      container.find('.listmoveup').off().on('click', function() {
+        return moveListItem($(this).parent(), -1);
       });
-      return $('.listmovedown').on('click', function() {
-        return moveItem($(this).parent(), 1);
+      return container.find('.listmovedown').off().on('click', function() {
+        return moveListItem($(this).parent(), 1);
       });
     };
-    editListField = function(control, value) {
-      var list, listIndex, noteId;
+    editListItem = function(input) {
+      var list, listIndex, listItem, noteId;
       noteId = $('.note .title').attr('data-id');
       if (!noteId) {
         noteId = createNote();
@@ -183,20 +183,26 @@
       if (!notes[noteId].list) {
         notes[noteId].list = [];
       }
-      listIndex = parseInt(control.attr('data-index'));
       list = notes[noteId].list;
+      listItem = input.parent();
+      if (listItem.attr('data-index')) {
+        listIndex = parseInt(listItem.attr('data-index'));
+      } else {
+        listIndex = list.length;
+        listItem.attr('data-index', listIndex);
+      }
       if (list.length < (listIndex + 1)) {
         list.push({
-          text: value,
+          text: input.text(),
           checked: false
         });
-        renderList(notes[noteId].list);
+        renderList(listItem.parent());
       } else {
-        list[listIndex].text = value;
+        list[listIndex].text = input.text();
       }
       return setSaveTimer(noteId);
     };
-    checkItem = function(control) {
+    checkListItem = function(control) {
       var listIndex, noteId;
       noteId = $('.note .title').attr('data-id');
       listIndex = control.attr('data-index');
@@ -205,32 +211,50 @@
       }
       notes[noteId].list[listIndex].checked = !notes[noteId].list[listIndex].checked;
       control.toggleClass('checked');
-      control.find('.checkbox').toggleClass('ion-ios7-checkmark-outline').toggleClass('ion-ios7-circle-outline');
+      control.find('.listcheckbox').toggleClass('ion-ios7-checkmark-outline').toggleClass('ion-ios7-circle-outline');
       return setSaveTimer(noteId);
     };
-    deleteItem = function(control) {
-      var listIndex, noteId;
+    deleteListItem = function(control) {
+      var listContainer, listIndex, noteId;
       noteId = $('.note .title').attr('data-id');
       listIndex = control.attr('data-index');
       if (!noteId || !notes[noteId].list || !notes[noteId].list[listIndex]) {
         return;
       }
       notes[noteId].list.splice(listIndex, 1);
-      renderList(notes[noteId].list);
+      control.remove();
+      listContainer = control.closest('.list');
+      resetListIndex(listContainer);
       return setSaveTimer(noteId);
     };
-    moveItem = function(control, relativePosition) {
-      var item, list, listIndex, noteId;
+    moveListItem = function(control, relativePosition) {
+      var item, list, listContainer, listIndex, noteId;
       noteId = $('.note .title').attr('data-id');
       if (!noteId || !notes[noteId].list) {
         return;
       }
       listIndex = parseInt(control.attr('data-index'));
       list = notes[noteId].list;
+      console.log(list);
       item = list.splice(listIndex, 1);
+      console.log('removing from ' + listIndex);
       list.splice(listIndex + relativePosition, 0, item[0]);
-      renderList(list);
+      console.log('inserting ' + (listIndex + relativePosition));
+      if (relativePosition > 0) {
+        control.insertAfter(control.next());
+      } else {
+        control.insertBefore(control.prev());
+      }
+      listContainer = control.closest('.list');
+      resetListIndex(listContainer);
       return setSaveTimer(noteId);
+    };
+    resetListIndex = function(container) {
+      var index;
+      index = 0;
+      return container.find('.listitem').each(function() {
+        return $(this).attr('data-index', index++);
+      });
     };
     setSaveTimer = function(id) {
       if (editTimer) {
@@ -279,7 +303,9 @@
     });
     $('.newnote').on('click', createNote);
     $('.deletenote').on('click', deleteNote);
-    $('.startlist').on('click', startList);
+    $('.startlist').on('click', function() {
+      return startList($(this));
+    });
     $('.folders').on('click', toggleFolderList);
     $('.newfolder').on('click', function() {
       return $(this).siblings('*').show();

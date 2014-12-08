@@ -1,0 +1,10 @@
+{% extends "list.html" %}
+{% block listitem %}
+	<div class="listitem {% if item.checked %}checked{% endif %}" data-index="{{ loop.index0 }}">
+		<button class="listcheckbox icon {% if item.checked %}ion-ios7-checkmark-outline{% else %}ion-ios7-circle-outline{% endif %}"></button>
+		<div contenteditable="true" class="listtext">{{ item.text }}</div>
+		<button class="listmoveup icon ion-ios7-arrow-up"></button>
+		<button class="listmovedown icon ion-ios7-arrow-down"></button>
+		<button class="listclose icon ion-ios7-close-empty"></button>
+	</div>
+{% endblock %}

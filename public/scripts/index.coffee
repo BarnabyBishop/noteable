@@ -12,10 +12,9 @@ $ ->
 		$('.note .title').val(note.title).attr('data-id', note._id)
 		$('.note .text').val(note.text).attr('data-id', note._id)
 
+		$('.list').empty()
 		if note.list?.length
-			renderList(note.list)
-		else
-			$('.list').empty()
+			renderList($('.list'), note.list)
 
 	setValue = (elements, value) ->
 		elements.each(
@@ -122,6 +121,7 @@ $ ->
 			saveFolder(id)
 			addFolderToList(folders[id])
 
+
 		$('.foldername').text('').hide()
 		$('.confirmfolder').hide()
 
@@ -139,19 +139,21 @@ $ ->
 		$('.note .title').val('')
 		$('.note .text').val('')
 
-	startList = ->
-		renderList()
+	startList = (button) ->
+		console.log button.siblings('.list').length
+		renderList(button.siblings('.list'))
 
-	renderList = (list) ->
-		listTemplate = nunjucks.render('list.html', { list: list })
-		$('.list').html(listTemplate)
-		$('.listtext').on('input', -> editListField($(this).parent(), $(this).text()))
-		$('.checkbox').on('click', -> checkItem($(this).parent()))
-		$('.listclose').on('click', -> deleteItem($(this).parent()))
-		$('.listmoveup').on('click', -> moveItem($(this).parent(), -1))
-		$('.listmovedown').on('click', -> moveItem($(this).parent(), 1))
+	renderList = (container, list) ->
+		listTemplate = nunjucks.render('listitem.html', { list: list })
+		container.append(listTemplate)
+		# remove all handlers to avoid double binding
+		container.find('.listtext').off().on('input', -> editListItem($(this)))
+		container.find('.listcheckbox').off().on('click', -> checkListItem($(this).parent()))
+		container.find('.listclose').off().on('click', -> deleteListItem($(this).parent()))
+		container.find('.listmoveup').off().on('click', -> moveListItem($(this).parent(), -1))
+		container.find('.listmovedown').off().on('click', -> moveListItem($(this).parent(), 1))
 
-	editListField = (control, value) ->
+	editListItem = (input) ->
 		noteId = $('.note .title').attr('data-id')
 		if not noteId
 			noteId = createNote()
@@ -159,18 +161,22 @@ $ ->
 		if not notes[noteId].list
 			notes[noteId].list = []
 
-		listIndex = parseInt(control.attr('data-index'))
 		list = notes[noteId].list
+		listItem = input.parent()
+		if listItem.attr('data-index')
+			listIndex = parseInt(listItem.attr('data-index'))
+		else
+			listIndex = list.length
+			listItem.attr('data-index', listIndex)
 
 		if list.length < (listIndex + 1)
-			list.push({ text: value, checked: false })
-			renderList(notes[noteId].list)
+			list.push({ text: input.text(), checked: false })
+			renderList(listItem.parent())
 		else
-			list[listIndex].text = value
-
+			list[listIndex].text = input.text()
 		setSaveTimer(noteId)
 
-	checkItem = (control) ->
+	checkListItem = (control) ->
 		noteId = $('.note .title').attr('data-id')
 
 		listIndex = control.attr('data-index')
@@ -180,13 +186,13 @@ $ ->
 		notes[noteId].list[listIndex].checked = !notes[noteId].list[listIndex].checked
 
 		control.toggleClass('checked')
-		control.find('.checkbox')
+		control.find('.listcheckbox')
 				.toggleClass('ion-ios7-checkmark-outline')
 				.toggleClass('ion-ios7-circle-outline')
 
 		setSaveTimer(noteId)
 
-	deleteItem = (control) ->
+	deleteListItem = (control) ->
 		noteId = $('.note .title').attr('data-id')
 
 		listIndex = control.attr('data-index')
@@ -195,11 +201,18 @@ $ ->
 
 		notes[noteId].list.splice(listIndex, 1)
 
-		renderList(notes[noteId].list)
+		control.remove()
+
+		listContainer = control.closest('.list')
+		resetListIndex(listContainer)
+
+		# listContainer = control.closest('.list')
+		# listContainer.empty()
+		# renderList(listContainer, notes[noteId].list)
 
 		setSaveTimer(noteId)
 
-	moveItem = (control, relativePosition) ->
+	moveListItem = (control, relativePosition) ->
 		noteId = $('.note .title').attr('data-id')
 
 		if not noteId or not notes[noteId].list
@@ -207,14 +220,28 @@ $ ->
 
 		listIndex = parseInt(control.attr('data-index'))
 		list = notes[noteId].list
-
+		console.log list
 		item = list.splice(listIndex, 1)
+		console.log 'removing from ' + listIndex
 		list.splice(listIndex + relativePosition, 0, item[0])
+		console.log 'inserting ' + (listIndex + relativePosition)
+		if (relativePosition > 0)
+			control.insertAfter(control.next())
+		else
+			control.insertBefore(control.prev())
 
-		renderList(list)
+		listContainer = control.closest('.list')
+		resetListIndex(listContainer)
+		#listContainer.empty()
+		# renderList(listContainer, list)
 
 		setSaveTimer(noteId)
 
+
+	resetListIndex = (container) ->
+		index = 0
+		container.find('.listitem').each ->
+			$(this).attr('data-index', index++)
 
 	setSaveTimer  = (id) ->
 		# If the user has stopped typing for 1 second Or made over 50 changes save
@@ -258,7 +285,7 @@ $ ->
 	$('.note .text') .on('input', -> editNoteField($(this), this.value))
 	$('.newnote').on('click', createNote)
 	$('.deletenote').on('click', deleteNote)
-	$('.startlist').on('click', startList)
+	$('.startlist').on('click', -> startList($(this)))
 
 	$('.folders').on('click', toggleFolderList)
 	$('.newfolder').on('click', -> $(this).siblings('*').show())

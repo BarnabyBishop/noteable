@@ -26,7 +26,6 @@ module.exports =
 	save: (note, callback) ->
 		_id = note._id
 
-		console.log note
 		# mongo gets cranky if you try and insert/update the _id
 		# through the saved object
 		delete note._id
