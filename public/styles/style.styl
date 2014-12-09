@@ -28,12 +28,13 @@ textarea:focus, input:focus
 	vertical-align top
 	margin-right 15px
 
+
 .notelist
 .panel
 	border solid 1px #ccc
 	cursor pointer
 	font-weight bold
-	div
+	> div
 		padding:10px
 
 		&:not(:last-child)
@@ -53,9 +54,12 @@ textarea:focus, input:focus
 		box-shadow 2px 2px 1px rgba(0,0,0,0.08);
 		display none
 		position absolute
-		padding 10px
 
 		.folder
+			background-color #FFF
+			i
+				font-size 23px
+				margin-right 10px
 			div
 				display inline-block
 

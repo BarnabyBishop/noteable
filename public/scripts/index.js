@@ -87,7 +87,7 @@
     };
     addFolderToList = function(folder) {
       var node;
-      node = $("<div data-id='" + folder._id + "' data-path='" + folder.path + "' class='folder' data-type='folder' data-field='name'><span class='icon fa fa-folder-o'></span><div data-id='" + folder._id + "'>" + (folder.name != null ? folder.name : void 0) + "</div></div>");
+      node = $("<div data-id='" + folder._id + "' data-path='" + folder.path + "' class='folder' data-type='folder' data-field='name'><i class='icon ion-ios7-bookmarks-outline'></i><div data-id='" + folder._id + "'>" + (folder.name != null ? folder.name : void 0) + "</div></div>");
       $('.folderlist .panel .newfolder').before(node);
       return node.click(function() {
         return selectFolder($(this));
