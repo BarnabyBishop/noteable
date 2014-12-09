@@ -57,6 +57,8 @@
     };
     createNote = function() {
       var id;
+      $('.list').empty();
+      clearInputs();
       id = uuid.v4();
       notes[id] = {
         _id: id,
@@ -67,7 +69,6 @@
       $('.note .title').attr('data-id', id);
       $('.note .text').attr('data-id', id);
       addNoteToList(notes[id]);
-      clearInputs();
       $('.note .title').focus();
       return id;
     };
@@ -98,6 +99,7 @@
       folderId = folderElement.attr('data-id');
       $('.currentfolder').attr('data-current-path', folderPath).text(folders[folderId].name);
       $('.notelist').empty();
+      $('.list').empty();
       for (note in notes) {
         if (notes[note].path === folderPath) {
           addNoteToList(notes[note]);
@@ -146,10 +148,11 @@
     };
     clearInputs = function() {
       $('.note .title').val('');
-      return $('.note .text').val('');
+      $('.note .text').val('');
+      $('.note .title').attr('data-id', '');
+      return $('.note .text').attr('data-id', '');
     };
     startList = function(button) {
-      console.log(button.siblings('.list').length);
       return renderList(button.siblings('.list'));
     };
     renderList = function(container, list) {
