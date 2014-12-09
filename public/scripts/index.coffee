@@ -81,7 +81,7 @@ $ ->
 			)
 
 	addFolderToList = (folder) ->
-		node = $("<div data-id='#{folder._id}' data-path='#{folder.path}' class='folder' data-type='folder' data-field='name'><span class='icon fa fa-folder-o'></span><div data-id='#{folder._id}'>#{folder.name if folder.name?}</div></div>")
+		node = $("<div data-id='#{folder._id}' data-path='#{folder.path}' class='folder' data-type='folder' data-field='name'><i class='icon ion-ios7-bookmarks-outline'></i><div data-id='#{folder._id}'>#{folder.name if folder.name?}</div></div>")
 		$('.folderlist .panel .newfolder').before(node)
 		node.click( ->
 			selectFolder($(this))
