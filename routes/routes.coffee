@@ -4,6 +4,19 @@ mongoose = require('mongoose')
 passport = require('passport')
 model = require('../models/model')
 
+
+
+# Tempory
+router.get('/createuser', (req, res) ->
+	res.render('login')
+)
+
+router.post('/createuser', (req, res) ->
+	model.user.create(req.body)
+	res.redirect('/login')
+)
+
+
 ensureAuthenticated = (req, res, next) ->
 	if req.isAuthenticated()
 		return next()

@@ -47,5 +47,8 @@ userSchema.methods.comparePassword = (candidatePassword, cb) ->
 			cb(null, isMatch)
 	)
 
+userSchema.methods.create = (user) ->
+	user = new User({email: user.email, password: user.password })
+	user.save()
 
 module.exports = mongoose.model('User', userSchema)
