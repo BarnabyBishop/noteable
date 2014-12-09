@@ -56,6 +56,8 @@ $ ->
 
 
 	createNote = ->
+		$('.list').empty()
+		clearInputs()
 		id = uuid.v4()
 		notes[id] =
 			_id: id
@@ -65,7 +67,6 @@ $ ->
 		$('.note .title').attr('data-id', id)
 		$('.note .text').attr('data-id', id)
 		addNoteToList(notes[id])
-		clearInputs()
 		$('.note .title').focus()
 		return id
 
@@ -93,6 +94,7 @@ $ ->
 			.attr('data-current-path', folderPath)
 			.text(folders[folderId].name)
 		$('.notelist').empty()
+		$('.list').empty()
 		for note of notes
 			if notes[note].path is folderPath
 				addNoteToList(notes[note])
@@ -138,9 +140,10 @@ $ ->
 	clearInputs = ->
 		$('.note .title').val('')
 		$('.note .text').val('')
+		$('.note .title').attr('data-id', '')
+		$('.note .text').attr('data-id', '')
 
 	startList = (button) ->
-		console.log button.siblings('.list').length
 		renderList(button.siblings('.list'))
 
 	renderList = (container, list) ->
