@@ -153,7 +153,10 @@
       return $('.note .text').attr('data-id', '');
     };
     startList = function(button) {
-      return renderList(button.siblings('.list'));
+      var list;
+      list = button.siblings('.list');
+      renderList(list);
+      return list.find('.listtext').focus();
     };
     renderList = function(container, list) {
       var listTemplate;
@@ -162,7 +165,9 @@
       });
       container.append(listTemplate);
       bindList(container);
-      return $('.note .text').attr('tabindex', list.length);
+      if (list) {
+        return $('.note .text').attr('tabindex', list.length);
+      }
     };
     bindList = function(container) {
       container.find('.listtext').off().on('keypress', function(e) {
