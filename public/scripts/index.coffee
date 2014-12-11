@@ -150,6 +150,7 @@ $ ->
 		listTemplate = nunjucks.render('listitem.html', { list: list })
 		container.append(listTemplate)
 		bindList(container)
+		$('.note .text').attr('tabindex', list.length)
 
 	bindList = (container) ->
 		# remove all handlers to avoid double binding
@@ -266,6 +267,8 @@ $ ->
 		index = 0
 		container.find('.listitem').each ->
 			$(this).attr('data-index', index++)
+			$(this).find('.listtext').attr('tabindex', index + 2)
+		$('.note .text').attr('tabindex', index + 2)
 
 	setSaveTimer  = (id) ->
 		# If the user has stopped typing for 1 second Or made over 50 changes save

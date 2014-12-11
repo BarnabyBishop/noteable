@@ -61,7 +61,7 @@ var lineno = null;
 var colno = null;
 var output = "";
 try {
-output += "\r\n\t<div class=\"notelist-container\">\r\n\t\t<div class=\"folderlist\">\r\n\t\t\t<button class=\"folders\">\r\n\t\t\t\t<i class=\"icon ion-ios7-bookmarks-outline\"></i>\r\n\t\t\t\t<span class=\"currentfolder\" data-current-path=\"\"></span>\r\n\t\t\t</button>\r\n\t\t\t<div class=\"panel\">\r\n\t\t\t\t<button class=\"icon ion-ios7-plus-empty newfolder\"></button>\r\n\t\t\t\t<input type=\"text\" placeholder=\"New Folder\" class=\"foldername textbox\">\r\n\t\t\t\t<button class=\"confirmfolder icon ion-ios7-checkmark\"></button>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"notelist\"></div>\r\n\t</div>\r\n\r\n\t<div class=\"note-container\">\r\n\t\t<button class=\"icon ion-ios7-plus-empty newnote\"></button>\r\n\t\t<button class=\"icon ion-ios7-trash-outline deletenote\"></button>\r\n\t\t<div class=\"note\">\r\n\t\t\t<button class=\"startlist icon ion-clipboard\"></button>\r\n\t\t\t<input type=\"text\" class=\"title\" placeholder=\"Title\" data-field=\"title\">\r\n\t\t\t<div class=\"list\"></div>\r\n\t\t\t<textarea name=\"\" id=\"\" cols=\"30\" rows=\"10\" class=\"text\" placeholder=\"Note\" data-field=\"text\"></textarea>\r\n\t\t</div>\r\n\t</div>\r\n\r\n\t<script src=\"/scripts/uuid.min.js\"></script>\r\n\t<script src=\"/scripts/jquery-2.1.1.min.js\"></script>\r\n\t<script src=\"/scripts/nunjucks-slim.min.js\"></script>\r\n\t<script src=\"/scripts/templates.js\"></script>\r\n\t<script src=\"/scripts/index.js\"></script>\r\n\r\n\r\n";
+output += "\r\n\t<div class=\"notelist-container\">\r\n\t\t<div class=\"folderlist\">\r\n\t\t\t<button class=\"folders\">\r\n\t\t\t\t<i class=\"icon ion-ios7-bookmarks-outline\"></i>\r\n\t\t\t\t<span class=\"currentfolder\" data-current-path=\"\"></span>\r\n\t\t\t</button>\r\n\t\t\t<div class=\"panel\">\r\n\t\t\t\t<button class=\"icon ion-ios7-plus-empty newfolder\"></button>\r\n\t\t\t\t<input type=\"text\" placeholder=\"New Folder\" class=\"foldername textbox\">\r\n\t\t\t\t<button class=\"confirmfolder icon ion-ios7-checkmark\"></button>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"notelist\"></div>\r\n\t</div>\r\n\r\n\t<div class=\"note-container\">\r\n\t\t<button class=\"icon ion-ios7-plus-empty newnote\"></button>\r\n\t\t<button class=\"icon ion-ios7-trash-outline deletenote\"></button>\r\n\t\t<div class=\"note\">\r\n\t\t\t<button class=\"startlist icon ion-clipboard\"></button>\r\n\t\t\t<input type=\"text\" class=\"title\" placeholder=\"Title\" data-field=\"title\" tabindex=\"1\">\r\n\t\t\t<div class=\"list\"></div>\r\n\t\t\t<textarea name=\"\" id=\"\" cols=\"30\" rows=\"10\" class=\"text\" placeholder=\"Note\" data-field=\"text\" tabindex=\"2\"></textarea>\r\n\t\t</div>\r\n\t</div>\r\n\r\n\t<script src=\"/scripts/uuid.min.js\"></script>\r\n\t<script src=\"/scripts/jquery-2.1.1.min.js\"></script>\r\n\t<script src=\"/scripts/nunjucks-slim.min.js\"></script>\r\n\t<script src=\"/scripts/templates.js\"></script>\r\n\t<script src=\"/scripts/index.js\"></script>\r\n\r\n\r\n";
 cb(null, output);
 ;
 } catch (e) {
@@ -230,7 +230,9 @@ else {
 output += "ion-ios7-circle-outline";
 ;
 }
-output += "\"></button>\r\n\t\t<div contenteditable=\"true\" class=\"listtext\">";
+output += "\"></button>\r\n\t\t<div contenteditable=\"true\" class=\"listtext\" tabindex=\"";
+output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "loop")),"index0", env.autoesc) + 2, env.autoesc);
+output += "\">";
 output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "item")),"text", env.autoesc), env.autoesc);
 output += "</div>\r\n\t\t<button class=\"listmoveup icon ion-ios7-arrow-up\"></button>\r\n\t\t<button class=\"listmovedown icon ion-ios7-arrow-down\"></button>\r\n\t\t<button class=\"listclose icon ion-ios7-close-empty\"></button>\r\n\t</div>\r\n";
 cb(null, output);
