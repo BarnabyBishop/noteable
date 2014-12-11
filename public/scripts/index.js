@@ -1,6 +1,6 @@
 (function() {
   $(function() {
-    var addFolderToList, addNoteToList, bindList, checkListItem, clearInputs, createFolder, createNote, deleteListItem, deleteNote, editAmount, editFolder, editListItem, editNoteField, editTimer, folders, moveListItem, notes, renderList, resetListIndex, saveFolder, saveNote, selectFolder, selectNote, setSaveTimer, setValue, startList, toggleFolderList;
+    var addFolderToList, addNoteToList, bindList, checkListItem, clearInputs, createFolder, createNote, deleteListItem, deleteNote, editAmount, editFolder, editListItem, editNoteField, editTimer, folders, insertItemAfter, moveListItem, notes, renderList, resetListIndex, saveFolder, saveNote, selectFolder, selectNote, setSaveTimer, setValue, startList, toggleFolderList;
     notes = {};
     folders = {};
     editAmount = 0;
@@ -165,22 +165,7 @@
     };
     bindList = function(container) {
       container.find('.listtext').off().on('keypress', function(e) {
-        var item, itemIndex, newItem, noteId;
-        if (e.which === 13) {
-          e.preventDefault();
-          noteId = $('.note .title').attr('data-id');
-          item = $(this).parent();
-          itemIndex = parseInt(item.attr('data-index'));
-          notes[noteId].list.splice(itemIndex + 1, 0, {
-            text: '',
-            checked: false
-          });
-          newItem = item.clone();
-          item.after(newItem);
-          newItem.find('.listtext').text('').focus();
-          resetListIndex(newItem.parent());
-          return bindList(newItem.parent());
-        }
+        return insertItemAfter($(this), e);
       }).on('input', function() {
         return editListItem($(this));
       });
@@ -196,6 +181,26 @@
       return container.find('.listmovedown').off().on('click', function() {
         return moveListItem($(this).parent(), 1);
       });
+    };
+    insertItemAfter = function(inputControl, e) {
+      var item, itemIndex, newItem, noteId;
+      if (e.which === 13) {
+        e.preventDefault();
+        noteId = $('.note .title').attr('data-id');
+        item = inputControl.parent();
+        itemIndex = parseInt(item.attr('data-index'));
+        notes[noteId].list.splice(itemIndex + 1, 0, {
+          text: '',
+          checked: false
+        });
+        newItem = item.clone();
+        item.after(newItem);
+        newItem.find('.listtext').text('').focus();
+        newItem.removeClass('checked');
+        newItem.find('.listcheckbox').removeClass('ion-ios7-checkmark-outline').addClass('ion-ios7-circle-outline');
+        resetListIndex(newItem.parent());
+        return bindList(newItem.parent());
+      }
     };
     editListItem = function(input) {
       var list, listIndex, listItem, noteId;
