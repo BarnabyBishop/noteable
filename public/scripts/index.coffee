@@ -153,29 +153,35 @@ $ ->
 
 	bindList = (container) ->
 		# remove all handlers to avoid double binding
-		container.find('.listtext').off()
-			.on('keypress',
-				(e) ->
-					if e.which == 13
-						e.preventDefault()
-						noteId = $('.note .title').attr('data-id')
-						item = $(this).parent()
-						itemIndex = parseInt(item.attr('data-index'))
-						notes[noteId].list.splice(itemIndex + 1, 0, { text: '', checked: false })
-
-
-						newItem = item.clone()
-						item.after(newItem)
-
-						newItem.find('.listtext').text('').focus()
-						resetListIndex(newItem.parent())
-						bindList(newItem.parent())
-				)
-			.on('input', -> editListItem($(this)))
+		container.find('.listtext')
+				 .off()
+				 .on('keypress', (e) -> insertItemAfter($(this), e))
+				 .on('input', -> editListItem($(this)))
 		container.find('.listcheckbox').off().on('click', -> checkListItem($(this).parent()))
 		container.find('.listclose').off().on('click', -> deleteListItem($(this).parent()))
 		container.find('.listmoveup').off().on('click', -> moveListItem($(this).parent(), -1))
 		container.find('.listmovedown').off().on('click', -> moveListItem($(this).parent(), 1))
+
+	insertItemAfter = (inputControl, e) ->
+		if e.which == 13
+			e.preventDefault()
+			noteId = $('.note .title').attr('data-id')
+			item = inputControl.parent()
+			itemIndex = parseInt(item.attr('data-index'))
+			notes[noteId].list.splice(itemIndex + 1, 0, { text: '', checked: false })
+
+			newItem = item.clone()
+			item.after(newItem)
+
+			newItem.find('.listtext').text('').focus()
+
+			newItem.removeClass('checked')
+			newItem.find('.listcheckbox')
+				.removeClass('ion-ios7-checkmark-outline')
+				.addClass('ion-ios7-circle-outline')
+
+			resetListIndex(newItem.parent())
+			bindList(newItem.parent())
 
 	editListItem = (input) ->
 		noteId = $('.note .title').attr('data-id')
