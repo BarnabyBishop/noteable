@@ -1,6 +1,6 @@
 (function() {
   $(function() {
-    var addFolderToList, addNoteToList, checkListItem, clearInputs, createFolder, createNote, deleteListItem, deleteNote, editAmount, editFolder, editListItem, editNoteField, editTimer, folders, moveListItem, notes, renderList, resetListIndex, saveFolder, saveNote, selectFolder, selectNote, setSaveTimer, setValue, startList, toggleFolderList;
+    var addFolderToList, addNoteToList, bindList, checkListItem, clearInputs, createFolder, createNote, deleteListItem, deleteNote, editAmount, editFolder, editListItem, editNoteField, editTimer, folders, moveListItem, notes, renderList, resetListIndex, saveFolder, saveNote, selectFolder, selectNote, setSaveTimer, setValue, startList, toggleFolderList;
     notes = {};
     folders = {};
     editAmount = 0;
@@ -161,7 +161,27 @@
         list: list
       });
       container.append(listTemplate);
-      container.find('.listtext').off().on('input', function() {
+      return bindList(container);
+    };
+    bindList = function(container) {
+      container.find('.listtext').off().on('keypress', function(e) {
+        var item, itemIndex, newItem, noteId;
+        if (e.which === 13) {
+          e.preventDefault();
+          noteId = $('.note .title').attr('data-id');
+          item = $(this).parent();
+          itemIndex = parseInt(item.attr('data-index'));
+          notes[noteId].list.splice(itemIndex + 1, 0, {
+            text: '',
+            checked: false
+          });
+          newItem = item.clone();
+          item.after(newItem);
+          newItem.find('.listtext').text('').focus();
+          resetListIndex(newItem.parent());
+          return bindList(newItem.parent());
+        }
+      }).on('input', function() {
         return editListItem($(this));
       });
       container.find('.listcheckbox').off().on('click', function() {
@@ -194,6 +214,7 @@
         listIndex = list.length;
         listItem.attr('data-index', listIndex);
       }
+      console.log(listIndex, list);
       if (list.length < (listIndex + 1)) {
         list.push({
           text: input.text(),
@@ -240,9 +261,7 @@
       list = notes[noteId].list;
       console.log(list);
       item = list.splice(listIndex, 1);
-      console.log('removing from ' + listIndex);
       list.splice(listIndex + relativePosition, 0, item[0]);
-      console.log('inserting ' + (listIndex + relativePosition));
       if (relativePosition > 0) {
         control.insertAfter(control.next());
       } else {

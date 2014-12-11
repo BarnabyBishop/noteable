@@ -149,8 +149,29 @@ $ ->
 	renderList = (container, list) ->
 		listTemplate = nunjucks.render('listitem.html', { list: list })
 		container.append(listTemplate)
+		bindList(container)
+
+	bindList = (container) ->
 		# remove all handlers to avoid double binding
-		container.find('.listtext').off().on('input', -> editListItem($(this)))
+		container.find('.listtext').off()
+			.on('keypress',
+				(e) ->
+					if e.which == 13
+						e.preventDefault()
+						noteId = $('.note .title').attr('data-id')
+						item = $(this).parent()
+						itemIndex = parseInt(item.attr('data-index'))
+						notes[noteId].list.splice(itemIndex + 1, 0, { text: '', checked: false })
+
+
+						newItem = item.clone()
+						item.after(newItem)
+
+						newItem.find('.listtext').text('').focus()
+						resetListIndex(newItem.parent())
+						bindList(newItem.parent())
+				)
+			.on('input', -> editListItem($(this)))
 		container.find('.listcheckbox').off().on('click', -> checkListItem($(this).parent()))
 		container.find('.listclose').off().on('click', -> deleteListItem($(this).parent()))
 		container.find('.listmoveup').off().on('click', -> moveListItem($(this).parent(), -1))
@@ -171,7 +192,7 @@ $ ->
 		else
 			listIndex = list.length
 			listItem.attr('data-index', listIndex)
-
+		console.log listIndex, list
 		if list.length < (listIndex + 1)
 			list.push({ text: input.text(), checked: false })
 			renderList(listItem.parent())
@@ -209,10 +230,6 @@ $ ->
 		listContainer = control.closest('.list')
 		resetListIndex(listContainer)
 
-		# listContainer = control.closest('.list')
-		# listContainer.empty()
-		# renderList(listContainer, notes[noteId].list)
-
 		setSaveTimer(noteId)
 
 	moveListItem = (control, relativePosition) ->
@@ -225,9 +242,7 @@ $ ->
 		list = notes[noteId].list
 		console.log list
 		item = list.splice(listIndex, 1)
-		console.log 'removing from ' + listIndex
 		list.splice(listIndex + relativePosition, 0, item[0])
-		console.log 'inserting ' + (listIndex + relativePosition)
 		if (relativePosition > 0)
 			control.insertAfter(control.next())
 		else
