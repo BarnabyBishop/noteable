@@ -161,7 +161,8 @@
         list: list
       });
       container.append(listTemplate);
-      return bindList(container);
+      bindList(container);
+      return $('.note .text').attr('tabindex', list.length);
     };
     bindList = function(container) {
       container.find('.listtext').off().on('keypress', function(e) {
@@ -279,9 +280,11 @@
     resetListIndex = function(container) {
       var index;
       index = 0;
-      return container.find('.listitem').each(function() {
-        return $(this).attr('data-index', index++);
+      container.find('.listitem').each(function() {
+        $(this).attr('data-index', index++);
+        return $(this).find('.listtext').attr('tabindex', index + 2);
       });
+      return $('.note .text').attr('tabindex', index + 2);
     };
     setSaveTimer = function(id) {
       if (editTimer) {
