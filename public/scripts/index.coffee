@@ -144,13 +144,16 @@ $ ->
 		$('.note .text').attr('data-id', '')
 
 	startList = (button) ->
-		renderList(button.siblings('.list'))
+		list = button.siblings('.list')
+		renderList(list)
+		list.find('.listtext').focus()
 
 	renderList = (container, list) ->
 		listTemplate = nunjucks.render('listitem.html', { list: list })
 		container.append(listTemplate)
 		bindList(container)
-		$('.note .text').attr('tabindex', list.length)
+		if (list)
+			$('.note .text').attr('tabindex', list.length)
 
 	bindList = (container) ->
 		# remove all handlers to avoid double binding
