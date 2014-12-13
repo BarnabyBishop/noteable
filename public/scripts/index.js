@@ -1,6 +1,6 @@
 (function() {
   $(function() {
-    var addFolderToList, addNoteToList, bindList, checkListItem, clearInputs, createFolder, createNote, deleteListItem, deleteNote, editAmount, editFolder, editListItem, editNoteField, editTimer, folders, insertItemAfter, moveListItem, notes, renderList, resetListIndex, saveFolder, saveNote, selectFolder, selectNote, setSaveTimer, setValue, startList, toggleFolderList;
+    var addFolderToList, addNoteToList, bindList, checkListItem, clearInputs, createFolder, createNote, deleteListItem, deleteNote, editAmount, editFolder, editListItem, editNoteField, editTimer, folders, insertItemAfter, moveListItem, notes, removeNoteFromList, renderList, resetListIndex, saveFolder, saveNote, selectFolder, selectNote, setSaveTimer, setValue, startList, toggleFolderList;
     notes = {};
     folders = {};
     editAmount = 0;
@@ -48,15 +48,22 @@
       });
     };
     addNoteToList = function(note) {
-      var node;
-      node = $("<div data-id='" + note._id + "' data-field='title'>" + note.title + "</div>");
-      $('.notelist').append(node);
-      return node.click(function() {
+      var element;
+      element = $("<div data-id='" + note._id + "' data-field='title'>" + note.title + "</div>");
+      $('.notelist').append(element);
+      element.click(function() {
         return selectNote($(this));
       });
+      return element;
+    };
+    removeNoteFromList = function(noteId) {
+      $(".notelist [data-id='" + noteId + "'").remove();
+      $('.note .title').val('').attr('data-id', '');
+      $('.note .text').val('').attr('data-id', '');
+      return $('.note .list').empty();
     };
     createNote = function() {
-      var id;
+      var id, noteListElement;
       $('.list').empty();
       clearInputs();
       id = uuid.v4();
@@ -68,7 +75,9 @@
       };
       $('.note .title').attr('data-id', id);
       $('.note .text').attr('data-id', id);
-      addNoteToList(notes[id]);
+      noteListElement = addNoteToList(notes[id]);
+      $('.notelist .selected').removeClass('selected');
+      noteListElement.addClass('selected');
       $('.note .title').focus();
       return id;
     };
@@ -76,7 +85,7 @@
       var id;
       id = $('.note .title').attr('data-id');
       if (id) {
-        return $.ajax({
+        $.ajax({
           type: 'POST',
           url: '/deletenote',
           data: {
@@ -84,6 +93,7 @@
           }
         });
       }
+      return removeNoteFromList(id);
     };
     addFolderToList = function(folder) {
       var node;
