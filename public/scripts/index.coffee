@@ -48,12 +48,19 @@ $ ->
 		)
 
 	addNoteToList = (note) ->
-		node = $("<div data-id='#{note._id}' data-field='title'>#{note.title}</div>")
-		$('.notelist').append(node)
-		node.click( ->
+		element = $("<div data-id='#{note._id}' data-field='title'>#{note.title}</div>")
+		$('.notelist').append(element)
+		element.click( ->
 			selectNote($(this))
 		)
+		return element
 
+	removeNoteFromList = (noteId) ->
+		$(".notelist [data-id='#{noteId}'").remove()
+		$('.note .title').val('').attr('data-id', '')
+		$('.note .text').val('').attr('data-id', '')
+
+		$('.note .list').empty()
 
 	createNote = ->
 		$('.list').empty()
@@ -66,7 +73,9 @@ $ ->
 			deleted: false
 		$('.note .title').attr('data-id', id)
 		$('.note .text').attr('data-id', id)
-		addNoteToList(notes[id])
+		noteListElement = addNoteToList(notes[id])
+		$('.notelist .selected').removeClass('selected')
+		noteListElement.addClass('selected')
 		$('.note .title').focus()
 		return id
 
@@ -79,6 +88,7 @@ $ ->
 				data:
 					_id: id
 			)
+		removeNoteFromList(id)
 
 	addFolderToList = (folder) ->
 		node = $("<div data-id='#{folder._id}' data-path='#{folder.path}' class='folder' data-type='folder' data-field='name'><i class='icon ion-ios7-bookmarks-outline'></i><div data-id='#{folder._id}'>#{folder.name if folder.name?}</div></div>")
