@@ -37,7 +37,7 @@ app.use(session(
 	saveUninitialized: true
 	resave: true
 	cookie:
-		maxAge: 3600000
+		maxAge: 604800000 # 7 days
 	store: new MongoStore(db: 'noteable')
 	))
 app.use(passport.initialize())
