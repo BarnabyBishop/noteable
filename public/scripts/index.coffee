@@ -1,3 +1,4 @@
+require 'lib/uuid.js'
 $ ->
 	notes = {}
 	folders = {}

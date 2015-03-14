@@ -31,7 +31,7 @@ nunjucks.configure(
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded( extended: false ))
 app.use(cookieParser())
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'build')))
 app.use(session(
 	secret: 'i have no idea what im doing'
 	saveUninitialized: true
@@ -65,7 +65,6 @@ passport.use(new LocalStrategy({
 					(err, isMatch) ->
 						if err
 							throw err
-						console.log('Password: ', isMatch)
 						if isMatch
 							return done(null, user)
 						else
@@ -121,8 +120,8 @@ app.use((err, req, res, next) ->
 
 module.exports = app
 
-app.set('port', process.env.PORT or 3000)
+app.set('port', process.env.PORT or 4000)
 
 server = app.listen(app.get('port'), () ->
-	debug('Express server listening on port ' + server.address().port)
+	console.log('Express server listening on port ' + server.address().port)
 )

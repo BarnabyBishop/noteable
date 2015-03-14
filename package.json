@@ -14,26 +14,35 @@
     "passport": "~0.2.1",
     "passport-local": "~1.0.0",
     "coffee-script": "~1.8.0",
-    "connect-mongo": "~0.6.0"
+    "connect-mongo": "~0.6.0",
+    "react": "~0.12.2",
+    "express-session": "~1.10.3",
+    "connect-flash": "~0.1.1",
+    "bcrypt": "~0.8.1",
+    "object-assign": "~2.0.0",
+    "keymirror": "~0.1.1"
   },
   "devDependencies": {
     "grunt": "~0.4.4",
     "grunt-express-server": "~0.4.17",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-node-inspector": "~0.1.5",
-    "load-grunt-tasks": "~0.6.0",
     "grunt-nodemon": "~0.2.1",
-    "time-grunt": "~1.0.0",
-    "coffeelint": "~1.6.0",
     "grunt-coffeelint": "0.0.13",
     "grunt-shell": "~1.1.1",
     "grunt-shell-spawn": "~0.3.0",
     "grunt-concurrent": "~1.0.0",
     "grunt-contrib-stylus": "~0.20.0",
     "grunt-nunjucks": "~0.1.4",
+    "load-grunt-tasks": "~0.6.0",
+    "time-grunt": "~1.0.0",
+    "coffeelint": "~1.6.0",
     "gulp": "~3.8.10",
     "gulp-coffeelint": "~0.4.0",
-    "gulp-stylus": "~2.0.0"
+    "gulp-stylus": "~2.0.0",
+    "babelify": "~5.0.4",
+    "gulp-uglify": "~1.1.0",
+    "vinyl-buffer": "~1.0.0"
   },
   "scripts": {
     "start": "coffee app.coffee"

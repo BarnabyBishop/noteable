@@ -40,6 +40,12 @@ router.get('/',
 		res.render('index')
 )
 
+router.get('/app',
+	(req, res) ->
+		res.render('app')
+)
+
+
 router.get('/getnotes',
 	ensureAuthenticated,
 	(req, res) ->

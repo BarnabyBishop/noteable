@@ -1,3 +1,4 @@
+uuid = require('./lib/uuid.js');
 (function() {
   $(function() {
     var addFolderToList, addNoteToList, bindList, checkListItem, clearInputs, createFolder, createNote, deleteListItem, deleteNote, editAmount, editFolder, editListItem, editNoteField, editTimer, folders, insertItemAfter, moveListItem, notes, removeNoteFromList, renderList, resetListIndex, saveFolder, saveNote, selectFolder, selectNote, setSaveTimer, setValue, startList, toggleFolderList;
