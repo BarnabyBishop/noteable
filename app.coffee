@@ -124,5 +124,5 @@ module.exports = app
 app.set('port', 3100)
 
 server = app.listen(app.get('port'), () ->
-	debug('Express server listening on port ' + server.address().port)
+	console.log('Express server listening on port ' + server.address().port)
 )
