@@ -102,7 +102,7 @@ router.post('/deletenote',
 		)
 )
 
-router.get('*',
+router.get('/',
 	ensureAuthenticated,
 	(req, res) ->
 		res.render('index')
