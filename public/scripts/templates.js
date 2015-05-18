@@ -3,12 +3,12 @@ var lineno = null;
 var colno = null;
 var output = "";
 try {
-env.getTemplate("layout.html", true, function(t_2,parentTemplate) {
+env.getTemplate("layout.html", true, "error.html", function(t_2,parentTemplate) {
 if(t_2) { cb(t_2); return; }
 for(var t_1 in parentTemplate.blocks) {
 context.addBlock(t_1, parentTemplate.blocks[t_1]);
 }
-output += "\n\n";
+output += "\r\n\r\n";
 parentTemplate.rootRenderFunc(env, context, frame, runtime, cb);
 });
 } catch (e) {
@@ -20,13 +20,13 @@ var lineno = null;
 var colno = null;
 var output = "";
 try {
-output += "\n\t<h1>";
-output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "message"), env.autoesc);
-output += "</h1>\n\t<h2>";
-output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "error")),"status", env.autoesc), env.autoesc);
-output += "</h2>\n\t<pre>";
-output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "error")),"stack", env.autoesc), env.autoesc);
-output += "</pre>\n";
+output += "\r\n\t<h1>";
+output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "message"), env.opts.autoescape);
+output += "</h1>\r\n\t<h2>";
+output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "error")),"status", env.opts.autoescape), env.opts.autoescape);
+output += "</h2>\r\n\t<pre>";
+output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "error")),"stack", env.opts.autoescape), env.opts.autoescape);
+output += "</pre>\r\n";
 cb(null, output);
 ;
 } catch (e) {
@@ -44,7 +44,7 @@ var lineno = null;
 var colno = null;
 var output = "";
 try {
-env.getTemplate("layout.html", true, function(t_2,parentTemplate) {
+env.getTemplate("layout.html", true, "index.html", function(t_2,parentTemplate) {
 if(t_2) { cb(t_2); return; }
 for(var t_1 in parentTemplate.blocks) {
 context.addBlock(t_1, parentTemplate.blocks[t_1]);
@@ -197,7 +197,7 @@ var lineno = null;
 var colno = null;
 var output = "";
 try {
-env.getTemplate("list.html", true, function(t_2,parentTemplate) {
+env.getTemplate("list.html", true, "listitem.html", function(t_2,parentTemplate) {
 if(t_2) { cb(t_2); return; }
 for(var t_1 in parentTemplate.blocks) {
 context.addBlock(t_1, parentTemplate.blocks[t_1]);
@@ -215,14 +215,14 @@ var colno = null;
 var output = "";
 try {
 output += "\r\n\t<div class=\"listitem ";
-if(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "item")),"checked", env.autoesc)) {
+if(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "item")),"checked", env.opts.autoescape)) {
 output += "checked";
 ;
 }
 output += "\" data-index=\"";
-output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "loop")),"index0", env.autoesc), env.autoesc);
+output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "loop")),"index0", env.opts.autoescape), env.opts.autoescape);
 output += "\">\r\n\t\t<button class=\"listcheckbox icon ";
-if(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "item")),"checked", env.autoesc)) {
+if(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "item")),"checked", env.opts.autoescape)) {
 output += "ion-ios7-checkmark-outline";
 ;
 }
@@ -231,9 +231,9 @@ output += "ion-ios7-circle-outline";
 ;
 }
 output += "\"></button>\r\n\t\t<div contenteditable=\"true\" class=\"listtext\" tabindex=\"";
-output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "loop")),"index0", env.autoesc) + 2, env.autoesc);
+output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "loop")),"index0", env.opts.autoescape) + 2, env.opts.autoescape);
 output += "\">";
-output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "item")),"text", env.autoesc), env.autoesc);
+output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "item")),"text", env.opts.autoescape), env.opts.autoescape);
 output += "</div>\r\n\t\t<button class=\"listmoveup icon ion-ios7-arrow-up\"></button>\r\n\t\t<button class=\"listmovedown icon ion-ios7-arrow-down\"></button>\r\n\t\t<button class=\"listclose icon ion-ios7-close-empty\"></button>\r\n\t</div>\r\n";
 cb(null, output);
 ;
@@ -252,7 +252,7 @@ var lineno = null;
 var colno = null;
 var output = "";
 try {
-env.getTemplate("layout.html", true, function(t_2,parentTemplate) {
+env.getTemplate("layout.html", true, "login.html", function(t_2,parentTemplate) {
 if(t_2) { cb(t_2); return; }
 for(var t_1 in parentTemplate.blocks) {
 context.addBlock(t_1, parentTemplate.blocks[t_1]);
@@ -272,7 +272,7 @@ try {
 output += "\r\n\t<div class=\"login-container\">\r\n\t\t";
 if(runtime.contextOrFrameLookup(context, frame, "message")) {
 output += "\r\n\t\t\t<div>";
-output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "message"), env.autoesc);
+output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "message"), env.opts.autoescape);
 output += "</div>\r\n\t\t";
 ;
 }

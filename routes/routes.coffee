@@ -34,12 +34,6 @@ router.get('/logout', (req, res) ->
 	res.redirect('/')
 )
 
-router.get('/',
-	ensureAuthenticated,
-	(req, res) ->
-		res.render('index')
-)
-
 router.get('/getnotes',
 	ensureAuthenticated,
 	(req, res) ->
@@ -108,5 +102,10 @@ router.post('/deletenote',
 		)
 )
 
+router.get('*',
+	ensureAuthenticated,
+	(req, res) ->
+		res.render('index')
+)
 
 module.exports = router

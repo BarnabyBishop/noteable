@@ -1,19 +1,20 @@
 (function() {
   $(function() {
-    var addFolderToList, addNoteToList, bindList, checkListItem, clearInputs, createFolder, createNote, deleteListItem, deleteNote, editAmount, editFolder, editListItem, editNoteField, editTimer, folders, insertItemAfter, moveListItem, notes, removeNoteFromList, renderList, resetListIndex, saveFolder, saveNote, selectFolder, selectNote, setSaveTimer, setValue, startList, toggleFolderList;
+    var addFolderToList, addNoteToList, bindFolderList, bindList, checkListItem, clearInputs, createFolder, createNote, currentPath, deleteListItem, deleteNote, editAmount, editFolder, editListItem, editNoteField, editTimer, folders, insertItemAfter, moveListItem, notes, removeNoteFromList, renderList, resetListIndex, saveFolder, saveNote, selectFolder, selectNote, setSaveTimer, setValue, startList, toggleFolderList;
     notes = {};
     folders = {};
     editAmount = 0;
     editTimer = false;
+    currentPath = '';
     selectNote = function(element) {
-      var note, _ref;
+      var note, ref;
       $('.notelist .selected').removeClass('selected');
       element.addClass('selected');
       note = notes[element.attr('data-id')];
       $('.note .title').val(note.title).attr('data-id', note._id);
       $('.note .text').val(note.text).attr('data-id', note._id);
       $('.list').empty();
-      if ((_ref = note.list) != null ? _ref.length : void 0) {
+      if ((ref = note.list) != null ? ref.length : void 0) {
         return renderList($('.list'), note.list);
       }
     };
@@ -95,6 +96,21 @@
       }
       return removeNoteFromList(id);
     };
+    bindFolderList = function() {
+      var folder, id, results;
+      $('.folderlist .panel .folder').remove();
+      results = [];
+      for (id in folders) {
+        folder = folders[id];
+        console.log(folder.path.substring(0, folder.path.lastIndexOf("," + folder.name + ",")));
+        if (folder.path.substring(0, folder.path.lastIndexOf("," + folder.name + ",")) === currentPath || id === '') {
+          results.push(addFolderToList(folder));
+        } else {
+          results.push(void 0);
+        }
+      }
+      return results;
+    };
     addFolderToList = function(folder) {
       var node;
       node = $("<div data-id='" + folder._id + "' data-path='" + folder.path + "' class='folder' data-type='folder' data-field='name'><i class='icon ion-ios7-bookmarks-outline'></i><div data-id='" + folder._id + "'>" + (folder.name != null ? folder.name : void 0) + "</div></div>");
@@ -104,19 +120,20 @@
       });
     };
     selectFolder = function(folderElement) {
-      var folderId, folderPath, note;
-      folderPath = folderElement.attr('data-path');
+      var folderId, note;
+      currentPath = folderElement.attr('data-path');
       folderId = folderElement.attr('data-id');
-      $('.currentfolder').attr('data-current-path', folderPath).text(folders[folderId].name);
+      $('.currentfolder').attr('data-current-path', currentPath).text(folders[folderId].name);
       $('.notelist').empty();
       $('.list').empty();
       for (note in notes) {
-        if (notes[note].path === folderPath) {
+        if (notes[note].path === currentPath) {
           addNoteToList(notes[note]);
         }
       }
       toggleFolderList();
-      return clearInputs();
+      clearInputs();
+      return bindFolderList();
     };
     editFolder = function(control, value) {
       var editFolderTimer, id;
@@ -130,14 +147,15 @@
       }), 500);
     };
     createFolder = function() {
-      var folderName, id;
+      var currentFolder, folderName, id;
       folderName = $('.foldername').val();
+      currentFolder = $('.currentfolder').attr('data-current-path');
       if (folderName) {
         id = uuid.v4();
         folders[id] = {
           _id: id,
           name: folderName,
-          path: ',' + folderName + ',',
+          path: (currentFolder ? currentFolder : '') + "," + folderName + ",",
           deleted: false
         };
         saveFolder(id);
@@ -317,21 +335,21 @@
     $.ajax({
       url: "/getfolders"
     }).then(function(data) {
+      var folder, i, len;
       folders[''] = {
         _id: '',
         name: '/',
         path: ''
       };
-      addFolderToList(folders['']);
-      return data.forEach(function(folder) {
+      for (i = 0, len = data.length; i < len; i++) {
+        folder = data[i];
         folders[folder._id] = folder;
-        return addFolderToList(folder);
-      });
+      }
+      return bindFolderList();
     });
     $.ajax({
       url: "/getnotes"
     }).then(function(data) {
-      var currentPath;
       currentPath = $('.currentfolder').attr('data-current-path');
       return data.forEach(function(note) {
         notes[note._id] = note;

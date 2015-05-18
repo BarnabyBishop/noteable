@@ -103,6 +103,7 @@ module.exports = (grunt) ->
 	# default option to connect server
 	grunt.registerTask('default', (target) ->
 		grunt.task.run([
+			'stylus',
 			'coffeelint',
 			'coffee',
 			'nunjucks',

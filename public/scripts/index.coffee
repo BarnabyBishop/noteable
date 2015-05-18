@@ -3,6 +3,7 @@ $ ->
 	folders = {}
 	editAmount = 0
 	editTimer = false
+	currentPath = ''
 
 	selectNote = (element) ->
 		$('.notelist .selected').removeClass('selected')
@@ -90,6 +91,13 @@ $ ->
 			)
 		removeNoteFromList(id)
 
+	bindFolderList = ->
+		$('.folderlist .panel .folder').remove()
+		for id, folder of folders
+			console.log folder.path.substring(0, folder.path.lastIndexOf(",#{folder.name},"))
+			if folder.path.substring(0, folder.path.lastIndexOf(",#{folder.name},")) is currentPath or id is ''
+				addFolderToList(folder)
+
 	addFolderToList = (folder) ->
 		node = $("<div data-id='#{folder._id}' data-path='#{folder.path}' class='folder' data-type='folder' data-field='name'><i class='icon ion-ios7-bookmarks-outline'></i><div data-id='#{folder._id}'>#{folder.name if folder.name?}</div></div>")
 		$('.folderlist .panel .newfolder').before(node)
@@ -98,18 +106,19 @@ $ ->
 		)
 
 	selectFolder = (folderElement)->
-		folderPath = folderElement.attr('data-path')
+		currentPath = folderElement.attr('data-path')
 		folderId = folderElement.attr('data-id')
 		$('.currentfolder')
-			.attr('data-current-path', folderPath)
+			.attr('data-current-path', currentPath)
 			.text(folders[folderId].name)
 		$('.notelist').empty()
 		$('.list').empty()
 		for note of notes
-			if notes[note].path is folderPath
+			if notes[note].path is currentPath
 				addNoteToList(notes[note])
 		toggleFolderList()
 		clearInputs()
+		bindFolderList()
 
 	editFolder = (control, value) ->
 		id = control.attr('data-id')
@@ -122,12 +131,13 @@ $ ->
 
 	createFolder = ->
 		folderName = $('.foldername').val()
+		currentFolder = $('.currentfolder').attr('data-current-path')
 		if folderName
 			id = uuid.v4()
 			folders[id] =
 				_id: id
 				name: folderName
-				path: ',' + folderName + ','
+				path: "#{if currentFolder then currentFolder else ''},#{folderName},"
 				deleted: false
 
 			saveFolder(id)
@@ -301,12 +311,11 @@ $ ->
 				_id: ''
 				name: '/'
 				path: ''
-			addFolderToList(folders[''])
-			data.forEach(
-				(folder) ->
-					folders[folder._id] = folder
-					addFolderToList(folder)
-			)
+			# addFolderToList(folders[''])
+			for folder in data
+				folders[folder._id] = folder
+
+			bindFolderList()
 	)
 	$.ajax(url: "/getnotes")
 	.then(
