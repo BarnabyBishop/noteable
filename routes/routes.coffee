@@ -92,11 +92,13 @@ router.post('/savenote',
 	ensureAuthenticated,
 	(req, res) ->
 		note = req.body || {}
+		console.log req
 		model.note.save(note,
 			(err, note) ->
 				if err
 					console.error(err)
 					return res.status(500).end()
+				console.log(err, note)
 				return res.status(200).end()
 		)
 )
