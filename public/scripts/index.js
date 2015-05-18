@@ -6,6 +6,11 @@
     editAmount = 0;
     editTimer = false;
     currentPath = '';
+    if (window.location.pathname && window.location.pathname !== '/') {
+      currentPath = decodeURI(window.location.pathname).replace(/\//g, ',,');
+      currentPath = currentPath.substring(1) + ',';
+      console.log(currentPath);
+    }
     selectNote = function(element) {
       var note, ref;
       $('.notelist .selected').removeClass('selected');
@@ -102,7 +107,6 @@
       results = [];
       for (id in folders) {
         folder = folders[id];
-        console.log(folder.path.substring(0, folder.path.lastIndexOf("," + folder.name + ",")));
         if (folder.path.substring(0, folder.path.lastIndexOf("," + folder.name + ",")) === currentPath || id === '') {
           results.push(addFolderToList(folder));
         } else {
@@ -350,7 +354,6 @@
     $.ajax({
       url: "/getnotes"
     }).then(function(data) {
-      currentPath = $('.currentfolder').attr('data-current-path');
       return data.forEach(function(note) {
         notes[note._id] = note;
         if (note.path === currentPath) {

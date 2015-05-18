@@ -5,6 +5,11 @@ $ ->
 	editTimer = false
 	currentPath = ''
 
+	if window.location.pathname and window.location.pathname isnt '/'
+		currentPath = decodeURI(window.location.pathname).replace(/\//g, ',,')
+		currentPath = currentPath.substring(1) + ','
+		console.log currentPath
+
 	selectNote = (element) ->
 		$('.notelist .selected').removeClass('selected')
 		element.addClass('selected')
@@ -94,7 +99,6 @@ $ ->
 	bindFolderList = ->
 		$('.folderlist .panel .folder').remove()
 		for id, folder of folders
-			console.log folder.path.substring(0, folder.path.lastIndexOf(",#{folder.name},"))
 			if folder.path.substring(0, folder.path.lastIndexOf(",#{folder.name},")) is currentPath or id is ''
 				addFolderToList(folder)
 
@@ -319,7 +323,6 @@ $ ->
 	$.ajax(url: "/getnotes")
 	.then(
 		(data) ->
-			currentPath = $('.currentfolder').attr('data-current-path')
 			data.forEach(
 				(note) ->
 					notes[note._id] = note

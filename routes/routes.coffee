@@ -56,13 +56,6 @@ router.get('/getfolders',
 		)
 )
 
-
-router.get('/:id',
-	ensureAuthenticated,
-	(req, res) ->
-		res.json({})
-)
-
 router.post('/savefolder',
 	ensureAuthenticated,
 	(req, res) ->
@@ -102,7 +95,7 @@ router.post('/deletenote',
 		)
 )
 
-router.get('/',
+router.get('*',
 	ensureAuthenticated,
 	(req, res) ->
 		res.render('index')
