@@ -311,7 +311,6 @@ $ ->
 				_id: ''
 				name: '/'
 				path: ''
-			# addFolderToList(folders[''])
 			for folder in data
 				folders[folder._id] = folder
 
