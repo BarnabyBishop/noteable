@@ -51,4 +51,14 @@ userSchema.methods.create = (user) ->
 	user = new User({email: user.email, password: user.password })
 	user.save()
 
-module.exports = mongoose.model('User', userSchema)
+
+userModel = mongoose.model('User', userSchema)
+
+# If there are no users in the DB and the default user is
+# set in env variables create the inital user
+if process.env.DEFAULT_USER and process.env.DEFAULT_PASS
+	userModel.count (err, count) ->
+		if count is 0
+			userModel.create({ email: process.env.DEFAULT_USER, password: process.env.DEFAULT_PASS })
+
+module.exports = userModel

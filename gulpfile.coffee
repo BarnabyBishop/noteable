@@ -10,12 +10,7 @@ gulp.task 'lint', ->
 		.pipe coffeelint()
 		.pipe coffeelint.reporter()
 
-###
-gulp.task 'coffee', ->
-	gulp.src '/public/scripts/*.coffee'
-		.pipe coffee({bare: true}) #.on('error', gutil.log)
-		.pipe gulp.dest('/public/scripts/')
-###
+
 gulp.task 'webpack', (callback) ->
 	# run webpack
 	gulp.src('public/scripts/start.js')
@@ -26,7 +21,8 @@ gulp.task 'webpack', (callback) ->
 		      	},
 				module: {
 					loaders: [
-						{ test: /\.coffee$/, loader: "coffee-loader" },
+						{ test: /\.cjsx$/, loaders: ['coffee-loader', 'cjsx-loader']},
+						{ test: /\.coffee$/, loader: 'coffee-loader' },
 						{ test: /\.(coffee\.md|litcoffee)$/, loader: "coffee-loader?literate" }
 					]
 				}
@@ -40,7 +36,7 @@ gulp.task 'stylus', ->
 
 gulp.task 'start', ->
 	nodemon({ script: 'app.coffee', ext: 'coffee styl', ignore: ['*.css, *.js'] })
-		.on 'change', ['lint','webpack', 'stylus']
+		.on 'change', ['lint', 'webpack', 'stylus']
 		.on 'restart', ->
 			console.log('Restarted!')
 

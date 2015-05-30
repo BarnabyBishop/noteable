@@ -1,1 +1,1 @@
-require('./index.coffee')()
+require('./index.cjsx')()

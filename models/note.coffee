@@ -15,6 +15,14 @@ noteSchema = mongoose.Schema(
 		text: String
 		checked: Boolean
 	]
+	lists: [
+		title: String
+		position: Number
+		items: [
+			text: String
+			checked: Boolean
+		]
+	]
 )
 
 noteModel = mongoose.model('Note', noteSchema)

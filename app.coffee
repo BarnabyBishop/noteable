@@ -1,3 +1,4 @@
+require('dotenv').load()
 debug = require('debug')('noteable')
 express = require('express')
 session = require('express-session')
@@ -9,8 +10,8 @@ bodyParser = require('body-parser')
 flash = require('connect-flash')
 routes = require('./routes/routes')
 model = require('./models/model')
-passport = require("passport")
-LocalStrategy = require("passport-local").Strategy
+passport = require('passport')
+LocalStrategy = require('passport-local').Strategy
 MongoStore = require('connect-mongo')(session)
 nunjucks = require('nunjucks')
 
@@ -59,7 +60,7 @@ passport.use(new LocalStrategy({
 					return done(err)
 				unless user
 					console.log 'incorrect username'
-					return done(null, false, message: "Incorrect username.")
+					return done(null, false, message: 'Incorrect username.')
 
 				user.comparePassword(password,
 					(err, isMatch) ->
@@ -69,12 +70,13 @@ passport.use(new LocalStrategy({
 						if isMatch
 							return done(null, user)
 						else
-							return done(null, false, message: "Incorrect password.")
+							return done(null, false, message: 'Incorrect password.')
 				)
 
 			)
 		)
 )
+
 passport.serializeUser((user, done) ->
 	done(null, user.id)
 )
@@ -88,6 +90,7 @@ passport.deserializeUser((id, done) ->
 			done(null,user)
 	)
 )
+
 # catch 404 and forward to error handler
 app.use((req, res, next) ->
 	err = new Error('Not Found')

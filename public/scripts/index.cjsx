@@ -1,5 +1,7 @@
 $ = require './libs/jquery'
 uuid = require './libs/uuid'
+List = require './components/list.cjsx'
+React = require './libs/react'
 
 notes = {}
 folders = {}
@@ -7,6 +9,14 @@ editAmount = 0
 editTimer = false
 currentPath = ''
 
+
+Items = React.createClass
+	render: ->
+		createItem = (item) ->
+			console.log item
+			<List title={item.title} position={item.position} items={item.items} />
+
+		<div>{@props.items.map(createItem)}</div>
 
 
 selectNote = (element) ->
@@ -17,6 +27,10 @@ selectNote = (element) ->
 	$('.note .title').val(note.title).attr('data-id', note._id)
 	$('.note .text').val(note.text).attr('data-id', note._id)
 
+	if note.lists?.length
+		console.log('rendering...', note.lists)
+		React.render <Items items={ note.lists } />,
+			document.getElementById('items')
 	# $('.list').empty()
 	# if note.list?.length
 	# 	renderList($('.list'), note.list)
