@@ -4,6 +4,7 @@ coffeelint = require 'gulp-coffeelint'
 stylus = require 'gulp-stylus'
 nodemon = require 'gulp-nodemon'
 webpack = require 'gulp-webpack'
+#watch = require 'gulp-watch'
 
 gulp.task 'lint', ->
 	gulp.src ['models/*.coffee', 'views/*.coffee', 'public/**/*.coffee']
@@ -14,6 +15,7 @@ gulp.task 'lint', ->
 gulp.task 'webpack', (callback) ->
 	# run webpack
 	gulp.src('public/scripts/start.js')
+		#.pipe(watch('public/scripts/**/*.(coffee|cjsx)'))
 		.pipe(webpack(
 			{
 				output: {
@@ -40,4 +42,8 @@ gulp.task 'start', ->
 		.on 'restart', ->
 			console.log('Restarted!')
 
-gulp.task 'default', ['lint', 'webpack', 'stylus', 'start']
+gulp.task 'watch', ->
+	gulp.watch('public/scripts/**/*', ['webpack'])
+	gulp.watch('public/styles/**/*', ['stylus'])
+
+gulp.task 'default', ['watch', 'lint', 'webpack', 'stylus', 'start']
