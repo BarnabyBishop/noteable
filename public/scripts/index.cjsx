@@ -2,13 +2,15 @@ $ = require './libs/jquery'
 uuid = require './libs/uuid'
 List = require './components/list.cjsx'
 React = require './libs/react'
+NoteStore = require './stores/notestore.coffee'
+
+noteStore = new NoteStore()
 
 notes = {}
 folders = {}
 editAmount = 0
 editTimer = false
 currentPath = ''
-
 
 Items = React.createClass
 	render: ->
@@ -17,7 +19,6 @@ Items = React.createClass
 			<List title={item.title} position={item.position} items={item.items} />
 
 		<div>{@props.items.map(createItem)}</div>
-
 
 selectNote = (element) ->
 	$('.notelist .selected').removeClass('selected')
@@ -58,13 +59,7 @@ editNoteField = (control, value) ->
 	setSaveTimer(id)
 
 saveNote = (id) ->
-	$.ajax(
-		type: 'POST',
-		url: '/savenote',
-		contentType: 'application/json',
-		data: JSON.stringify(notes[id])
-
-	)
+	noteStore.saveNote(notes[id])
 
 addNoteToList = (note) ->
 	element = $("<div data-id='#{note._id}' data-field='title'>#{note.title}</div>")
@@ -209,16 +204,13 @@ module.exports = ->
 
 			bindFolderList()
 	)
-	$.ajax(url: "/getnotes")
-	.then(
-		(data) ->
-			data.forEach(
-				(note) ->
-					notes[note._id] = note
-					if note.path is currentPath
-						addNoteToList(note)
-			)
-	)
+
+
+	noteStore.getNotes (data) ->
+		data.forEach (note) ->
+			notes[note._id] = note
+			if note.path is currentPath
+				addNoteToList(note)
 
 	# prepare inputs for editing
 	$('.note .title').on('input', -> editNoteField($(this), this.value))
