@@ -15,7 +15,6 @@ currentPath = ''
 Items = React.createClass
 	render: ->
 		createItem = (item) ->
-			console.log item
 			<List title={item.title} position={item.position} items={item.items} />
 
 		<div>{@props.items.map(createItem)}</div>
@@ -30,7 +29,7 @@ selectNote = (element) ->
 
 	if note.lists?.length
 		console.log('rendering...', note.lists)
-		React.render <Items items={ note.lists } />,
+		React.render <Items lists={note.lists} texts={note.textitems} />,
 			document.getElementById('items')
 	# $('.list').empty()
 	# if note.list?.length
@@ -206,8 +205,8 @@ module.exports = ->
 	)
 
 
-	noteStore.getNotes (data) ->
-		data.forEach (note) ->
+	noteStore.getNotes (notes) ->
+		notes.forEach (note) ->
 			notes[note._id] = note
 			if note.path is currentPath
 				addNoteToList(note)

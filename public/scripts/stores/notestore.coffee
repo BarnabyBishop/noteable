@@ -2,12 +2,18 @@ $ = require '../libs/jquery'
 Store = require './store.coffee'
 
 class NoteStore extends Store
-	constructor: -> super()
+	@notes = []
+	constructor: ->
+		super()
 
-	getNotes: (cb) ->
+	loadNotes: ->
 		$.ajax(url: '/getnotes')
 			.then (data) ->
+				# this data should be managed by the store...
 				cb(data)
+
+
+	getNotes: (cb) ->
 
 	saveNote: (note) ->
 		$.ajax
@@ -15,5 +21,8 @@ class NoteStore extends Store
 			url: '/savenote',
 			contentType: 'application/json',
 			data: JSON.stringify(note)
+
+	updateListItem: (item, noteId) ->
+
 
 module.exports = NoteStore

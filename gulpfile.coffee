@@ -37,8 +37,8 @@ gulp.task 'stylus', ->
 		.pipe gulp.dest('build/public/styles')
 
 gulp.task 'start', ->
-	nodemon({ script: 'app.coffee', ext: 'coffee styl', ignore: ['*.css, *.js'] })
-		.on 'change', ['lint', 'webpack', 'stylus']
+	nodemon({ script: 'app.coffee', ext: 'coffee', ignore: ['*.css, *.js'] })
+		#.on 'change', ['lint', 'webpack', 'stylus']
 		.on 'restart', ->
 			console.log('Restarted!')
 

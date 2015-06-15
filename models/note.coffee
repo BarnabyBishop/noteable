@@ -23,6 +23,10 @@ noteSchema = mongoose.Schema(
 			checked: Boolean
 		]
 	]
+	textItems: [
+		title: String
+		text: String
+	]
 )
 
 noteModel = mongoose.model('Note', noteSchema)
