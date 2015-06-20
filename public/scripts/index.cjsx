@@ -1,6 +1,7 @@
 $ = require './libs/jquery'
 uuid = require './libs/uuid'
 List = require './components/list.cjsx'
+TextItem = require './components/textitem.cjsx'
 React = require './libs/react'
 NoteStore = require './stores/notestore.coffee'
 
@@ -15,7 +16,10 @@ currentPath = ''
 Items = React.createClass
 	render: ->
 		createItem = (item) ->
-			<List title={item.title} position={item.position} items={item.items} />
+			if item.items
+				<List title={item.title} position={item.position} items={item.items} />
+			else
+				<TextItem title={item.title} position={item.position} text={item.text} />
 
 		<div>{@props.items.map(createItem)}</div>
 
@@ -24,13 +28,15 @@ selectNote = (element) ->
 	element.addClass('selected')
 
 	note = notes[element.attr('data-id')]
-	$('.note .title').val(note.title).attr('data-id', note._id)
-	$('.note .text').val(note.text).attr('data-id', note._id)
+	#$('.note .title').val(note.title).attr('data-id', note._id)
+	#$('.note .text').val(note.text).attr('data-id', note._id)
 
-	if note.lists?.length
-		console.log('rendering...', note.lists)
-		React.render <Items lists={note.lists} texts={note.textitems} />,
+	items = [].concat(note.texts, note.lists)
+
+	if items?.length
+		React.render <Items items={items} />,
 			document.getElementById('items')
+
 	# $('.list').empty()
 	# if note.list?.length
 	# 	renderList($('.list'), note.list)

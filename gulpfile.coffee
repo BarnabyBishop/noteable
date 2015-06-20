@@ -43,7 +43,12 @@ gulp.task 'start', ->
 			console.log('Restarted!')
 
 gulp.task 'watch', ->
+<<<<<<< Updated upstream
 	gulp.watch('public/scripts/**/*', ['webpack'])
 	gulp.watch('public/styles/**/*', ['stylus'])
+=======
+  gulp.watch 'public/scripts/**/*', [ 'webpack' ]
+  gulp.watch 'public/styles/**/*', [ 'stylus' ]
+>>>>>>> Stashed changes
 
 gulp.task 'default', ['watch', 'lint', 'webpack', 'stylus', 'start']

@@ -5,16 +5,10 @@ noteSchema = mongoose.Schema(
 	_id:
 		type: String  # will actually be a uuid
 		required: true
-	title: String
-	text: String
 	path: String
 	deleted:
 		type: Boolean
 		default: false
-	list: [
-		text: String
-		checked: Boolean
-	]
 	lists: [
 		title: String
 		position: Number
@@ -23,9 +17,10 @@ noteSchema = mongoose.Schema(
 			checked: Boolean
 		]
 	]
-	textItems: [
+	texts: [
 		title: String
 		text: String
+		position: Number
 	]
 )
 

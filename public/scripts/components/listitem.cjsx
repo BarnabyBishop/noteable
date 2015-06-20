@@ -2,6 +2,7 @@ React = require '../libs/react'
 
 ListItem = React.createClass
 	render: ->
-		return <div>{this.props.text}</div>
+		<div key={this.props.position}>{this.props.checked}</div>
+		<div key={this.props.position}>{this.props.text}</div>
 
 module.exports = ListItem
