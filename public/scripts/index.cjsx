@@ -1,8 +1,8 @@
-$ = require './libs/jquery'
-uuid = require './libs/uuid'
+$ = require 'jquery'
+uuid = require 'uuid'
 List = require './components/list.cjsx'
 TextItem = require './components/textitem.cjsx'
-React = require './libs/react'
+React = require 'react'
 NoteStore = require './stores/notestore.coffee'
 
 noteStore = new NoteStore()
@@ -15,11 +15,12 @@ currentPath = ''
 
 Items = React.createClass
 	render: ->
+		noteId = @props.noteid
 		createItem = (item) ->
 			if item.items
-				<List title={item.title} position={item.position} items={item.items} />
+				<List key={item.position} title={item.title} position={item.position} items={item.items} />
 			else
-				<TextItem title={item.title} position={item.position} text={item.text} />
+				<TextItem key={item.position} id={noteId} title={item.title} position={item.position} text={item.text} />
 
 		<div>{@props.items.map(createItem)}</div>
 
@@ -34,7 +35,7 @@ selectNote = (element) ->
 	items = [].concat(note.texts, note.lists)
 
 	if items?.length
-		React.render <Items items={items} />,
+		React.render <Items noteid={note._id} items={items} />,
 			document.getElementById('items')
 
 	# $('.list').empty()
@@ -194,7 +195,6 @@ module.exports = ->
 	if window.location.pathname and window.location.pathname isnt '/'
 		currentPath = decodeURI(window.location.pathname).replace(/\//g, ',,')
 		currentPath = currentPath.substring(1) + ','
-		console.log currentPath
 
 	# Load notes from server
 	$.ajax(url: "/getfolders")
@@ -211,8 +211,9 @@ module.exports = ->
 	)
 
 
-	noteStore.getNotes (notes) ->
-		notes.forEach (note) ->
+	noteStore.getNotes (data) ->
+		console.log 'loaded', notes.length, 'notes'
+		for note in data
 			notes[note._id] = note
 			if note.path is currentPath
 				addNoteToList(note)

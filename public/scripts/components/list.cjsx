@@ -1,9 +1,8 @@
-React = require '../libs/react'
+React = require 'react'
 ListItem = require './listitem.cjsx'
 List = React.createClass
 	render: ->
 		createItem = (item) ->
-			console.log 'blah'
 			<ListItem text={item.text} checked={item.checked} />
 
 		<div>

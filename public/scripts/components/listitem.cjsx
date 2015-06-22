@@ -1,4 +1,4 @@
-React = require '../libs/react'
+React = require 'react'
 
 ListItem = React.createClass
 	render: ->

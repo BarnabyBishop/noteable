@@ -4,7 +4,6 @@ coffeelint = require 'gulp-coffeelint'
 stylus = require 'gulp-stylus'
 nodemon = require 'gulp-nodemon'
 webpack = require 'gulp-webpack'
-#watch = require 'gulp-watch'
 
 gulp.task 'lint', ->
 	gulp.src ['models/*.coffee', 'views/*.coffee', 'public/**/*.coffee']
@@ -15,12 +14,11 @@ gulp.task 'lint', ->
 gulp.task 'webpack', (callback) ->
 	# run webpack
 	gulp.src('public/scripts/start.js')
-		#.pipe(watch('public/scripts/**/*.(coffee|cjsx)'))
 		.pipe(webpack(
 			{
 				output: {
-		        	filename: 'bundle.js',
-		      	},
+					filename: 'bundle.js',
+				},
 				module: {
 					loaders: [
 						{ test: /\.cjsx$/, loaders: ['coffee-loader', 'cjsx-loader']},
@@ -38,17 +36,12 @@ gulp.task 'stylus', ->
 
 gulp.task 'start', ->
 	nodemon({ script: 'app.coffee', ext: 'coffee', ignore: ['*.css, *.js'] })
-		#.on 'change', ['lint', 'webpack', 'stylus']
 		.on 'restart', ->
 			console.log('Restarted!')
 
 gulp.task 'watch', ->
-<<<<<<< Updated upstream
 	gulp.watch('public/scripts/**/*', ['webpack'])
 	gulp.watch('public/styles/**/*', ['stylus'])
-=======
-  gulp.watch 'public/scripts/**/*', [ 'webpack' ]
-  gulp.watch 'public/styles/**/*', [ 'stylus' ]
->>>>>>> Stashed changes
+
 
 gulp.task 'default', ['watch', 'lint', 'webpack', 'stylus', 'start']
