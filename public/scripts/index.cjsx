@@ -1,7 +1,6 @@
 $ = require 'jquery'
 uuid = require 'uuid'
-List = require './components/list.cjsx'
-TextItem = require './components/textitem.cjsx'
+Note = require './components/note.cjsx'
 React = require 'react'
 NoteStore = require './stores/notestore.coffee'
 
@@ -12,35 +11,14 @@ folders = {}
 editAmount = 0
 editTimer = false
 currentPath = ''
-
-Items = React.createClass
-	render: ->
-		noteId = @props.noteid
-		createItem = (item) ->
-			if item.items
-				<List key={item.position} title={item.title} position={item.position} items={item.items} />
-			else
-				<TextItem key={item.position} id={noteId} title={item.title} position={item.position} text={item.text} />
-
-		<div>{@props.items.map(createItem)}</div>
-
 selectNote = (element) ->
 	$('.notelist .selected').removeClass('selected')
 	element.addClass('selected')
 
 	note = notes[element.attr('data-id')]
-	#$('.note .title').val(note.title).attr('data-id', note._id)
-	#$('.note .text').val(note.text).attr('data-id', note._id)
-
-	items = [].concat(note.texts, note.lists)
-
-	if items?.length
-		React.render <Items noteid={note._id} items={items} />,
-			document.getElementById('items')
-
-	# $('.list').empty()
-	# if note.list?.length
-	# 	renderList($('.list'), note.list)
+	
+	React.render <Note note={note} />,
+		document.getElementById('note')
 
 setValue = (elements, value) ->
 	elements.each(
@@ -212,9 +190,8 @@ module.exports = ->
 
 
 	noteStore.getNotes (data) ->
-		console.log 'loaded', notes.length, 'notes'
-		for note in data
-			notes[note._id] = note
+		notes = data
+		for id, note of data
 			if note.path is currentPath
 				addNoteToList(note)
 
