@@ -1,8 +1,8 @@
 $ = require 'jquery'
 uuid = require 'uuid'
-Note = require './components/note.cjsx'
+Note = require './components/Note.cjsx'
 React = require 'react'
-NoteStore = require './stores/notestore.coffee'
+NoteStore = require './stores/NoteStore.coffee'
 
 noteStore = new NoteStore()
 
@@ -11,12 +11,26 @@ folders = {}
 editAmount = 0
 editTimer = false
 currentPath = ''
+
+# class BaseClass
+# 	someFunction: ->
+# 		alert 'yay'
+
+# class DerivedClass extends BaseClass
+# 	@nonFunction: ->
+# 		alert 'expected'
+
+# blah = new DerivedClass()
+
+# blah.nonFunction()
+# blah.someFunction()
+
 selectNote = (element) ->
 	$('.notelist .selected').removeClass('selected')
 	element.addClass('selected')
 
 	note = notes[element.attr('data-id')]
-	
+
 	React.render <Note note={note} />,
 		document.getElementById('note')
 

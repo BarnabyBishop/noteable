@@ -1,31 +1,40 @@
 React = require 'react'
-List = require './list.cjsx'
-TextItem = require './textitem.cjsx'
+List = require './List.cjsx'
+TextItem = require './TextItem.cjsx'
+NoteStore = require '../stores/NoteStore.coffee'
 
+noteStore = new NoteStore()
 
 NoteItems = React.createClass
-	# getInitialState: ->
-	# 	: ''
-	# 	text: ''
+	getInitialState: ->
+		@getItemsState()
 
-	# componentDidMount: ->		
-	# 	@setState 
-	# 		title: @props.title
-	# 		text: @props.text
-	# 		position: @props.position
-	# 		id: @props.id
+	getItemsState: ->
+		items: noteStore.getItems(@props.noteid)
+
+	updateItemsState: ->
+		@setState @getItemsState()
+
+	componentDidMount: ->
+		noteStore.addChangeListener @updateItemsState
+
+	componentWillUnmount: ->
+		noteStore.removeChangeListener @updateItemsStateß
 
 	render: ->
 		noteId = @props.noteid
-		items = @props.items
-		type = if items.length > 1 then 'multiple' else 'full'
+		items = @state.items
+		type = if items?.length > 1 then 'multiple' else 'full'
 
 		createItem = (item) ->
-			if item.items
-				<List key={item.position} type={type} title={item.title} position={item.position} items={item.items} />
+			if item?.items
+				<List key={'noteId_items_' + item.position} type={type} title={item.title} position={item.position} items={item.items} />
 			else
-				<TextItem key={item.position} type={type} id={noteId} title={item.title} position={item.position} text={item.text} />
+				<TextItem key={'noteId_items_' + item.position} type={type} id={noteId} title={item.title} position={item.position} text={item.text} />
 
-		<div>{items.map(createItem)}</div>
+		if items?.length
+			<div key={noteId + '_items'}>{items.map(createItem)}</div>
+		else
+			<div key={noteId + '_items'}></div>
 
 module.exports = NoteItems

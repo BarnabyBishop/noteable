@@ -1,9 +1,9 @@
 class Store
-	@constructor: ->
+	constructor: ->
 		@changeListeners = []
 		@eventListeners = {}
 
-	@notifyChange: (name) ->
+	notifyChange: (name) ->
 		if @eventListeners[name]
 			@eventListeners[name].forEach (fn) ->
 				fn()
@@ -13,7 +13,7 @@ class Store
 			return
 		return
 
-	@addChangeListener: (name, fn) ->
+	addChangeListener: (name, fn) ->
 		if arguments.length == 1
 			fn = name
 			name = null
@@ -26,7 +26,7 @@ class Store
 			@changeListeners.push fn
 		return
 
-	@removeChangeListener: (name, fn) ->
+	removeChangeListener: (name, fn) ->
 		if arguments.length == 1
 			fn = name
 			name = null
@@ -42,7 +42,7 @@ class Store
 			)
 		return
 
-	@extend: ->
+	extend: ->
 		i = 0
 		while i < arguments.length
 			source = arguments[i]

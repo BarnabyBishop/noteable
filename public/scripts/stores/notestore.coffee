@@ -1,26 +1,38 @@
 $ = require 'jquery'
 _ = require 'lodash'
 uuid = require 'uuid'
-Store = require './store.coffee'
+Store = require './Store.coffee'
+
+notes = null
 
 class NoteStore extends Store
-	notes: null
 	constructor: ->
 		super()
 
 	loadNotes: (cb) ->
-		@notes = {}
+		notes = {}
 		$.ajax(url: '/getnotes')
 			.then (data) =>
 				for note in data
-					@notes[note._id] = note
-				cb(@notes)
+					notes[note._id] = note
+				cb(notes)
 
 	getNotes: (cb) ->
-		if @notes
-			cb(@notes)
+		if notes
+			cb(notes)
 		else
 			@loadNotes(cb)
+
+	getItems: (noteId) ->
+		note = notes[noteId]
+		items = []
+		if note.texts?.length
+			items = items.concat(note.texts)
+
+		if note.lists?.length
+			items = items.concat(note.lists)
+
+		return items
 
 	saveNote: (note) ->
 		$.ajax
@@ -31,34 +43,44 @@ class NoteStore extends Store
 
 	createNote: (path) ->
 		id = uuid.v4()
-		@notes[id] =
+		notes[id] =
 			_id: id
 			title: ''
 			path: path
 			deleted: false
 			texts: []
 			lists: []
-		
+
 		return id
 
 	updateTextTitle: (noteId, position, title) ->
 		textNode = @getTextNode(noteId, position)
 		textNode.title = title
+		@notifyChange()
 		@triggerSave(noteId)
 
 	updateText: (noteId, position, text) ->
 		textNode = @getTextNode(noteId, position)
 		textNode.text = text
+		@notifyChange()
 		@triggerSave(noteId)
 
 	getTextNode: (noteId, position) ->
-		note = @notes[noteId]
+		note = notes[noteId]
 		return _.findWhere(note.texts, { 'position': position })
 
-	addTextNode: (nodeId) ->
-		note = @notes[noteId]
+	addTextNode: (noteId) ->
+		note = notes[noteId]
+		note.texts.push({ position: note.texts.length })
+		@notifyChange()
+
+	addList: (noteId) ->
+		note = notes[noteId]
+		note.lists.push({ position: note.lists.length })
+		@notifyChange()
+
 
 	triggerSave: (noteId) ->
-		_.debounce(@saveNote(@notes[noteId]), 500)
+		_.debounce(@saveNote(notes[noteId]), 500)
 
 module.exports = NoteStore

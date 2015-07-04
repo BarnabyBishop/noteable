@@ -1,5 +1,5 @@
 React = require 'react'
-ListItem = require './listitem.cjsx'
+ListItem = require './ListItem.cjsx'
 List = React.createClass
 	render: ->
 		createItem = (item) ->
