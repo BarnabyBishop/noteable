@@ -2,9 +2,7 @@ $ = require 'jquery'
 uuid = require 'uuid'
 Note = require './components/Note.cjsx'
 React = require 'react'
-NoteStore = require './stores/NoteStore.coffee'
-
-noteStore = new NoteStore()
+noteStore = require './stores/NoteStore.coffee'
 
 notes = {}
 folders = {}

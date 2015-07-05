@@ -1,9 +1,7 @@
 React = require 'react'
 List = require './List.cjsx'
 TextItem = require './TextItem.cjsx'
-NoteStore = require '../stores/NoteStore.coffee'
-
-noteStore = new NoteStore()
+noteStore = require '../stores/NoteStore.coffee'
 
 NoteItems = React.createClass
 	getInitialState: ->

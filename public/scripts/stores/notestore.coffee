@@ -12,7 +12,7 @@ class NoteStore extends Store
 	loadNotes: (cb) ->
 		notes = {}
 		$.ajax(url: '/getnotes')
-			.then (data) =>
+			.then (data) ->
 				for note in data
 					notes[note._id] = note
 				cb(notes)
@@ -35,6 +35,7 @@ class NoteStore extends Store
 		return items
 
 	saveNote: (note) ->
+		console.log 'saveNote'
 		$.ajax
 			type: 'POST',
 			url: '/savenote',
@@ -72,6 +73,7 @@ class NoteStore extends Store
 	addTextNode: (noteId) ->
 		note = notes[noteId]
 		note.texts.push({ position: note.texts.length })
+		console.log 'text node added!'
 		@notifyChange()
 
 	addList: (noteId) ->
@@ -81,6 +83,11 @@ class NoteStore extends Store
 
 
 	triggerSave: (noteId) ->
-		_.debounce(@saveNote(notes[noteId]), 500)
+		console.log 'trigger', noteId
+		_.debounce(
+			=> @saveNote(notes[noteId])
+			500)()
 
-module.exports = NoteStore
+console.log('init')
+noteStore = new NoteStore()
+module.exports = noteStore

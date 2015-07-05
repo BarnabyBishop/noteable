@@ -1,7 +1,5 @@
 React = require 'react'
-NoteStore = require '../stores/NoteStore.coffee'
-
-noteStore = new NoteStore()
+noteStore = require '../stores/NoteStore.coffee'
 
 NoteControls = React.createClass
 
@@ -10,7 +8,6 @@ NoteControls = React.createClass
 
 	addList: (event) ->
 		noteStore.addList(@props.noteid)
-
 
 	render: ->
 		<div key={@props.noteid + '_controls'} className="note-control-container">
