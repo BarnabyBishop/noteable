@@ -8,6 +8,7 @@ notes = null
 class NoteStore extends Store
 	constructor: ->
 		super()
+		@triggerSave = _.debounce(@saveNote, 500)
 
 	loadNotes: (cb) ->
 		notes = {}
@@ -34,8 +35,8 @@ class NoteStore extends Store
 
 		return items
 
-	saveNote: (note) ->
-		console.log 'saveNote'
+	saveNote: (noteId) ->
+		note = notes[noteId]
 		$.ajax
 			type: 'POST',
 			url: '/savenote',
@@ -82,12 +83,7 @@ class NoteStore extends Store
 		@notifyChange()
 
 
-	triggerSave: (noteId) ->
-		console.log 'trigger', noteId
-		_.debounce(
-			=> @saveNote(notes[noteId])
-			500)()
 
-console.log('init')
+
 noteStore = new NoteStore()
 module.exports = noteStore

@@ -29,7 +29,7 @@ TextItem = React.createClass
 		noteStore.updateText(@props.id, @props.position, text)
 
 	render: ->
-		<div key={'textnode_' + @props.id + '_' + @props.position} position={@props.position} className="note {@props.type}">
+		<div key={'textnode_' + @props.id + '_' + @props.position} position={@props.position} className={'note ' + @props.type}>
 			<input value={@props.title} onChange={@handleTitleChange} type="text" className="title" placeholder="Title" tabIndex="1" />
 			<textarea value={@props.text} onChange={@handleTextChange} cols="30" rows="10" className="text" placeholder="Note" tabIndex="2"></textarea>
 		</div>
