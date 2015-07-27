@@ -30,7 +30,7 @@ gulp.task 'webpack', (callback) ->
 		.pipe(gulp.dest('build/public/scripts'))
 
 gulp.task 'stylus', ->
-	gulp.src('public/styles/*.styl')
+	gulp.src('public/styles/index.styl')
 		.pipe stylus()
 		.pipe gulp.dest('build/public/styles')
 

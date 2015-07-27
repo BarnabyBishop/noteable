@@ -11,8 +11,8 @@ NoteControls = React.createClass
 
 	render: ->
 		<div key={@props.noteid + '_controls'} className="note-control-container">
-			<button onClick={@addTextNode}" className="note-button fa fa-file-text-o" />
-			<button onClick={@addList} className="note-button fa fa-list" />
+			<button onClick={@addTextNode}" className="note-button note-button-addtext fa fa-file-text-o" />
+			<button onClick={@addList} className="note-button note-button-addlist fa fa-list" />
 		</div>
 
 module.exports = NoteControls
