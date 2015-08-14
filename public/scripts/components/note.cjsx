@@ -7,8 +7,8 @@ Note = React.createClass
 		note = @props.note
 
 		<div>
+			<NoteControls noteid={note._id} path={@props.path} />
 			<NoteItems noteid={note._id} />
-			<NoteControls noteid={note._id} />
 		</div>
 
 module.exports = Note

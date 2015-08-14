@@ -43,6 +43,13 @@ class NoteStore extends Store
 			contentType: 'application/json',
 			data: JSON.stringify(note)
 
+	deleteNote: (noteId) ->
+		$.ajax
+			type: 'POST',
+			url: '/deletenote',
+			data:
+				_id: id
+
 	createNote: (path) ->
 		id = uuid.v4()
 		notes[id] =
@@ -52,6 +59,8 @@ class NoteStore extends Store
 			deleted: false
 			texts: []
 			lists: []
+
+		@notifyChange()
 
 		return id
 
@@ -81,8 +90,6 @@ class NoteStore extends Store
 		note = notes[noteId]
 		note.lists.push({ position: note.lists.length })
 		@notifyChange()
-
-
 
 
 noteStore = new NoteStore()

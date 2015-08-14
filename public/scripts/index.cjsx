@@ -29,7 +29,7 @@ selectNote = (element) ->
 
 	note = notes[element.attr('data-id')]
 
-	React.render <Note note={note} />,
+	React.render <Note note={note} path={currentPath} />,
 		document.getElementById('note')
 
 setValue = (elements, value) ->
@@ -182,6 +182,7 @@ setSaveTimer  = (id) ->
 		editTimer = setTimeout((-> saveNote(id)), 500)
 
 module.exports = ->
+	# Get current route/path and set current folder
 	if window.location.pathname and window.location.pathname isnt '/'
 		currentPath = decodeURI(window.location.pathname).replace(/\//g, ',,')
 		currentPath = currentPath.substring(1) + ','
@@ -210,8 +211,10 @@ module.exports = ->
 	# prepare inputs for editing
 	$('.note .title').on('input', -> editNoteField($(this), this.value))
 	$('.note .text') .on('input', -> editNoteField($(this), this.value))
+	###
 	$('.newnote').on('click', createNote)
 	$('.deletenote').on('click', deleteNote)
+	###
 	$('.startlist').on('click', -> startList($(this)))
 
 	$('.folders').on('click', toggleFolderList)
