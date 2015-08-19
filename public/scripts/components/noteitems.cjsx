@@ -1,27 +1,33 @@
 React = require 'react'
 List = require './List.cjsx'
 TextItem = require './TextItem.cjsx'
-noteStore = require '../stores/NoteStore.coffee'
+# noteStore = require '../stores/NoteStore.coffee'
 
 NoteItems = React.createClass
-	getInitialState: ->
-		@getItemsState()
+	# getInitialState: ->
+	# 	@getItemsState()
 
-	getItemsState: ->
-		items: noteStore.getItems(@props.noteid)
+	# getItemsState: ->
+	# 	items: noteStore.getItems(@props.noteid)
 
-	updateItemsState: ->
-		@setState @getItemsState()
+	# updateItemsState: ->
+	# 	@setState @getItemsState()
 
-	componentDidMount: ->
-		noteStore.addChangeListener @updateItemsState
+	# componentDidMount: ->
+	# 	noteStore.addChangeListener @updateItemsState
 
-	componentWillUnmount: ->
-		noteStore.removeChangeListener @updateItemsStateß
+	# componentWillUnmount: ->
+	# 	noteStore.removeChangeListener @updateItemsState
 
 	render: ->
-		noteId = @props.noteid
-		items = @state.items
+		if @props.note
+			@renderItems()
+		else
+			@renderEmpty()
+
+	renderItems: ->
+		noteId = @props.note._id
+		items = @props.note.items
 		type = if items?.length > 1 then 'multiple' else 'full'
 
 		createItem = (item) ->
@@ -34,5 +40,8 @@ NoteItems = React.createClass
 			<div key={noteId + '_items'}>{items.map(createItem)}</div>
 		else
 			<div key={noteId + '_items'}></div>
+
+	renderEmpty: ->
+		<div>Please select a note.</div>
 
 module.exports = NoteItems

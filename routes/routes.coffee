@@ -41,6 +41,7 @@ router.get('/getnotes',
 			(err, notes) ->
 				if err
 					console.error(err)
+
 				res.json(notes)
 		)
 )
