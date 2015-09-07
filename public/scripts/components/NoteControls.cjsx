@@ -10,7 +10,7 @@ NoteControls = React.createClass
 		noteStore.addList(@props.noteid)
 
 	addNote: (event) ->
-		noteStore.addNote(@props.path)
+		noteStore.addNote(@props.currentPath)
 
 	deleteNote: (event) ->
 		noteStore.deleteNote(@props.noteid)

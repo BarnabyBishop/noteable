@@ -3,6 +3,6 @@ NoteItems = require './NoteItems.cjsx'
 
 Note = React.createClass
 	render: ->
-		<NoteItems note={@props.selectedNote} />
+		<NoteItems note={@props.note} />
 
 module.exports = Note

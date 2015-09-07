@@ -4,6 +4,7 @@ uuid = require 'uuid'
 Store = require './Store.coffee'
 
 notes = null
+selectedNoteId = null
 
 class NoteStore extends Store
 	constructor: ->
@@ -16,13 +17,24 @@ class NoteStore extends Store
 			.then (data) ->
 				for note in data
 					notes[note._id] = note
-				cb(notes)
 
-	getNotes: (cb) ->
+				cb()
+
+	buildNoteList: (path) ->
+		noteList = []
+		for note of notes
+			console.log 'if not ', path, ' or ', path, ' is ', note.path
+			if not path or path is notes[note].path
+				noteList.push(notes[note])
+
+		return noteList
+
+	getNotes: (path, cb) ->
 		if notes
-			cb(notes)
+			cb(@buildNoteList(path))
 		else
-			@loadNotes(cb)
+			@loadNotes =>
+				cb(@buildNoteList(path))
 
 	getItems: (noteId) ->
 		note = notes[noteId]
@@ -50,15 +62,18 @@ class NoteStore extends Store
 			data:
 				_id: id
 
-	createNote: (path) ->
+	addNote: (path) ->
 		id = uuid.v4()
 		notes[id] =
 			_id: id
-			title: ''
 			path: path
 			deleted: false
-			texts: []
+			texts: [
+				position: 0
+			]
 			lists: []
+
+		selectedNoteId = id
 
 		@notifyChange()
 
@@ -83,12 +98,18 @@ class NoteStore extends Store
 	addTextNode: (noteId) ->
 		note = notes[noteId]
 		note.texts.push({ position: note.texts.length })
-		console.log 'text node added!'
 		@notifyChange()
 
 	addList: (noteId) ->
 		note = notes[noteId]
 		note.lists.push({ position: note.lists.length })
+		@notifyChange()
+
+	getSelectedNote: ->
+		return notes[selectedNoteId] or null
+
+	updateSelectedNoteId: (noteId) ->
+		selectedNoteId = noteId
 		@notifyChange()
 
 

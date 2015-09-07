@@ -3,19 +3,6 @@ Note = require './Note.cjsx'
 NoteList = require './NoteList.cjsx'
 NoteControls = require './NoteControls.cjsx'
 
-# class BaseClass
-# 	someFunction: ->
-# 		alert 'yay'
-
-# class DerivedClass extends BaseClass
-# 	@nonFunction: ->
-# 		alert 'expected'
-
-# blah = new DerivedClass()
-
-# blah.nonFunction()
-# blah.someFunction()
-
 class App extends React.Component
 
 	render: ->
@@ -23,19 +10,21 @@ class App extends React.Component
 			<div className="notelist-container">
 				<div className="folderlist">
 					<button className="folders">
-						<i className="icon-button fa fa-book"></i>
+						<i className="note-button icon-button fa fa-book"></i>
 						<span className="currentfolder" data-current-path=""></span>
 					</button>
 					<div className="panel">
 						<button className="icon-button fa fa-plus newfolder"></button>
-						<input type="text" placeholder="New Folder" className="foldername textbox">
+						<div className="note-button folder-home"><i className="icon-button fa fa-home"></i></div>
+						<div className="note-button folder-up"><i className="icon-button fa fa-level-up"></i></div>
+						<input type="text" placeholder="New Folder" className="foldername textbox" />
 						<button className="confirmfolder icon-button fa fa-check-circle-o"></button>
 					</div>
 				</div>
-				<NoteList notes={@props.notes} />
+				<NoteList notes={@props.notes} currentPath={@props.currentPath} />
 			</div>
 			<div className="note-container">
-				<NoteControls noteid={@props.selectedNote?._id} path={@props.path} />
+				<NoteControls noteid={@props.selectedNote?._id} currentPath={@props.currentPath} />
 				<Note note={@props.selectedNote} />
 			</div>
 		</div>

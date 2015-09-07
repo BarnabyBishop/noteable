@@ -1,24 +1,8 @@
 React = require 'react'
 List = require './List.cjsx'
 TextItem = require './TextItem.cjsx'
-# noteStore = require '../stores/NoteStore.coffee'
 
 NoteItems = React.createClass
-	# getInitialState: ->
-	# 	@getItemsState()
-
-	# getItemsState: ->
-	# 	items: noteStore.getItems(@props.noteid)
-
-	# updateItemsState: ->
-	# 	@setState @getItemsState()
-
-	# componentDidMount: ->
-	# 	noteStore.addChangeListener @updateItemsState
-
-	# componentWillUnmount: ->
-	# 	noteStore.removeChangeListener @updateItemsState
-
 	render: ->
 		if @props.note
 			@renderItems()
@@ -27,7 +11,11 @@ NoteItems = React.createClass
 
 	renderItems: ->
 		noteId = @props.note._id
-		items = @props.note.items
+
+		items = @props.note.texts || []
+		if @props.note.lists
+			items = items.concat(@props.note.lists)
+
 		type = if items?.length > 1 then 'multiple' else 'full'
 
 		createItem = (item) ->

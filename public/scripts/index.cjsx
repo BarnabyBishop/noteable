@@ -4,21 +4,24 @@ App = require './components/App.cjsx'
 React = require 'react'
 noteStore = require './stores/NoteStore.coffee'
 
-notes = {}
+notes = null
 folders = {}
 editAmount = 0
 editTimer = false
-currentPath = ''
+currentPath = null
 
 bindFolderList = ->
 	$('.folderlist .panel .folder').remove()
 	for id, folder of folders
-		if folder.path.substring(0, folder.path.lastIndexOf(",#{folder.name},")) is currentPath or id is ''
+		folderPath = folder.path
+		parentPath = folderPath.substring(0, folderPath.lastIndexOf(",#{folder.name},")) or null
+		console.log folderPath, parentPath, currentPath
+		if parentPath is currentPath #or (path is null and currentPath is null)
 			addFolderToList(folder)
 
 addFolderToList = (folder) ->
 	node = $("<div data-id='#{folder._id}' data-path='#{folder.path}' class='folder' data-type='folder' data-field='name'><i class='icon ion-ios7-bookmarks-outline'></i><div data-id='#{folder._id}'>#{folder.name if folder.name?}</div></div>")
-	$('.folderlist .panel .newfolder').before(node)
+	$('.folderlist .panel .folder-up').after(node)
 	node.click( ->
 		selectFolder($(this))
 	)
@@ -29,14 +32,16 @@ selectFolder = (folderElement)->
 	$('.currentfolder')
 		.attr('data-current-path', currentPath)
 		.text(folders[folderId].name)
+
+	updateFolderList()
+
+
+updateFolderList = ->
 	$('.notelist').empty()
-	# $('.list').empty()
-	for note of notes
-		if notes[note].path is currentPath
-			addNoteToList(notes[note])
 	toggleFolderList()
-	clearInputs()
 	bindFolderList()
+	notesUpdated()
+
 
 editFolder = (control, value) ->
 	id = control.attr('data-id')
@@ -65,6 +70,14 @@ createFolder = ->
 	$('.foldername').text('').hide()
 	$('.confirmfolder').hide()
 
+homeFolder = ->
+	currentFolder = null
+	updateFolderList()
+
+upFolder = ->
+	currentFolder = currentFolder.split(',').pop().join(',')
+	updateFolderList()
+
 saveFolder = (id) ->
 	$.ajax(
 		type: 'POST',
@@ -80,35 +93,31 @@ notesUpdated = ->
 		render()
 
 loadNotes = (cb) ->
-	noteStore.getNotes (data) ->
+	noteStore.getNotes currentPath, (data) ->
 		notes = data
-		unless Array.isArray notes
-			notes = [notes]
-
 		cb()
 
 loadFolders = ->
-	# Load notes from server
+	# Load folders from server
 	$.ajax(url: "/getfolders")
 	.then(
 		(data) ->
-			folders[''] =
-				_id: ''
-				name: '/'
-				path: ''
+			console.log data
 			for folder in data
 				folders[folder._id] = folder
 
 			bindFolderList()
 	)
 
-
 	$('.folders').on('click', toggleFolderList)
 	$('.newfolder').on('click', -> $(this).siblings('*').show())
 	$('.confirmfolder').on('click', createFolder)
+	$('.folder-home').on('click', homeFolder)
+	$('.folder-up').on('click', upFolder)
 
 render = ->
-	React.render <App notes={notes} path={currentPath} />,
+	console.log currentPath
+	React.render <App notes={notes} currentPath={currentPath} selectedNote={noteStore.getSelectedNote()} />,
 		document.getElementById('app')
 
 init = ->
@@ -118,7 +127,6 @@ init = ->
 		currentPath = currentPath.substring(1) + ','
 
 	loadNotes ->
-		console.log notes
 		render()
 		loadFolders()
 		noteStore.addChangeListener notesUpdated
